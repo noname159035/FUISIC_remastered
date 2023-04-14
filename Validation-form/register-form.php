@@ -1,0 +1,143 @@
+<! DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content=" ie=edge">
+        <title>FUISIC</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="container-md mx-auto mt-6">
+            <?php
+            if($_COOKIE['user'] == ''):
+            ?>
+
+            <div class="row">
+                <div class="col">
+                    <h1>Регистрация</h1>
+                    <form action="/validation-form/check.php" method="post">
+
+                        <!-- E-mail -->
+                        <div class="form-group">
+                            <label for="login">E-mail:</label>
+                            <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="pass">Пароль:</label>
+                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <!-- First name -->
+                        <div class="form-group">
+                            <label for="name">Имя:</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <!-- Last name -->
+                        <div class="form-group">
+                            <label for="second_name">Фамилия:</label>
+                            <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <!-- Date of birth -->
+                        <div class="form-group">
+                            <label for="birth_day">Дата рождения:</label>
+                            <input type="date" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
+
+                        <a href="login-form.php" class="header-text auth_txt">войти</a>
+                        <a href="/index.html" class="header-text auth_txt">Отмена</a>
+                    </form>
+                </div>
+
+                <?php else: ?>
+                <?php header('Location: /validation-form/profile.php') ?>
+                <?php endif;?>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script>
+            $('form').on('submit', function(event) {
+                var login = $('[name="login"]').val();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(login)) {
+                    $('[name="login"]').addClass('is-invalid');
+                    $('[name="login"]').siblings('.invalid-feedback').text('Введите корректный e-mail');
+                    event.preventDefault();
+                    return;
+                }
+                $.ajax({
+                    url: 'http://localhost/validation-form/check-email.php',
+                    method: 'post',
+                    data: {login: login},
+                    success: function(response) {
+                        if (response == 'exists') {
+                            $('[name="login"]').addClass('is-invalid');
+                            $('[name="login"]').siblings('.invalid-feedback').text('Пользователь с таким e-mail уже существует');
+                            event.preventDefault();
+                        } else {
+                            form.submit();
+                        }
+                    }
+                });
+            });
+
+            $('input[name="pass"]').on('input', function() {
+                var form = $(this).closest('form')[0];
+                var pass = $(this).val();
+                if (pass.length < 5) {
+                    $(this).addClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('');
+                }
+                const invalidCount = form.querySelectorAll('.is-invalid').length;
+                form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+            });
+
+            $('input[name="name"], input[name="second_name"]').on('input', function() {
+                var form = $(this).closest('form')[0];
+                var name = $(this).val();
+                var nameRegex = /^[А-Яа-яёЁ]+$/;
+                if (!nameRegex.test(name)) {
+                    $(this).addClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('Имя и фамилия должны содержать только буквы русского алфавита');
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('');
+                }
+                const invalidCount = form.querySelectorAll('.is-invalid').length;
+                form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+            });
+
+            $('input[name="birth_day"]').on('input', function() {
+                var form = $(this).closest('form')[0];
+                var birthDay = new Date($(this).val());
+                var today = new Date();
+                if (birthDay >= today) {
+                    $(this).addClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('Дата рождения не может быть больше или равна текущей дате');
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').text('');
+                }
+                const invalidCount = form.querySelectorAll('.is-invalid').length;
+                form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+            });
+        </script>
+    </body>
+</html>

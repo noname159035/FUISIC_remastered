@@ -1,0 +1,370 @@
+.container_1 {
+    /* min-width: 600px; */
+    width: 45vw;
+    margin: auto;
+    display: flex;
+    margin-top: 10vh;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-width: 260px;
+    min-height: 250px;
+}
+
+
+
+.card {
+    position: relative;
+    perspective: 1000px;
+    margin-bottom: 0.5vh;
+
+    width: 38vw;
+    height: 16vw;
+
+    min-width: 240px;
+    min-height: 125px;
+
+    border: none;
+
+    /* text-align: center; */
+}
+
+
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.5s ease;
+    border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px;
+
+
+    margin-left: 0vw;
+    cursor: pointer;
+    border: none;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 1%;
+
+    background-color: white;
+
+
+    width: 38vw;
+    height: 16vw;
+
+
+    min-width: 240px;
+    min-height: 125px;
+    box-shadow: 0px 0px 20px #02b3e490;
+
+    outline: none;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* text-align: center; */
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card.is-flipped .card-front {
+    transform: rotateY(-180deg);
+}
+
+.card.is-flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1vh;
+    gap: 0.5vw;
+    text-align: center;
+}
+
+.button {
+    text-decoration: none;
+    color: #fff;
+    min-height: 35px;
+    min-width: 40px;
+    width: 19vw;
+    height: 4vw;
+    background-color: white;
+    border: 2px solid rgb(12, 80, 124, 0.2);
+    border-radius: 1vw;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    display: inline-block
+}
+
+.prev-button svg {
+    min-height: 30px;
+    min-width: 30px;
+    width: 3vw;
+    height: 3vw;
+    left: 50%;
+}
+
+.next-button svg {
+    /* background-color: #af4c54; */
+    min-height: 30px;
+    min-width: 30px;
+    width: 3vw;
+    height: 3vw;
+}
+.next-button{
+    margin-bottom: 30px;
+}
+
+.finish-button {
+    background-color: #2196f3;
+
+    position: absolute;
+
+    left: -20vw;
+    top: 0vw;
+    min-width: 100px;
+    min-height: 30px;
+    width: 15vw;
+}
+
+.training-button {
+    background-color: #2196f3;
+
+    position: absolute;
+
+    left: -20vw;
+    top: 5vw;
+    min-width: 100px;
+    min-height: 30px;
+    width: 15vw;
+}
+.check-button {
+    background-color: #2196f3;
+
+    position: absolute;
+
+    left: -20vw;
+    top: 10vw;
+    min-width: 100px;
+    min-height: 30px;
+    width: 15vw;
+}
+.exp-button {
+    background-color: #2196f3;
+
+    position: absolute;
+
+    left: -20vw;
+    top: 15vw;
+    min-width: 100px;
+    min-height: 30px;
+    width: 15vw;
+}
+
+.card-counter {
+    text-align: center;
+}
+
+.card-counter p {
+    font-size: 18px;
+}
+
+.card-counter a {
+    display: block;
+    margin-top: 20px;
+}
+
+
+.container_1{
+    position: relative;
+}
+
+#counter{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+body {
+    /*
+    padding-left: 1%;
+    padding-right: 1%;
+    */
+    margin: 0;
+    background-color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Пиздец */
+/* Согласен */
+
+#conteiner {
+    /*    height: 100vh;*/
+    min-width: 600px;
+    /*    overflow: hidden;*/
+}
+
+.header {
+    background-color: #0c507c;
+    height: 2.5vw;
+    padding-left: 10vw;
+
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(3, 15, 37, 0.4);
+    -moz-box-shadow: 0px 5px 5px 0px rgba(3, 15, 37, 0.4);
+    box-shadow: 0px 5px 5px 0px rgba(3, 15, 37, 0.4);
+    padding-top: 0.4vw;
+    text-decoration: none;
+    min-height: 20px;
+}
+
+.header-text {
+    position: absolute;
+    display: inline-block;
+    /*    margin-top: 0.5%;*/
+    /*    font-size: 157%;*/
+    margin-left: 10vw;
+    margin-bottom: 0;
+    color: white;
+    font-size: 1.3vw;
+    font-weight: 400;
+    text-decoration: none;
+
+}
+
+.header-text:hover {
+    color: #32bfe6;
+    text-decoration: none;
+}
+
+.header-text:active {
+    color: #0886a8;
+    text-decoration: none;
+}
+
+.coll_txt{
+    left: 25vw;
+}
+
+.help_txt{
+    left: 41vw;
+}
+
+.auth_txt{
+    right: 1vw;
+}
+
+
+input,
+select,
+textarea {
+    color: #0c507c;
+    font-size: 1vw;
+}
+
+#logo {
+    background-image: url(img/logo_3.svg);
+    width: 5vw;
+    min-width: 31px;
+    height: 6vw;
+    min-height: 36px;
+    position: absolute;
+    left: 3vw;
+    top: 1vw;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background-size: cover;
+}
+
+
+
+#card_cont {
+    margin-left: 0vw;
+    cursor: pointer;
+    border: none;
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 1%;
+
+    background-color: white;
+
+
+    width: 35vw;
+    height: 16vw;
+
+
+    min-width: 240px;
+    min-height: 125px;
+    left: 30vw;
+    box-shadow: 0px 0px 20px #02b3e490;
+    /* border-radius: 3vw; */
+    position: relative;
+    transform-style: preserve-3d;
+
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .header-text{
+        font-size: 10px;
+    }
+
+    .main_txt{
+        left: 20px;
+    }
+
+    .coll_txt{
+        left: 160px;
+    }
+
+    .help_txt{
+        left: 310px;
+    }
+
+    .auth_txt{
+        left: 460px;
+    }
+
+    .finish-button{
+        left: -120px;
+        top: 30px;
+    }
+
+    .training-button{
+        left: -120px;
+        top: 80px;
+    }
+
+    .prev-button{
+        height: 30px;
+        width: 120px;
+    }
+
+    .next-button{
+        height: 30px;
+        width: 120px;
+    }
+
+    .check-button{
+        top: 130px;
+        left: -120px;
+    }
+}

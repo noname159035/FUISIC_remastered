@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Иконки -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="/favicons/safari-pinned-tab.svg"
+      color="#5bbads5"
+    />
+    <meta name="msapplication-TileColor" content="#2b5797" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="style/support_style.css" />
+    <!-- Подключение скрипта -->
+<!--    <script src="main.js"></script>-->
+    <title>FIUSIC</title>
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="conteiner">
+      <div class="header">
+        <a href="index.html" class="header-text main_txt">Главная</a>
+        <a href="collections.php" class="header-text coll_txt">Подборки</a>
+        <a href="support.html" class="header-text help_txt">Помощь</a>
+<!--        <img src="img/search.png" id="search_img" />-->
+      </div>
+      <a href="index.html" id="logo"></a>
+      <p class="name_of_support">КАК С НАМИ СВЯЗАТЬСЯ</p>
+
+      <div id="bottom_info_block">
+        <p id="bottom_info_toptext" class="top_info_text">
+          Если вы сталкнулись с проблемой или у вас пойвились вопросы, сообщите нам
+        </p>
+      </div>
+
+      <form action="mail.php" method="post">
+          <input
+          name="user_name"
+          required
+          placeholder="Ф.И.О"
+          class="support_input" id="name">
+          <input
+          name="user_email"
+          required
+          placeholder="E-mail"
+          id="email" class="support_input">
+          <input
+          name="user_browser"
+          required
+          placeholder="Браузер"
+          id="browser" class="support_input">
+          <input
+          name="user_screen"
+          required
+          placeholder="Разрешение экрана"
+          id="screen" class="support_input">
+          <textarea name="user_question" id="main_textarea" cols="30" rows="10" placeholder="Опишите вашу проблему"></textarea>
+
+          <button id="button_send" type="submit">ОТПРАВИТЬ</button>
+      </form>
+
+
+
+      <div id="footer">
+        <p id="footer_heading">FIUSIC</p>
+        <br />
+        <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
+      </div>
+    </div>
+  </body>
+</html>

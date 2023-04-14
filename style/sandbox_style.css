@@ -1,0 +1,131 @@
+#keyboard{
+    box-sizing: border-box;
+    position: absolute;
+    width: 773px;
+    height: 270px;
+    background-color: #BCE2FC;
+    border: solid #116CA9 5px;
+    border-radius: 4px;
+    box-shadow: 7px 7px 6px -4px rgba(34, 60, 80, 0.34);
+}
+
+#input_place{
+    position: absolute;
+/*    top: 10vw;*/
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    border: none;
+/*
+    font-size: 140%;
+*/
+    font-weight: 600;
+
+    box-shadow: 0px 3px 4px 0px #6884BF;
+}
+
+#input_place:focus{
+    outline: none;
+    box-shadow: 0px 3px 4px 0px #6884BF;
+}
+
+#conteiner{
+    display: inline-block;
+    padding: 1%;
+    padding-top: 9%;
+    padding-left: 3%;
+}
+
+.keyboard_button{
+    font-weight: 700;
+    width: 56px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 3px 0px 0px #5CACE1;
+    margin-bottom: 1.2%;
+    font-size: 16px;
+}
+
+.keyboard_button:hover{
+    background-color: #E7E7E7;
+}
+
+.keyboard_button:active{
+    background-color: #DBDBDB;
+}
+
+
+#dark{
+    background-color: #A7C9F3;
+}
+
+#dark:hover{
+    background-color: #9FBFE7;
+}
+
+#dark:active{
+    background-color: #98B8DE;
+}
+
+#more_dark{
+    background-color: #74A6D5;
+    color: #DCE3F0;
+}
+
+#more_dark:hover{
+    background-color: #6E9ECA;
+}
+
+#more_dark:active{
+    background-color: #6490B8;
+}
+
+.novision{
+    visibility: hidden;
+}
+
+.long{
+    width: 116px;
+}
+
+#test_cont1{
+    position: absolute;
+    top: 60%;
+}
+
+#test_btn{
+    position: absolute;
+    width: 300px;
+    height: 200px;
+}
+
+#test_btn2{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+}
+
+#test_cont2{
+    position: absolute;
+    top: 60%;
+    left: 20%;
+}
+
+#test_btn_2{
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    background-color: aqua;
+    text-align: center;
+}
+
+#test_btn2_2{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    text-align: center;
+}

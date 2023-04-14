@@ -1,0 +1,30 @@
+.level-info {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.current-level {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.next-level {
+    margin-bottom: 10px;
+}
+
+.progress {
+    background-color: white;
+    height: 20px;
+    margin-bottom: 0;
+    border-radius: 4px;
+}
+
+.progress-bar {
+    font-size: 20px;
+    line-height: 3;
+
+}
+.lvl{
+
+}

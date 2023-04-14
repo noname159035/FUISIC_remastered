@@ -1,0 +1,451 @@
+@media screen and (min-width: 1000px) {
+    #keyboard {
+      box-sizing: border-box;
+      width: 48vw;
+      height: auto;
+      position: absolute;
+      bottom: 3vh;
+      left: 50%;
+      margin-left: -23vw;
+      background-color: white;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+
+      visibility: visible;
+      font-style: normal;
+    }
+    #input_place:empty:before {
+        content: attr(placeholder);
+        color: #a9a9a9;
+    }
+
+    #input_place{
+        display: inline-block;
+        text-align: center;
+        box-sizing: border-box;
+        width: 38vw;
+        height: auto;
+        background-color: white;
+        border: none;
+        font-size: 130%;
+        font-family: sans-serif;
+        font-style: italic;
+
+        font-weight: 500;
+        box-shadow: 0px 3px 4px 0px hsl(204, 68%, 62%);
+
+    }
+   
+    #conteiner_1 {
+      /* position: absolute;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -100%) */
+      display: inline-block;
+      padding: 1%;
+      padding-left: 5%;
+      /* position: relative; */
+      /* padding-top: 6%; */
+      font-style: normal;
+
+    }
+
+    .keyboard_button {
+      font-family: sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      font-weight: normal;
+      width: 3.3vw;
+      height: 4vh;
+      /* height: 2vw; */
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+      font-style: normal;
+    }
+
+    #flip {
+      width: 6.9vw;
+    }
+
+    #input_place_1{
+      width: 48vw;
+    }
+
+
+    #keyboard_2 {
+      box-sizing: border-box;
+      width: 46vw;
+      height: auto;
+      position: fixed;
+      bottom: 3vh;
+      left: 50%;
+      margin-left: -23vw;
+      background-color: FFFFFF;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+      font-weight: normal;
+
+      visibility: hidden;
+      font-style: normal;
+
+    }
+
+
+    #input_place:focus {
+      outline: none;
+      box-shadow: 0px 3px 4px 0px #0c507c;
+    }
+
+    .keyboard_button_2 {
+      font-family: sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      font-weight: normal;
+      width: 3.3vw;
+      height: 4vh;
+      /* height: 2vw; */
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+      font-style: normal;
+    }
+
+    /* .line_5 {
+      text-align: center;
+    } */
+
+    #btn {
+      width: 6.9vw;
+    }
+
+    #btn2 {
+      width: 6.9vw;
+    }
+
+    #digital_color{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(209, 63%, 50%);
+    }
+
+    #color_xyzi{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsla(220, 63%, 50%, 0.832);
+    }
+
+    #trigan{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsla(216, 75%, 49%, 0.795);
+    }
+
+    body {
+      font-style: normal;
+    }    
+  }
+
+.MathQuill-TextArea {
+    font-family: Verdana, sans-serif;
+}
+
+
+  @media screen and (max-width: 999px) {
+    #keyboard {
+      box-sizing: border-box;
+      width: 100%;
+      height: auto;
+      position: fixed;
+      bottom: 3vh;
+      background-color: FFFFFF;
+      margin-left: -1vw;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+
+      visibility: visible;
+    }
+
+    #input_place {
+      display: inline-block;
+      /* position: absolute; */
+      text-align: center;
+      box-sizing: border-box;
+      width: 100%;
+      height: auto;
+      background-color: white;
+      border: none;
+      font-size: 130%;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-style: oblique;
+      color: #0c507c;
+      font-weight: 600;
+      box-shadow: 0px 3px 4px 0px hsl(204, 68%, 62%);
+    }
+
+    #input_place:focus {
+      outline: none;
+      box-shadow: 0px 3px 4px 0px #0c507c;
+    }
+
+    #conteiner {
+      /* position: absolute;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -100%) */
+      display: inline-block;
+      padding: 1%;
+      /* padding-left: 5%; */
+      /* position: relative; */
+      /* padding-top: 6%; */
+    }
+
+    .keyboard_button {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      width: 7.5vw;
+      height: 4vh;
+
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+    }
+
+    #btn {
+      width: 15.5vw;
+    }
+
+    #btn2 {
+      width: 16.5vw;
+    }
+
+    #keyboard_2 {
+      box-sizing: border-box;
+      width: 100%;
+      height: auto;
+      position: fixed;
+      bottom: 3vh;
+      background-color: FFFFFF;
+      margin-left: -1vw;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+
+      visibility: hidden;
+    }
+
+
+    .keyboard_button_2 {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      width: 8vw;
+      height: 4vh;
+
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+    }
+
+    .lines{
+      margin-left: 2vw;
+    }
+
+    #flip {
+      /* width: 6%;
+      height: 3%; */
+    }
+
+    #digital_color{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(209, 63%, 50%);
+    }
+
+    #color_xyzi{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsla(220, 63%, 50%, 0.832);
+    }
+
+    #trigan{
+      box-shadow: 0px 0.7vh 0.7vh 0px hsla(216, 75%, 49%, 0.795);
+    }
+  }
+
+
+  @media screen and (max-width: 610px) {
+    #keyboard {
+      box-sizing: border-box;
+      width: 610px;
+      height: auto;
+      position: fixed;
+      bottom: 3vh;
+      background-color: FFFFFF;
+      margin-left: -1vw;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+
+      visibility: visible;
+    }
+
+    #input_place {
+      display: inline-block;
+      /* position: absolute; */
+      text-align: center;
+      box-sizing: border-box;
+      width: 610px;
+      height: auto;
+      background-color: white;
+      border: none;
+      font-size: 130%;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-style: oblique;
+      color: #0c507c;
+      font-weight: 600;
+      box-shadow: 0px 3px 4px 0px hsl(204, 68%, 62%);
+    }
+
+    #input_place:focus {
+      outline: none;
+      box-shadow: 0px 3px 4px 0px #0c507c;
+    }
+
+    #conteiner {
+      /* position: absolute;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -100%) */
+      display: inline-block;
+      padding: 1%;
+      /* position: relative; */
+      /* padding-top: 6%; */
+    }
+
+    .keyboard_button {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      width: 45px;
+      height: 30px;
+
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+    }
+
+    #btn {
+      width: 95px;
+    }
+
+    #btn2 {
+      width: 95px;
+    }
+
+    #keyboard_2 {
+      box-sizing: border-box;
+      width: 610px;
+      height: auto;
+      position: fixed;
+      bottom: 3vh;
+      background-color: FFFFFF;
+      margin-left: -1vw;
+      /* border: solid #116ca9 1px; */
+      border-radius: 10px;
+      box-shadow: 0px 10px 16px 4px #0c507c80;
+      font-family: sans-serif;
+      font-weight: 600;
+
+      visibility: hidden;
+    }
+
+    #input_place {
+      display: inline-block;
+      /* position: absolute; */
+      text-align: center;
+      box-sizing: border-box;
+      width: 610px;
+      height: auto;
+      background-color: white;
+      border: none;
+      font-size: 130%;
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-style: oblique;
+      color: #0c507c;
+      font-weight: 600;
+      box-shadow: 0px 3px 4px 0px hsl(204, 68%, 62%);
+    }
+
+
+
+
+    .keyboard_button_2 {
+      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #0c507c;
+      font-weight: 600;
+      width: 45px;
+      height: 30px;
+
+      border: none;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0px 0.7vh 0.7vh 0px hsl(204, 68%, 62%);
+      /* box-shadow: 0px 0.7vh 0.7vh 0px hsl(193, 98%, 45%, 65%); */
+
+      margin-bottom: 1.2%;
+      font-size: 16px;
+    }
+
+    #flip {
+      /* width: 6%;
+      height: 3%; */
+    }
+
+    .lines{
+      margin-left: 20px;
+    }
+  }
