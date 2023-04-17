@@ -158,7 +158,7 @@
                     </div>
                     <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
                     <button id="button_tren" class="button buttons training-button" type="button">Вернуться</button>
-                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()">Пояснение</button>
+                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
                 </form>
             </div>
         </div>
@@ -166,6 +166,12 @@
         <div id="explanation" style="display:none;">
             <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
             <button onclick="hideExplanation()">Понятно</button>
+        </div>
+        
+        <div id="footer">
+            <p id="footer_heading">FUISIC</p>
+            <br />
+            <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
         </div>
         
 <!--        Клавиатура-->
@@ -543,6 +549,7 @@
         </div>
         
         
+        
         <!-- Подключаем скрипт библиотеки MathQuill -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
@@ -626,6 +633,10 @@
             document.getElementById("button_tren").addEventListener('click', function (event){
                 window.location.href = "show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>";
             });
+
+
+        
+
         </script>
         <!-- Подключаем скрипт библиотеки MathJax -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -645,6 +656,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="cards_scrypt.js"></script>
+
+        
+
     </body>
     <?php
     $link->close();

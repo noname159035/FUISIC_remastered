@@ -37,8 +37,8 @@
             <div class="container_1">
                 <?php
 
-                // Подключение к базе данных
-                $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+    // Подключение к базе данных
+    $link = new mysqli('localhost', 'root', 'root', 'Test_3');
                 $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
                 $stmt = $link->prepare($query);
                 $stmt->bind_param('s', $_GET['podbor']);
@@ -142,15 +142,15 @@
                         <div>
                             <!-- <div class="counter"> -->
                             <?php
-                            // Вывод счетчика всех карточек и текущей
-                            echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
+    // Вывод счетчика всех карточек и текущей
+    echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
                             ?>
                             <!-- </div>     -->
                         </div>
                     </div>
                     <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
                     <button id="button_tren" class="button buttons training-button" type="button">Тренажер</button>
-                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()">Пояснение</button>
+                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
                 </form>
             </div>
         </div>
@@ -158,6 +158,19 @@
             <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
             <button onclick="hideExplanation()">Понятно</button>
         </div>
+
+
+        <div class="footer_conteiner">
+            <div id="footer">
+                <p id="footer_heading">FUISIC</p>
+                <br/>
+                <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
+            </div>
+        </div>
+        
+
+
+
         <script>
             function showExplanation() {
                 document.getElementById("explanation").style.display = "block";
