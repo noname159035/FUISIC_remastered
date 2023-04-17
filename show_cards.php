@@ -37,8 +37,8 @@
             <div class="container_1">
                 <?php
 
-    // Подключение к базе данных
-    $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+                // Подключение к базе данных
+                $link = new mysqli('localhost', 'root', 'root', 'Test_3');
                 $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
                 $stmt = $link->prepare($query);
                 $stmt->bind_param('s', $_GET['podbor']);
@@ -142,8 +142,8 @@
                         <div>
                             <!-- <div class="counter"> -->
                             <?php
-    // Вывод счетчика всех карточек и текущей
-    echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
+                            // Вывод счетчика всех карточек и текущей
+                            echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
                             ?>
                             <!-- </div>     -->
                         </div>

@@ -46,13 +46,16 @@ body {
 .header-text:active {
   color: #0886a8;
 }
+.test_txt{
+    left: 41vw;
+}
 
 .coll_txt{
     left: 25vw;
 }
 
 .help_txt{
-    left: 41vw;
+    left: 55vw;
 }
 
 .auth_txt{
