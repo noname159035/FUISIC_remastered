@@ -150,7 +150,7 @@
                     </div>
                     <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
                     <button id="button_tren" class="button buttons training-button" type="button">Тренажер</button>
-                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()">Пояснение</button>
+                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
                 </form>
             </div>
         </div>
@@ -158,6 +158,19 @@
             <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
             <button onclick="hideExplanation()">Понятно</button>
         </div>
+
+
+        <div class="footer_conteiner">
+            <div id="footer">
+                <p id="footer_heading">FUISIC</p>
+                <br/>
+                <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
+            </div>
+        </div>
+        
+
+
+
         <script>
             function showExplanation() {
                 document.getElementById("explanation").style.display = "block";
