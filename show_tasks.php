@@ -13,6 +13,7 @@
         <div class="header">
             <a href="index.html" class="header-text main_txt">Главная</a>
             <a href="collections.php" class="header-text coll_txt">Подборки</a>
+            <a href="Tests.php" class="header-text test_txt">Тесты</a>
             <a href="support.html" class="header-text help_txt">Помощь</a>
             <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
             <a href="index.html" id="logo"></a>
@@ -25,6 +26,14 @@
     $stmt->execute();
     $result = $stmt->get_result();
     $testName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
+    session_start();
+    if (!isset($_SESSION['correct_answers'])) {
+        $_SESSION['correct_answers'] = 0;
+    }
+
+    if (!isset($_SESSION['answered_tasks'])) {
+        $_SESSION['answered_tasks'] = [];
+    }
 
     ?>
     <h1 class="test_name">Тест: <?php echo $testName ?></h1>
@@ -42,15 +51,19 @@
         $time = date("Y-m-d H:i:s");
 
         if (isset($_POST['finish'])) {
-            // Код для записи данных в таблицу "История"
-            $query = "INSERT INTO `История тестов` (Пользователь, `Дата_прохождения_задания`, Тест) VALUES (?, ?, ?)";
+// Количество правильных ответов
+            $correctAnswers = $_SESSION['correct_answers'];
+
+// Код для записи данных в таблицу "История"
+            $query = "INSERT INTO `История тестов` (Пользователь, Дата_прохождения_задания, Тест, Результат) VALUES (?, ?, ?, ?)";
             $stmt = $link->prepare($query);
-            $stmt->bind_param('sss', $userId, $time, $testId);
+            $stmt->bind_param('sssi', $userId, $time, $testId, $correctAnswers);
             $stmt->execute();
             if (!$stmt) {
                 echo "Error: " . mysqli_error($link);
             }
-            // Перенаправление на страницу example.php с передачей данных в POST-запросе
+
+// Перенаправление на страницу Tests.php
             header("Location: Tests.php");
             exit();
 
@@ -89,6 +102,7 @@
                     echo "<div class='task'>";
                     echo "<h3><div class='mathjax-latex'>" . $task['task'] . "</div></h3>";
                     echo "</div>";
+                    unset($_SESSION['answered_tasks'][$currentTask]);
 
                     // Кнопки переключения карточек
                     echo "<div class='buttons'>";
@@ -103,19 +117,44 @@
 
                     }
 
+                    if (isset($_POST['check-answer'])) {
+                        $userAnswer = $_POST['user-answer'];
+                        $currentTask = $_POST['task'];
+
+                        if (in_array($currentTask, $_SESSION['answered_tasks'])) {
+// Если на эту карточку уже ответили, выводим сообщение
+                            echo "<div class='alert alert-warning'>Вы уже ответили на этот вопрос. Повторная проверка невозможна.</div>";
+                        } else {
+// Если это новый ответ, добавляем номер карточки в массив
+
+                            if ($userAnswer == $task['answer']) {
+                                array_push($_SESSION['answered_tasks'], $currentTask);
+                                $_SESSION['correct_answers']++;
+                                echo "<div class='alert alert-success'>Правильно!</div>";
+                            } else {
+                                echo "<div class='alert alert-danger'>Неправильно! Попробуйте еще раз.</div>";
+                            }
+                        }
+                    }
+
                     echo "</div>";
                 } else {
+                    session_unset();
+                    session_destroy();
                     header('Location: /Tests.php');
                     exit();
                 }
 
             } else {
+                session_unset();
+                session_destroy();
                 header('Location: /');
                 exit();
             }
         }
         ?>
-        <form method="POST" action="/show_tasks.php<?php echo"?task=" . $_GET['task']?>">
+        <form method="POST" action="/show_tasks.php<?php echo"?test=" . $_GET['test'] . "&task=" . $currentTask ?>">
+            <input type="hidden" name="task" value="<?php echo $currentTask ?>">
             <!-- Счетчик карточек и кнопка "Finish" -->
             <div class="buttons" id="counter">
                 <div>
@@ -127,11 +166,11 @@
             </div>
             <div class="answer">
                 <label for="user-answer">Ответ:</label>
-                <input type="text" id="user-answer" name="user-answer" required>
+                <input type="text" id="user-answer" name="user-answer">
             </div>
             <button type="submit" name="check-answer" class="button buttons check-button">Проверить</button>
             <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
-            <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanationscroll()">Решение</button>
+            <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanationscroll()"></button>
         </form>
     </div>
     <div id="explanation" style="display:none;">
