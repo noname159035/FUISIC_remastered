@@ -51,9 +51,12 @@ a {
 .coll_txt {
   left: 25vw;
 }
-
-.help_txt {
+.test_txt{
   left: 41vw;
+}
+
+.help_txt{
+  left: 55vw;
 }
 #search {
   padding: 1.2% 2% 1% 2.3%;

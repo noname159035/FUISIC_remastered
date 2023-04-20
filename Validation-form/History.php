@@ -13,6 +13,9 @@
         <div class="container">
             <h2>История прохождения заданий</h2>
             <div class="row">
+                <div class="col-md-4">
+                    <a href="/Validation-form/profile.php" class="btn btn-primary">вернуться</a>
+                </div>
                 <div class="col-md-4 text-center">
                     <h4>Сортировать по:</h4>
                 </div>
@@ -46,6 +49,14 @@
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
 
+            $query2 = "SELECT `История тестов`.Дата_прохождения_задания, Тесты.Название, `История тестов`.Результат FROM `История тестов` JOIN Тесты
+          ON `История тестов`.Тест = Тесты.Код_Теста
+          WHERE `История тестов`.Пользователь = $user_id ORDER BY `История тестов`.Дата_прохождения_задания $order";
+            $result2 = mysqli_query($db, $query2);
+            if (!$result2) {
+                die('Ошибка запроса: ' . mysqli_error($db));
+            }
+
             // Формирование HTML-таблицы с данными
             echo '<table class="table">';
             echo '<thead>';
@@ -64,12 +75,28 @@
             if (!$result) {
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
+
+            echo '<table class="table">';
+            echo '<thead>';
+            echo '<tr><th>#</th><th>Тест</th><th>Дата прохождения задания</th><th>Результат</th></tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result2)) {
+                echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата_прохождения_задания'].'</td><td>'.$row['Результат'].'</td></tr>';
+                $i++;
+            }
+            echo '</tbody>';
+            echo '</table>';
+            $result2 = mysqli_query($db, $query2);
+
+            if (!$result2) {
+                die('Ошибка запроса: ' . mysqli_error($db));
+            }
             // Закрытие соединения с БД
             mysqli_close($db);
             ?>
-            <div class="col-md-4">
-                <a href="/Validation-form/profile.php" class="btn btn-primary">Перейти в профиль</a>
-            </div>
+
         </div>
         <script>
             // Обработчики клика по кнопкам сортировки

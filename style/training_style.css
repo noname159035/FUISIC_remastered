@@ -47,8 +47,12 @@ body {
   left: 25vw;
 }
 
-.help_txt {
-  left: 41vw;
+.test_txt{
+    left: 41vw;
+}
+
+.help_txt{
+    left: 55vw;
 }
 
 #search {

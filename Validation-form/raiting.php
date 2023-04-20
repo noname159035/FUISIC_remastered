@@ -12,6 +12,9 @@
     <body>
         <div class="container">
             <h2>Рейтинг пользователей</h2>
+            <div>
+                <a href="/Validation-form/profile.php" class="btn btn-primary">вернуться</a>
+            </div>
             <?php
             // Подключение к БД
             $db = new mysqli('localhost', 'root', 'root', 'Test_3');
@@ -22,7 +25,13 @@
           ORDER BY `Количество_заданий` DESC";
             $result = mysqli_query($db, $query);
 
+            $query2 = "SELECT `Пользователи`.`Имя`, COUNT(*) AS `Количество_заданий_2` FROM `История тестов` JOIN `Пользователи`
+          ON `История тестов`.`Пользователь` = `Пользователи`.`Код пользователя` GROUP BY `Пользователи`.`Имя`
+          ORDER BY `Количество_заданий_2` DESC";
+            $result2 = mysqli_query($db, $query2);
+
             // Формирование HTML-таблицы с данными
+            echo '<h4>Рейтинг по подборкам</h4>';
             echo '<table class="table">';
             echo '<thead>';
             echo '<tr><th>#</th><th>Имя пользователя</th><th>Количество выполненных заданий</th></tr>';
@@ -39,12 +48,27 @@
             if (!$result) {
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
+
+            echo '<h4>Рейтинг по тестам</h4>';
+            echo '<table class="table">';
+            echo '<thead>';
+            echo '<tr><th>#</th><th>Имя пользователя</th><th>Количество выполненных заданий</th></tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result2)) {
+                echo '<tr><td>'.$i.'</td><td>'.$row['Имя'].'</td><td>'.$row['Количество_заданий_2'].'</td></tr>';
+                $i++;
+            }
+            echo '</tbody>';
+            echo '</table>';
+
+            if (!$result2) {
+                die('Ошибка запроса: ' . mysqli_error($db));
+            }
             // Закрытие соединения с БД
             mysqli_close($db);
             ?>
-            <div class="col-md-4">
-                <a href="/Validation-form/profile.php" class="btn btn-primary">Перейти в профиль</a>
-            </div>
         </div>
     </body>
 </html>
