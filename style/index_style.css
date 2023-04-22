@@ -50,9 +50,12 @@ body {
 .coll_txt{
     left: 25vw;
 }
+.test_txt{
+    left: 41vw;
+}
 
 .help_txt{
-    left: 41vw;
+    left: 55vw;
 }
 
 .auth_txt{

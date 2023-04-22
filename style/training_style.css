@@ -47,8 +47,12 @@ body {
   left: 25vw;
 }
 
-.help_txt {
-  left: 41vw;
+.test_txt{
+    left: 41vw;
+}
+
+.help_txt{
+    left: 55vw;
 }
 
 #search {
@@ -411,6 +415,59 @@ textarea {
   min-width: 30px;
   width: 3vw;
   height: 3vw;
+}
+
+.exp-button {
+  background-image: url(img/info_img.png);
+  /* background-color: #2196f3; */
+
+  position: absolute;
+
+  left: -20vw;
+  top: 15vw;
+
+  width: 2vw;
+  height: 2vw;
+  /* min-width: 100px;
+  min-height: 30px;
+  width: 15vw; */
+
+  border: none;
+
+  background-size: 2vw 2vw; /* added this line */
+  background-repeat: no-repeat;
+}
+
+
+#footer {
+  background-image: url(img/footer.png);
+  height: 8vw;
+  width: 100%;
+  background-size: cover;
+  position: absolute;
+  bottom: -15vw;
+  margin: auto;
+  z-index: 0;
+}
+
+#footer_heading {
+  color: #02b3e4;
+  position: absolute;
+  font-family: sans-serif;
+  font-size: 1.3vw;
+  margin-top: 2vw;
+  margin-left: 2vw;
+  line-height: 1.2; /* Adjust line-height to control spacing between lines */
+}
+
+#footer_text {
+  color: #02b3e4;
+  position: absolute;
+  font-family: sans-serif;
+  font-size: 1vw;
+  margin-top: 5vw;
+  margin-left: 2vw;
+  line-height: 1.2; /* Adjust line-height to control spacing between lines */
 }
 
 @media screen and (max-width: 600px) {

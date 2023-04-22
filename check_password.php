@@ -1,4 +1,5 @@
 <?php
+
 $dbc = mysqli_connect('localhost', 'root', 'root', 'Test_3');
 $user_id = mysqli_real_escape_string($dbc, $_COOKIE['user']);
 $current_password = mysqli_real_escape_string($dbc, $_POST['password']);
@@ -16,4 +17,5 @@ if (mysqli_stmt_num_rows($stmt) == 0) {
 
 mysqli_stmt_close($stmt);
 mysqli_close($dbc);
+
 ?>

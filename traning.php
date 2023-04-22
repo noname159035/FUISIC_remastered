@@ -20,6 +20,7 @@
             <div class="header">
                 <a href="index.html" class="header-text main_txt">Главная</a>
                 <a href="collections.php" class="header-text coll_txt">Подборки</a>
+                <a href="Tests.php" class="header-text test_txt">Тесты</a>
                 <a href="support.html" class="header-text help_txt">Помощь</a>
                 <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
                 <a href="index.html" id="logo"></a>
@@ -158,7 +159,7 @@
                     </div>
                     <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
                     <button id="button_tren" class="button buttons training-button" type="button">Вернуться</button>
-                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()">Пояснение</button>
+                    <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
                 </form>
             </div>
         </div>
@@ -168,7 +169,13 @@
             <button onclick="hideExplanation()">Понятно</button>
         </div>
         
-<!--        Клавиатура-->
+        <div id="footer">
+            <p id="footer_heading">FUISIC</p>
+            <br />
+            <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
+        </div>
+        
+        <!-- Клавиатура-->
         <div id = "keyboard">
             <div id="keyboard_1">
                 <!--            <span id="input_place"></span>-->
@@ -196,10 +203,10 @@
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\sin")'>sin</button>
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\cos")'>cos</button>
 
-                            <button type="button" class="keyboard_button_2"  onClick='input("\^")'>
+                            <button type="button" class="keyboard_button_2"  onClick='input("\\^ ")'>
                                 <img src="/style/img/x^smth.png" width="18" height="21">
                             </button>
-                            <button type="button" id="x_index" class="keyboard_button_2" onClick='input("\_")'>
+                            <button type="button" id="x_index" class="keyboard_button_2" onClick='input("\\_ ")'>
                                 <img src="/style/img/x_index.png" class="math_func" width="17" height="21">
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("e")'>
@@ -258,7 +265,7 @@
                             <button type="button" class="keyboard_button_2" onClick='input(">")'>
                                 &gt;
                             </button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\frac")'>
+                            <button type="button" class="keyboard_button_2" onClick='input("\\frac ")'>
                                 <img src="/style/img/division.png" width="24" height="17">
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("|")'>
@@ -541,8 +548,7 @@
                 </div>
             </div>
         </div>
-        
-        
+
         <!-- Подключаем скрипт библиотеки MathQuill -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
@@ -626,6 +632,10 @@
             document.getElementById("button_tren").addEventListener('click', function (event){
                 window.location.href = "show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>";
             });
+
+
+        
+
         </script>
         <!-- Подключаем скрипт библиотеки MathJax -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -645,6 +655,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="cards_scrypt.js"></script>
+
+        
+
     </body>
     <?php
     $link->close();
