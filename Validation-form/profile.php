@@ -141,7 +141,7 @@ mysqli_close($mysql);
                     } else {
                         die('Ошибка запроса: ' . mysqli_error($db));
                     }
-                    $query = "SELECT COUNT(*) AS Количество_заданий FROM История WHERE Пользователь = $user_id";
+                    $query = "SELECT (SELECT COUNT(*) FROM История WHERE Пользователь = $user_id) + (SELECT COUNT(*) FROM История тестов WHERE Пользователь = $user_id) AS Количество_заданий";
                     $result = mysqli_query($db, $query);
                     $row = mysqli_fetch_assoc($result);
                     $count = $row['Количество_заданий'];
