@@ -9,13 +9,18 @@
 <body>
 <div class="container">
     <div class="header">
-        <a href="index.html" class="header-text main_txt">Главная</a>
+        <a href="index.php" class="header-text main_txt">Главная</a>
         <a href="collections.php" class="header-text coll_txt">Подборки</a>
         <a href="Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="support.html" class="header-text help_txt">Помощь</a>
-        <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
-        <a href="index.html" id="logo"></a>
-        <p class="name_of_collections"></p>
+        <a href="support.php" class="header-text help_txt">Помощь</a>
+        <?php
+        // Проверяем, авторизован ли пользователь
+        if (!isset($_COOKIE['user'])) {
+            echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+        }
+        else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        ?>
+        <a href="index.php" id="logo"></a>
     </div>
     <form method="GET" action="show_tasks.php">
         <?php
