@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Обновляем данные пользователя в базе данных
-    $query = "UPDATE Пользователи SET e-mail='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth'";
+    $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth'";
     if (!empty($new_password)) {
         $query .= ", Password='$new_password'";
     }
@@ -53,7 +53,8 @@ mysqli_close($mysql);
         <meta charset="UTF-8">
         <title>Данные пользователя</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/validation-form/level.css">
+        <link rel="stylesheet" href="/Validation-form/level.css">
+        <link rel="stylesheet" href="/style/collections_style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -61,6 +62,21 @@ mysqli_close($mysql);
 
     </head>
     <body>
+    <div class="header">
+        <a href="/index.php" class="header-text main_txt">Главная</a>
+        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
+        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
+        <a href="/support.php" class="header-text help_txt">Помощь</a>
+        <?php
+        // Проверяем, авторизован ли пользователь
+        if (!isset($_COOKIE['user'])) {
+            echo ("<a href='/login-form.php' class='header-text auth_txt'>войти</a>");
+        }
+        else echo ("<a href='/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        ?>
+        <a href="index.php" id="logo"></a>
+
+    </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">

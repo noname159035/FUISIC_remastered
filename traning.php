@@ -18,12 +18,18 @@
 
         <div id="conteiner">
             <div class="header">
-                <a href="index.html" class="header-text main_txt">Главная</a>
+                <a href="index.php" class="header-text main_txt">Главная</a>
                 <a href="collections.php" class="header-text coll_txt">Подборки</a>
                 <a href="Tests.php" class="header-text test_txt">Тесты</a>
-                <a href="support.html" class="header-text help_txt">Помощь</a>
-                <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
-                <a href="index.html" id="logo"></a>
+                <a href="support.php" class="header-text help_txt">Помощь</a>
+                <?php
+                // Проверяем, авторизован ли пользователь
+                if (!isset($_COOKIE['user'])) {
+                    echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+                }
+                else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+                ?>
+                <a href="index.php" id="logo"></a>
             </div>
 
             <?php
@@ -203,10 +209,10 @@
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\sin")'>sin</button>
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\cos")'>cos</button>
 
-                            <button type="button" class="keyboard_button_2"  onClick='input("\\^ ")'>
+                            <button type="button" class="keyboard_button_2"  onClick='input("\\^{}")'>
                                 <img src="/style/img/x^smth.png" width="18" height="21">
                             </button>
-                            <button type="button" id="x_index" class="keyboard_button_2" onClick='input("\\_ ")'>
+                            <button type="button" id="x_index" class="keyboard_button_2" onClick='input("\\_{}")'>
                                 <img src="/style/img/x_index.png" class="math_func" width="17" height="21">
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("e")'>
@@ -234,7 +240,7 @@
                             </button>
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\tan")'>tg</button>
                             <button type="button" class="keyboard_button_2" id="trigan" onclick='input("\\cot")'>ctg</button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\sqrt")'>√</button>
+                            <button type="button" class="keyboard_button_2" onClick='input("\\sqrt{}")'>√</button>
                             <button type="button" class="keyboard_button_2" onClick='input("\\sqrt[]{}")'>
                                 <img src="/style/img/sqrt_exp.png" width="22" height="18">
                             </button>
@@ -265,7 +271,7 @@
                             <button type="button" class="keyboard_button_2" onClick='input(">")'>
                                 &gt;
                             </button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\frac ")'>
+                            <button type="button" class="keyboard_button_2" onClick='input("\\frac{}{}")'>
                                 <img src="/style/img/division.png" width="24" height="17">
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("|")'>
@@ -276,7 +282,7 @@
                             </button>
                         </div>
                         <div class="line_4">
-                            <button type="button" class="keyboard_button_2" id="color_xyzi" onClick='input("\\i")'>
+                            <button type="button" class="keyboard_button_2" id="color_xyzi" onClick='input("i")'>
                                 i
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("\\%")'>
@@ -288,10 +294,10 @@
                             <button type="button" class="keyboard_button_2" onClick='input("\\infty")'>
                                 &#8734;
                             </button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\left(")'>
+                            <button type="button" class="keyboard_button_2" onClick='input("\\ (")'>
                                 (
                             </button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\right)")'>
+                            <button type="button" class="keyboard_button_2" onClick='input("\\ )")'>
                                 )
                             </button>
                             <button type="button" class="keyboard_button_2" onClick='input("\\leq")'>
@@ -300,14 +306,14 @@
                             <button type="button" class="keyboard_button_2" onClick='input("\\geq")'>
                                 &#8805;
                             </button>
-                            <button type="button" class="keyboard_button_2" onClick='input("\\acute{}")'>
+                            <button type="button" class="keyboard_button_2" onClick="input(String.fromCharCode(39))">
                                 &#180;
                             </button>
                             <button
                                     type="button"
                                     class="keyboard_button_2"
                                     id="more_dark"
-                                    onclick='input("\\vec")'
+                                    onclick='input("\\vec{}")'
                                     >
                                 <img src="/style/img/arw_und_x.png" width="13" height="18">
                             </button>
@@ -605,18 +611,9 @@
             });
 
 
-            function input2(str) {
-                mathField.cmd(str);
-                mathField.focus();
-            }
-            
             function input(str) {
-                if (str == "\\sqrt[]{}" || "\\log_{} {}" || "\\lim_{} {}" || "\\int_{}^{}") {
-                    mathField.write(str);
-                    mathField.focus();
-                } else {
-                    input2(str);
-                }
+                mathField.write(str);
+                mathField.focus();
             }
 
             var correctAnswer = <?php echo json_encode($card['formula']); ?>;

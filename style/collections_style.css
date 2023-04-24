@@ -58,6 +58,11 @@ a {
 .help_txt{
   left: 55vw;
 }
+
+.auth_txt{
+  right: 1vw;
+}
+
 #search {
   padding: 1.2% 2% 1% 2.3%;
   float: right;

@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
     <head>
         <title>Тест</title>
         <title>Карточки</title>
@@ -11,12 +11,18 @@
     <body>
     <div id="conteiner">
         <div class="header">
-            <a href="index.html" class="header-text main_txt">Главная</a>
+            <a href="index.php" class="header-text main_txt">Главная</a>
             <a href="collections.php" class="header-text coll_txt">Подборки</a>
             <a href="Tests.php" class="header-text test_txt">Тесты</a>
-            <a href="support.html" class="header-text help_txt">Помощь</a>
-            <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
-            <a href="index.html" id="logo"></a>
+            <a href="support.php" class="header-text help_txt">Помощь</a>
+            <?php
+            // Проверяем, авторизован ли пользователь
+            if (!isset($_COOKIE['user'])) {
+                echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+            }
+            else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+            ?>
+            <a href="index.php" id="logo"></a>
         </div>
     <?php
     $link = new mysqli('localhost', 'root', 'root', 'Test_3');
@@ -36,7 +42,7 @@
     }
 
     ?>
-    <h1 class="test_name">Тест: <?php echo $testName ?></h1>
+    <h1 class="podbor_name">Тест: <?php echo $testName ?></h1>
     <div class="container_1">
         <?php
         // Подключение к базе данных
@@ -59,6 +65,8 @@
             $stmt = $link->prepare($query);
             $stmt->bind_param('sssi', $userId, $time, $testId, $correctAnswers);
             $stmt->execute();
+            session_unset();
+            session_destroy();
             if (!$stmt) {
                 echo "Error: " . mysqli_error($link);
             }
@@ -116,18 +124,21 @@
                         echo "<a href='?test=" . $_GET['test'] . "&task=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
 
                     }
+                    echo "</div>";
 
                     if (isset($_POST['check-answer'])) {
                         $userAnswer = $_POST['user-answer'];
-                        $currentTask = $_POST['task'];
+                        $currentTask = isset($_POST['task']) ? (int)$_POST['task'] : null;
 
                         if (in_array($currentTask, $_SESSION['answered_tasks'])) {
-// Если на эту карточку уже ответили, выводим сообщение
-                            echo "<div class='alert alert-warning'>Вы уже ответили на этот вопрос. Повторная проверка невозможна.</div>";
+// Если на это задание уже ответили, выводим сообщение
+                            echo "<div class='alert alert-warning'>Вы уже ответили на это задание. Повторная проверка невозможна.</div>";
+                        } elseif (empty($userAnswer)) {
+// Если ответ пустой, выводим сообщение об ошибке
+                            echo "<div class='alert alert-danger'>Введите ответ.</div>";
                         } else {
-// Если это новый ответ, добавляем номер карточки в массив
-
-                            if ($userAnswer == $task['answer']) {
+// Если это новый ответ и ответ не пустой, проверяем его на правильность
+                            if ($userAnswer == $taskArr[$currentTask]['answer']) {
                                 array_push($_SESSION['answered_tasks'], $currentTask);
                                 $_SESSION['correct_answers']++;
                                 echo "<div class='alert alert-success'>Правильно!</div>";
@@ -137,7 +148,6 @@
                         }
                     }
 
-                    echo "</div>";
                 } else {
                     session_unset();
                     session_destroy();
