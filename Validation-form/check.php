@@ -11,7 +11,7 @@
   FILTER_SANITIZE_STRING) ;
 
 
-  $mysql = new mysqli('localhost', 'root', 'root' ,'Test_3');
+  $mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
   $result = $mysql->query ("SELECT * FROM `Пользователи` WHERE `e-mail` = '$login'");
   if ($result->num_rows > 0) {
   echo "Пользователь с таким e-mail уже существует";
