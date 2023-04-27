@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="style/index_style.css"/>
         <!-- Иконки -->
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
         <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
         <link rel="manifest" href="/favicons/site.webmanifest"/>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
+        <link rel="stylesheet" href="style/index_style.css" />
         <meta name="msapplication-TileColor" content="#2b5797"/>
         <meta
         name="theme-color" content="#ffffff"/>
@@ -29,9 +29,9 @@
                 <?php
                 // Проверяем, авторизован ли пользователь
                 if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
                 }
-                else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
                 ?>
                 <a href="index.php" id="logo"></a>
 

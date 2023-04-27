@@ -4,7 +4,7 @@ if (!isset($_COOKIE['user'])) {
     exit();
 }
 
-$mysql = new mysqli('localhost', 'root', 'root', 'Test_3');
+$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 
 $user_code = $_COOKIE['user_code'];
 $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);

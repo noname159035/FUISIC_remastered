@@ -33,7 +33,7 @@
                         <button class="btn btn-primary" type ="submit">Авторизоваться</button>
 
                         <a href="register-form.php" class="header-text auth_txt">зарегистрироваться</a>
-                        <a href="/index.html" class="header-text auth_txt">Отмена</a>
+                        <a href="/index.php" class="header-text auth_txt">Отмена</a>
                     </form>
                 <?php else: ?>
                 <?php header('Location: /validation-form/profile.php') ?>

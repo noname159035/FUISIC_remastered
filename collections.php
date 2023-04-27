@@ -16,16 +16,16 @@
                 <?php
                 // Проверяем, авторизован ли пользователь
                 if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
                 }
-                else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
                 ?>
                 <a href="index.php" id="logo"></a>
             </div>
 
             <form method="GET" action="show_cards.php">
                 <?php
-                $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+                $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
                 $query = "SELECT * FROM Разделы";
                 $result = mysqli_query($link, $query);
 
