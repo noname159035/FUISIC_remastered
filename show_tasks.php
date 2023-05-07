@@ -108,7 +108,7 @@
                     // Вывод текущей карточки
                     $task = $taskArr[$currentTask];
                     echo "<div class='task'>";
-                    echo "<h3><div class='mathjax-latex'>" . $task['task'] . "</div></h3>";
+                    echo "<h3><div class='mathjax-latex' id='main_text'>" . $task['task'] . "</div></h3>";
                     echo "</div>";
                     unset($_SESSION['answered_tasks'][$currentTask]);
 

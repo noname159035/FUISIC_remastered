@@ -14,7 +14,9 @@
     min-height: 250px;
 }
 
-
+#main_text{
+    font-size: 80%;
+}
 
 .card {
     position: relative;
@@ -96,6 +98,7 @@
     margin-top: 1vh;
     gap: 0.5vw;
     text-align: center;
+    
 }
 
 .button {
@@ -108,7 +111,7 @@
     background-color: white;
     border: 2px solid rgb(12, 80, 124, 0.2);
     border-radius: 1vw;
-    transition: all 0.3s;
+    /*transition: all 0.3s;*/
     display: flex;
     justify-content: center;
     display: inline-block
@@ -214,6 +217,7 @@
 
 .container_1{
     position: relative;
+    padding-top: 3%;
 }
 
 #counter{

@@ -1,11 +1,11 @@
 @media screen and (min-width: 1000px) {
     #keyboard {
       box-sizing: border-box;
-      width: 48vw;
+      width: 43vw;
       height: auto;
-      position: absolute;
+      position: fixed;
       bottom: 3vh;
-      left: 50%;
+      left: 51.5%;
       margin-left: -23vw;
       background-color: white;
       /* border: solid #116ca9 1px; */
@@ -16,10 +16,19 @@
 
       visibility: visible;
       font-style: normal;
+      padding: 0;
     }
     #input_place:empty:before {
         content: attr(placeholder);
         color: #a9a9a9;
+    }
+
+    .lines_k2{
+      margin-left: 10%;
+    }
+
+    .lines_k1{
+      margin-left: 4%;
     }
 
     #input_place{
@@ -50,7 +59,7 @@
       /* position: relative; */
       /* padding-top: 6%; */
       font-style: normal;
-
+      width: 100%;
     }
 
     .keyboard_button {
@@ -58,7 +67,7 @@
       color: #0c507c;
       font-weight: 600;
       font-weight: normal;
-      width: 3.3vw;
+      width: 7%;
       height: 4vh;
       /* height: 2vw; */
       border: none;
@@ -83,11 +92,11 @@
 
     #keyboard_2 {
       box-sizing: border-box;
-      width: 46vw;
+      width: 43vw;
       height: auto;
       position: fixed;
       bottom: 3vh;
-      left: 50%;
+      left: 51.5%;
       margin-left: -23vw;
       background-color: FFFFFF;
       /* border: solid #116ca9 1px; */
@@ -113,7 +122,7 @@
       color: #0c507c;
       font-weight: 600;
       font-weight: normal;
-      width: 3.3vw;
+      width: 7%;
       height: 4vh;
       /* height: 2vw; */
       border: none;
@@ -132,11 +141,11 @@
     } */
 
     #btn {
-      width: 6.9vw;
+      width: 14.6%;
     }
 
     #btn2 {
-      width: 6.9vw;
+      width: 14.7%;
     }
 
     #digital_color{
@@ -177,6 +186,10 @@
       font-weight: 600;
 
       visibility: visible;
+    }
+
+    .lines_k1{
+      margin-left: 0%;
     }
 
     #input_place {
@@ -221,7 +234,7 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       color: #0c507c;
       font-weight: 600;
-      width: 7.5vw;
+      width: 7%;
       height: 4vh;
 
       border: none;
