@@ -36,6 +36,7 @@
                 <a href="index.php" id="logo"></a>
 
             </div>
+
             <div id="back_img_1"></div>
             <div id="triangle">
                 <p id="trang_heading">FUISIC</p>
@@ -64,6 +65,7 @@
                                                   “Математики” и “Физики”
                 </p>
             </div>
+            <a href="index_new.php">asdasd</a>
             <div id="footer">
                 <p id="footer_heading">FIUSIC</p>
                 <br/>
