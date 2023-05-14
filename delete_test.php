@@ -23,12 +23,8 @@ if (!isset($_COOKIE['user'])) {
     header("Location: /validation-form/login-form.php");
     exit;
 }
-
-// Получаем ID пользователя
-$user_id = $_COOKIE['user'];
-
 // Выбираем тест из базы данных
-$query = "SELECT * FROM Тесты WHERE `Код_Теста`=$test_id AND `Автор`=$user_id";
+$query = "SELECT * FROM Тесты WHERE `Код_Теста`=$test_id";
 $result = mysqli_query($link, $query);
 
 if (mysqli_num_rows($result) == 0) {

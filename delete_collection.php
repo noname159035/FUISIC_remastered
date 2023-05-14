@@ -24,11 +24,8 @@ if (!isset($_COOKIE['user'])) {
     exit;
 }
 
-// Получаем ID пользователя
-$user_id = $_COOKIE['user'];
-
 // Выбираем подборку из базы данных
-$query = "SELECT * FROM Подборки WHERE `Код подборки`=$collection_id AND `Автор`=$user_id";
+$query = "SELECT * FROM Подборки WHERE `Код подборки`=$collection_id";
 $result = mysqli_query($link, $query);
 
 if (mysqli_num_rows($result) == 0) {
