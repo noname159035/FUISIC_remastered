@@ -89,6 +89,12 @@ mysqli_close($mysql);
                         <li class="list-group-item"><a href="/validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
                         <li class="list-group-item"><a href="/validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
                     </ul>
+                    <?php
+                    if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
+                        echo "<a href='/my_base.php'><i class='fas fa-user'></i>Мои задания</a>";
+                    }
+                    ?>
+
                 </div>
                 <div class="col-md-6">
                     <h1>Личный кабинет</h1>
