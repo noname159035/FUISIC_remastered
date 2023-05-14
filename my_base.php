@@ -53,8 +53,8 @@ $user = $result->fetch_assoc();
 
 // Создаем кнопки для создания подборки и теста
 echo '<div class="mb-3">';
-echo '<a class="btn btn-success" href="create_collection.php">Создать подборку</a>';
-echo '<a class="btn btn-success" href="create_test.php">Создать тест</a>';
+echo '<button class="btn btn-success create-collection-btn">Создать подборку</button>';
+echo '<button class="btn btn-success create-test-btn">Создать тест</button>';
 echo '</div>';
 
 
@@ -83,7 +83,7 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
         while ($row_collections = mysqli_fetch_assoc($result_collections)) {
             echo '<li class="list-group-item d-flex justify-content-between align-items-center">' . $row_collections['Название'];
             echo '<div class="btn-group" role="group">';
-            echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_collection.php?id=' . $row_collections['Код подборки'] . '">Редактировать</a>';
+            echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_collection.php?podbor=' . $row_collections['Код подборки'] . '">Редактировать</a>';
             echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="delete_collection.php?id=' . $row_collections['Код подборки'] . '">Удалить</a>';
             echo '</div>';
             echo '</li>';
@@ -109,7 +109,7 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
         while ($row_tests = mysqli_fetch_assoc($result_tests)) {
             echo '<li class="list-group-item d-flex justify-content-between align-items-center">' . $row_tests['Название'];
             echo '<div class="btn-group" role="group">';
-            echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_test.php?id=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
+            echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_test.php?test=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
             echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="delete_test.php?id='  . $row_tests['Код_Теста'] . '">Удалить</a>';
             echo '</div>';
             echo '</li>';
@@ -118,11 +118,85 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
     }
     mysqli_free_result($result_tests);
 }
-
-// Освобождаем ресурсы
-mysqli_free_result($result_sections);
-mysqli_close($link);
 ?>
+
+<div class="modal fade" id="createCollectionModal" tabindex="-1" role="dialog" aria-labelledby="createCollectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createCollectionModalLabel">Создание подборки</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="collectionSection">Раздел</label>
+                    <select class="form-control" id="collectionSection" name="collectionSection" required>
+                        <?php
+                        $query_sections = "SELECT * FROM Разделы";
+                        $result_sections = mysqli_query($link, $query_sections);
+
+                        while ($row_sections = mysqli_fetch_assoc($result_sections)) {
+                            echo '<option value="' . $row_sections['Код Раздела'] . '">' . $row_sections['Название'] . '</option>';
+                        }
+
+                        mysqli_free_result($result_sections);
+                        ?>
+                    </select>
+                </div>
+                <form id="createCollectionForm">
+                    <div class="form-group">
+                        <label for="collectionTitle">Название подборки</label>
+                        <input type="text" class="form-control" id="collectionTitle" name="collectionTitle" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" id="createCollectionSubmit">Создать подборку</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createTestModal" tabindex="-1" role="dialog" aria-labelledby="createTestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createTestLabel">Создание теста</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="testSection">Раздел</label>
+                    <select class="form-control" id="testSection" name="testSection" required>
+                        <?php
+                        $query_sections = "SELECT * FROM Разделы";
+                        $result_sections = mysqli_query($link, $query_sections);
+
+                        while ($row_sections = mysqli_fetch_assoc($result_sections)) {
+                            echo '<option value="' . $row_sections['Код Раздела'] . '">' . $row_sections['Название'] . '</option>';
+                        }
+
+                        mysqli_free_result($result_sections);
+                        ?>
+                    </select>
+                </div>
+                <form id="createTestForm">
+                    <div class="form-group">
+                        <label for="testTitle">Название теста</label>
+                        <input type="text" class="form-control" id="testTitle" name="testTitle" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" id="createTestSubmit">Создать тест</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -144,11 +218,14 @@ mysqli_close($link);
     </div>
 </div>
 
-</body>
-</html>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
+<?php
+// Освобождаем ресурсы
+mysqli_free_result($result_sections);
+mysqli_close($link);
+?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(document).ready(function () {
         // Обработчик клика на кнопке подтверждения удаления
@@ -159,8 +236,67 @@ mysqli_close($link);
             confirmBtn.attr('href', href);
         });
     });
-</script>
 
+    $(document).ready(function () {
+        // Обработчик клика на кнопку "Создать подборку"
+        $('.create-collection-btn').click(function () {
+            $('#createCollectionModal').modal('show');
+        });
+
+        // Обработчик клика на кнопку "Создать подборку" в модальном окне
+        $('#createCollectionSubmit').click(function (e) {
+            e.preventDefault();
+            var collectionTitle = $('#collectionTitle').val();
+            var collectionSection = $('#collectionSection').val();
+            if (collectionTitle == '') {
+                alert('Введите название подборки');
+                return;
+            }
+            else {
+                $.ajax({
+                    url: 'create_collection.php',
+                    data: {'title': collectionTitle, 'section': collectionSection}, // Добавляем передачу кода раздела
+                    type: 'POST',
+                    success: function (response) {
+                        window.location.href = '/edit_collection.php?test=' + response;
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        // Обработчик клика на кнопку "Создать тест"
+        $('.create-test-btn').click(function () {
+            $('#createTestModal').modal('show');
+        });
+
+        // Обработчик клика на кнопку "Создать тест" в модальном окне
+        $('#createTestSubmit').click(function (e) {
+            e.preventDefault();
+            var testTitle = $('#testTitle').val();
+            var testSection = $('#testSection').val();
+            if (testTitle == '') {
+                alert('Введите название подборки');
+                return;
+            }
+            else {
+                $.ajax({
+                    url: 'create_test.php',
+                    data: {'title': testTitle, 'section': testSection}, // Добавляем передачу кода раздела
+                    type: 'POST',
+                    success: function (response) {
+                        window.location.href = '/edit_test.php?test=' + response;
+                    }
+                });
+            }
+        });
+    });
+
+
+
+</script>
+</body>
 <!-- Добавляем стили -->
 <style>
     .btn-success{
@@ -174,3 +310,6 @@ mysqli_close($link);
         margin-bottom: 30px;
     }
 </style>
+</html>
+
+
