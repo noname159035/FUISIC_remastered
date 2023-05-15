@@ -10,20 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </head>
 <body>
-<div class="header">
-    <a href="/index.php" class="header-text main_txt">Главная</a>
-    <a href="/collections.php" class="header-text coll_txt">Подборки</a>
-    <a href="/Tests.php" class="header-text test_txt">Тесты</a>
-    <a href="/support.php" class="header-text help_txt">Помощь</a>
-    <?php
-    // Проверяем, авторизован ли пользователь
-    if (!isset($_COOKIE['user'])) {
-        echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-    }
-    else echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-    ?>
-    <a href="/index.php" id="logo"></a>
-</div>
+<?php
+include("header.php");
+?>
 <?php
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
@@ -219,6 +208,10 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
 </div>
 
 <?php
+include("footer.php");
+?>
+
+<?php
 // Освобождаем ресурсы
 mysqli_free_result($result_sections);
 mysqli_close($link);
@@ -258,7 +251,7 @@ mysqli_close($link);
                     data: {'title': collectionTitle, 'section': collectionSection}, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
-                        window.location.href = '/edit_collection.php?test=' + response;
+                        window.location.href = '/edit_collection.php?podbor=' + response;
                     }
                 });
             }

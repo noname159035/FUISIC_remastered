@@ -21,22 +21,10 @@
     </head>
     <body>
         <div id="conteiner">
-            <div class="header">
-                <a href="index.php" class="header-text main_txt">Главная</a>
-                <a href="collections.php" class="header-text coll_txt">Подборки</a>
-                <a href="Tests.php" class="header-text test_txt">Тесты</a>
-                <a href="support.php" class="header-text help_txt">Помощь</a>
-                <?php
-                // Проверяем, авторизован ли пользователь
-                if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-                }
-                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-                ?>
-                <a href="index.php" id="logo"></a>
 
-            </div>
-
+            <?php
+            include("header.php");
+            ?>
             <div id="back_img_1"></div>
             <div id="triangle">
                 <p id="trang_heading">FUISIC</p>
@@ -66,11 +54,9 @@
                 </p>
             </div>
             <a href="index_new.php">asdasd</a>
-            <div id="footer">
-                <p id="footer_heading">FIUSIC</p>
-                <br/>
-                <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
-            </div>
+            <?php
+            include("footer.php");
+            ?>
         </div>
         <script src="scrypts/index_scrypt.js"></script>
     </body>

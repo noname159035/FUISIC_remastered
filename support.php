@@ -42,27 +42,10 @@
   </head>
   <body>
     <div id="conteiner">
-      <div class="header">
-        <a href="index.php" class="header-text main_txt">Главная</a>
-        <a href="collections.php" class="header-text coll_txt">Подборки</a>
-        <a href="Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="support.php" class="header-text help_txt">Помощь</a>
-        <?php
-        // Проверяем, авторизован ли пользователь
-        if (!isset($_COOKIE['user'])) {
-          echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-        }
-        else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-        ?>
-        <a href="index.php" id="logo"></a>
-      </div>
-      <p class="name_of_support">КАК С НАМИ СВЯЗАТЬСЯ</p>
 
-      <div id="bottom_info_block">
-        <p id="bottom_info_toptext" class="top_info_text">
-          Если вы сталкнулись с проблемой или у вас пойвились вопросы, сообщите нам
-        </p>
-      </div>
+      <?php
+      include("header.php");
+      ?>
 
       <form action="mail.php" method="post">
           <input
@@ -90,13 +73,10 @@
           <button id="button_send" type="submit">ОТПРАВИТЬ</button>
       </form>
 
+      <?php
+      include("footer.php");
+      ?>
 
-
-      <div id="footer">
-        <p id="footer_heading">FUISIC</p>
-        <br />
-        <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
-      </div>
     </div>
   </body>
 </html>

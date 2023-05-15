@@ -30,4 +30,4 @@ if (mysqli_query($link, $query)) {
 // Освобождаем ресурсы
 mysqli_close($link);
 ?>
-<?php
+

@@ -8,20 +8,9 @@
 </head>
 <body>
 <div class="container">
-    <div class="header">
-        <a href="index.php" class="header-text main_txt">Главная</a>
-        <a href="collections.php" class="header-text coll_txt">Подборки</a>
-        <a href="Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="support.php" class="header-text help_txt">Помощь</a>
-        <?php
-        // Проверяем, авторизован ли пользователь
-        if (!isset($_COOKIE['user'])) {
-            echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-        }
-        else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-        ?>
-        <a href="index.php" id="logo"></a>
-    </div>
+    <?php
+    include("header.php");
+    ?>
     <form method="GET" action="show_tasks.php">
         <?php
         $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
@@ -50,15 +39,15 @@
         ?>
     </form>
 </div>
-<div id="footer">
-    <p id="footer_heading">FUISIC</p>
-    <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
-</div>
+<?php
+include("footer.php");
+?>
 <script>
     function startTest(testId) {
         window.location.href = "test.php?id="+testId;
     }
 </script>
 <script src="jquery-3.6.1.min.js"></script>
+
 </body>
 </html>
