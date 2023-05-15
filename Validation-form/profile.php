@@ -1,13 +1,13 @@
 <?php
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
-    header('Location: /Validation-form/login-form.php');
+    header('Location: /validation-form/login-form.php');
     exit();
 }
 
 // Получаем данные пользователя по коду из куки
 
-$mysql = new mysqli('localhost', 'root', 'root', 'Test_3');
+$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 $user_id = $_COOKIE['user'];
 $result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
 $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
@@ -53,7 +53,8 @@ mysqli_close($mysql);
         <meta charset="UTF-8">
         <title>Данные пользователя</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/validation-form/level.css">
+        <link rel="stylesheet" href="/Validation-form/level.css">
+        <link rel="stylesheet" href="/style/collections_style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -61,6 +62,21 @@ mysqli_close($mysql);
 
     </head>
     <body>
+    <div class="header">
+        <a href="/index.php" class="header-text main_txt">Главная</a>
+        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
+        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
+        <a href="/support.php" class="header-text help_txt">Помощь</a>
+        <?php
+        // Проверяем, авторизован ли пользователь
+        if (!isset($_COOKIE['user'])) {
+            echo ("<a href='/login-form.php' class='header-text auth_txt'>войти</a>");
+        }
+        else echo ("<a href='/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        ?>
+        <a href="index.php" id="logo"></a>
+
+    </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -129,7 +145,7 @@ mysqli_close($mysql);
                 </div>
                 <div class="col-md-3">
                     <?php
-                    $db = new mysqli('localhost', 'root', 'root', 'Test_3');
+                    $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
                     $query = "SELECT * FROM Уровни ORDER BY id ASC";
                     $result = mysqli_query($db, $query);
                     $levels = []; // массив с информацией о каждом уровне

@@ -57,7 +57,7 @@
                         <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
 
                         <a href="login-form.php" class="header-text auth_txt">войти</a>
-                        <a href="/index.html" class="header-text auth_txt">Отмена</a>
+                        <a href="/index.php" class="header-text auth_txt">Отмена</a>
                     </form>
                 </div>
 

@@ -13,12 +13,19 @@
         <div class="header">
             <a href="index.html" class="header-text main_txt">Главная</a>
             <a href="collections.php" class="header-text coll_txt">Подборки</a>
-            <a href="support.html" class="header-text help_txt">Помощь</a>
-            <a href="Validation-form/login-form.php" class="header-text auth_txt">войти</a>
-            <a href="index.html" id="logo"></a>
+            <a href="Tests.php" class="header-text test_txt">Тесты</a>
+            <a href="support.php" class="header-text help_txt">Помощь</a>
+            <?php
+            // Проверяем, авторизован ли пользователь
+            if (!isset($_COOKIE['user'])) {
+                echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+            }
+            else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+            ?>
+            <a href="index.php" id="logo"></a>
         </div>
     <?php
-    $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
     $query = "SELECT Название FROM Тесты WHERE `Код_Теста` = ?";
     $stmt = $link->prepare($query);
     $stmt->bind_param('s', $_GET['test']);
@@ -31,7 +38,7 @@
     <div class="container_1">
         <?php
         // Подключение к базе данных
-        $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
         $query = "SELECT * FROM `Задачи` WHERE Тест = ?";
         $stmt = $link->prepare($query);
         $stmt->bind_param('s', $_GET['test']);

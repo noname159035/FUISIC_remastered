@@ -7,7 +7,7 @@ if (!isset($_COOKIE['user'])) {
 
 // Получаем данные пользователя по коду из куки
 $user_code = $_COOKIE['user_code'];
-$mysql = new mysqli('localhost', 'root', 'root', 'Test_3');
+$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 $result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_code'");
 $user = $result->fetch_assoc();
 $mysql->close();

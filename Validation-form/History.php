@@ -10,9 +10,27 @@
 
     </head>
     <body>
+    <div class="header">
+        <a href="/index.php" class="header-text main_txt">Главная</a>
+        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
+        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
+        <a href="/support.php" class="header-text help_txt">Помощь</a>
+        <?php
+        // Проверяем, авторизован ли пользователь
+        if (!isset($_COOKIE['user'])) {
+            echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+        }
+        else echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        ?>
+        <a href="index.php" id="logo"></a>
+
+    </div>
         <div class="container">
             <h2>История прохождения заданий</h2>
             <div class="row">
+                <div class="col-md-4">
+                    <a href="/Validation-form/profile.php" class="btn btn-primary">вернуться</a>
+                </div>
                 <div class="col-md-4 text-center">
                     <h4>Сортировать по:</h4>
                 </div>
@@ -23,11 +41,11 @@
             </div>
             <?php
             // Подключение к БД
-            $db = new mysqli('localhost', 'root', 'root', 'Test_3');
+            $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 
             // Получение данных о зарегистрированном пользователе
             if (!isset($_COOKIE['user'])) {
-                header('Location: /Validation-form/login-form.php');
+                header('Location: /validation-form/login-form.php');
                 exit();
             }
 
@@ -74,11 +92,11 @@
         <script>
             // Обработчики клика по кнопкам сортировки
             $('#sort-date-asc').on('click', function() {
-                window.location.href = '/Validation-form/history.php?sort=date_asc';
+                window.location.href = '/validation-form/History.php?sort=date_asc';
             });
 
             $('#sort-date-desc').on('click', function() {
-                window.location.href = '/Validation-form/history.php?sort=date_desc';
+                window.location.href = '/validation-form/History.php?sort=date_desc';
             });
         </script>
     </body>

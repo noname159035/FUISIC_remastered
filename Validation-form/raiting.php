@@ -10,11 +10,29 @@
 
     </head>
     <body>
+    <div class="header">
+        <a href="/index.php" class="header-text main_txt">Главная</a>
+        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
+        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
+        <a href="/support.php" class="header-text help_txt">Помощь</a>
+        <?php
+        // Проверяем, авторизован ли пользователь
+        if (!isset($_COOKIE['user'])) {
+            echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+        }
+        else echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        ?>
+        <a href="/index.php" id="logo"></a>
+
+    </div>
         <div class="container">
             <h2>Рейтинг пользователей</h2>
+            <div>
+                <a href="/Validation-form/profile.php" class="btn btn-primary">вернуться</a>
+            </div>
             <?php
             // Подключение к БД
-            $db = new mysqli('localhost', 'root', 'root', 'Test_3');
+            $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 
             // Выборка всех пользователей и их количества выполненных заданий, отсортированных по убыванию
             $query = "SELECT `Пользователи`.`Имя`, COUNT(*) AS `Количество_заданий` FROM `История` JOIN `Пользователи`
