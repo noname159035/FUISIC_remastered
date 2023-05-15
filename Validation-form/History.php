@@ -8,24 +8,13 @@
         <link rel="stylesheet" href="/style/collections_style.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     </head>
-    <body>
-    <div class="header">
-        <a href="/index.php" class="header-text main_txt">Главная</a>
-        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
-        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="/support.php" class="header-text help_txt">Помощь</a>
-        <?php
-        // Проверяем, авторизован ли пользователь
-        if (!isset($_COOKIE['user'])) {
-            echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-        }
-        else echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-        ?>
-        <a href="index.php" id="logo"></a>
 
-    </div>
+    <body>
+
+    <?php
+    include("header.php");
+    ?>
         <div class="container">
             <h2>История прохождения заданий</h2>
             <div class="row">
@@ -114,15 +103,21 @@
             ?>
 
         </div>
-        <script>
-            // Обработчики клика по кнопкам сортировки
-            $('#sort-date-asc').on('click', function() {
-                window.location.href = '/validation-form/History.php?sort=date_asc';
-            });
 
-            $('#sort-date-desc').on('click', function() {
-                window.location.href = '/validation-form/History.php?sort=date_desc';
-            });
-        </script>
+    <?php
+    include("footer.php");
+    ?>
+
+    <script>
+        // Обработчики клика по кнопкам сортировки
+        $('#sort-date-asc').on('click', function() {
+            window.location.href = '/validation-form/History.php?sort=date_asc';
+        });
+
+        $('#sort-date-desc').on('click', function() {
+            window.location.href = '/validation-form/History.php?sort=date_desc';
+        });
+    </script>
+
     </body>
 </html>
