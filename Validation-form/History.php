@@ -5,32 +5,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/style/collections_style.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     </head>
-    <body>
-    <div class="header">
-        <a href="/index.php" class="header-text main_txt">Главная</a>
-        <a href="/collections.php" class="header-text coll_txt">Подборки</a>
-        <a href="/Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="/support.php" class="header-text help_txt">Помощь</a>
-        <?php
-        // Проверяем, авторизован ли пользователь
-        if (!isset($_COOKIE['user'])) {
-            echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-        }
-        else echo ("<a href='/Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-        ?>
-        <a href="index.php" id="logo"></a>
 
-    </div>
+    <body>
+
+    <?php
+    include("header.php");
+    ?>
         <div class="container">
             <h2>История прохождения заданий</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <a href="/Validation-form/profile.php" class="btn btn-primary">вернуться</a>
-                </div>
                 <div class="col-md-4 text-center">
                     <h4>Сортировать по:</h4>
                 </div>
@@ -64,6 +51,14 @@
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
 
+            $query2 = "SELECT `История тестов`.Дата_прохождения_задания, Тесты.Название, `История тестов`.Результат FROM `История тестов` JOIN Тесты
+          ON `История тестов`.Тест = Тесты.Код_Теста
+          WHERE `История тестов`.Пользователь = $user_id ORDER BY `История тестов`.Дата_прохождения_задания $order";
+            $result2 = mysqli_query($db, $query2);
+            if (!$result2) {
+                die('Ошибка запроса: ' . mysqli_error($db));
+            }
+
             // Формирование HTML-таблицы с данными
             echo '<table class="table">';
             echo '<thead>';
@@ -82,21 +77,37 @@
             if (!$result) {
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
+
+            echo '<table class="table">';
+            echo '<thead>';
+            echo '<tr><th>#</th><th>Тест</th><th>Дата прохождения задания</th><th>Результат</th></tr>';
+            echo '</thead>';
+            echo '<tbody>';
+            $i = 1;
+            while ($row = mysqli_fetch_assoc($result2)) {
+                echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата_прохождения_задания'].'</td><td>'.$row['Результат'].'</td></tr>';
+                $i++;
+            }
+            echo '</tbody>';
+            echo '</table>';
+            $result2 = mysqli_query($db, $query2);
+
+            if (!$result2) {
+                die('Ошибка запроса: ' . mysqli_error($db));
+            }
             // Закрытие соединения с БД
             mysqli_close($db);
             ?>
-            <div class="col-md-4">
-                <a href="/Validation-form/profile.php" class="btn btn-primary">Перейти в профиль</a>
-            </div>
+
         </div>
         <script>
             // Обработчики клика по кнопкам сортировки
             $('#sort-date-asc').on('click', function() {
-                window.location.href = '/validation-form/History.php?sort=date_asc';
+                window.location.href = '/Validation-form/history.php?sort=date_asc';
             });
 
             $('#sort-date-desc').on('click', function() {
-                window.location.href = '/validation-form/History.php?sort=date_desc';
+                window.location.href = '/Validation-form/history.php?sort=date_desc';
             });
         </script>
     </body>

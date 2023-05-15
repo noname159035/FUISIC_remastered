@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Обновляем данные пользователя в базе данных
-    $query = "UPDATE Пользователи SET e-mail='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth'";
+    $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth'";
     if (!empty($new_password)) {
         $query .= ", Password='$new_password'";
     }
@@ -53,7 +53,7 @@ mysqli_close($mysql);
         <meta charset="UTF-8">
         <title>Данные пользователя</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/Validation-form/level.css">
+        <link rel="stylesheet" href="/validation-form/level.css">
         <link rel="stylesheet" href="/style/collections_style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -70,9 +70,9 @@ mysqli_close($mysql);
         <?php
         // Проверяем, авторизован ли пользователь
         if (!isset($_COOKIE['user'])) {
-            echo ("<a href='/login-form.php' class='header-text auth_txt'>войти</a>");
+            echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
         }
-        else echo ("<a href='/login-form.php' class='header-text auth_txt'>Профиль</a>");
+        else echo ("<a href='/validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
         ?>
         <a href="index.php" id="logo"></a>
 
@@ -89,6 +89,12 @@ mysqli_close($mysql);
                         <li class="list-group-item"><a href="/validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
                         <li class="list-group-item"><a href="/validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
                     </ul>
+                    <?php
+                    if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
+                        echo "<a href='/my_base.php'><i class='fas fa-user'></i>Мои задания</a>";
+                    }
+                    ?>
+
                 </div>
                 <div class="col-md-6">
                     <h1>Личный кабинет</h1>
@@ -157,7 +163,7 @@ mysqli_close($mysql);
                     } else {
                         die('Ошибка запроса: ' . mysqli_error($db));
                     }
-                    $query = "SELECT COUNT(*) AS Количество_заданий FROM История WHERE Пользователь = $user_id";
+                    $query = "SELECT (SELECT COUNT(*) FROM История WHERE Пользователь = $user_id) + (SELECT COUNT(*) FROM История тестов WHERE Пользователь = $user_id) AS Количество_заданий";
                     $result = mysqli_query($db, $query);
                     $row = mysqli_fetch_assoc($result);
                     $count = $row['Количество_заданий'];
@@ -226,6 +232,11 @@ mysqli_close($mysql);
                 </div>
             </div>
         </div>
+
+    <?php
+    include("footer.php");
+    ?>
+
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

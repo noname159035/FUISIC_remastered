@@ -50,9 +50,12 @@ body {
 .coll_txt{
     left: 25vw;
 }
+.test_txt{
+    left: 41vw;
+}
 
 .help_txt{
-    left: 41vw;
+    left: 55vw;
 }
 
 .auth_txt{
@@ -210,6 +213,7 @@ textarea {
   background-repeat: no-repeat;
     cursor: pointer;
   /* background-repeat: no-repeat; */
+
 }
 
 #menu_math {
@@ -229,6 +233,7 @@ textarea {
   -webkit-transition: 0.5s ease; /* Safari and Chrome */
   -moz-transition: 0.5s ease; /* Firefox 4 */
   -o-transition: 0.5s ease; /* Opera */
+    transition-property: transform;
 }
 
 #phys_name {
@@ -237,6 +242,7 @@ textarea {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+    transition-property: transform;
 }
 
 #math_name {
@@ -245,6 +251,7 @@ textarea {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+    /*transition-property: transform;*/
 }
 
 #menu_physics:hover {
@@ -276,6 +283,7 @@ textarea {
   font-weight: 700;
   stroke: #f9f9fa;
   stroke-width: 2px;
+
 }
 
 #menu_math {
@@ -285,6 +293,7 @@ textarea {
   -webkit-transition: 0.5s ease; /* Safari and Chrome */
   -moz-transition: 0.5s ease; /* Firefox 4 */
   -o-transition: 0.5s ease; /* Opera */
+    transition-property: transform;
 }
 
 #menu_math:hover {

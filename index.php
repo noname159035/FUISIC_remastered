@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="style/index_style.css"/>
         <!-- Иконки -->
         <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
@@ -22,22 +21,10 @@
     </head>
     <body>
         <div id="conteiner">
-            <div class="header">
-                <a href="index.html" class="header-text main_txt">Главная</a>
-                <a href="collections.php" class="header-text coll_txt">Подборки</a>
-                <a href="Tests.php" class="header-text test_txt">Тесты</a>
-                <a href="support.php" class="header-text help_txt">Помощь</a>
-                <?php
-                // Проверяем, авторизован ли пользователь
-                if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-                }
-                else echo ("<a href='Validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-                ?>
-                <a href="index.php" id="logo"></a>
 
-            </div>
-            <a href="index.html" id="logo"></a>
+            <?php
+            include("header.php");
+            ?>
             <div id="back_img_1"></div>
             <div id="triangle">
                 <p id="trang_heading">FUISIC</p>
@@ -66,11 +53,10 @@
                                                   “Математики” и “Физики”
                 </p>
             </div>
-            <div id="footer">
-                <p id="footer_heading">FIUSIC</p>
-                <br/>
-                <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
-            </div>
+            <a href="index_new.php">asdasd</a>
+            <?php
+            include("footer.php");
+            ?>
         </div>
         <script src="scrypts/index_scrypt.js"></script>
     </body>
