@@ -28,9 +28,6 @@
     </div>
         <div class="container">
             <h2>Рейтинг пользователей</h2>
-            <div>
-                <a href="/validation-form/profile.php" class="btn btn-primary">вернуться</a>
-            </div>
             <?php
             // Подключение к БД
             $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');

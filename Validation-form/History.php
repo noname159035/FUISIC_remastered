@@ -18,9 +18,6 @@
         <div class="container">
             <h2>История прохождения заданий</h2>
             <div class="row">
-                <div class="col-md-4">
-                    <a href="/validation-form/profile.php" class="btn btn-primary">вернуться</a>
-                </div>
                 <div class="col-md-4 text-center">
                     <h4>Сортировать по:</h4>
                 </div>
@@ -103,21 +100,15 @@
             ?>
 
         </div>
+        <script>
+            // Обработчики клика по кнопкам сортировки
+            $('#sort-date-asc').on('click', function() {
+                window.location.href = '/Validation-form/history.php?sort=date_asc';
+            });
 
-    <?php
-    include("footer.php");
-    ?>
-
-    <script>
-        // Обработчики клика по кнопкам сортировки
-        $('#sort-date-asc').on('click', function() {
-            window.location.href = '/validation-form/History.php?sort=date_asc';
-        });
-
-        $('#sort-date-desc').on('click', function() {
-            window.location.href = '/validation-form/History.php?sort=date_desc';
-        });
-    </script>
-
+            $('#sort-date-desc').on('click', function() {
+                window.location.href = '/Validation-form/history.php?sort=date_desc';
+            });
+        </script>
     </body>
 </html>

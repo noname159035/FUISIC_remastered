@@ -13,7 +13,7 @@
     ?>
     <form method="GET" action="show_tasks.php">
         <?php
-        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+        $link = new mysqli('localhost', 'root', 'root', 'Test_3');
         $query = "SELECT * FROM Разделы";
         $result = mysqli_query($link, $query);
 

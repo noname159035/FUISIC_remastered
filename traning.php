@@ -611,6 +611,7 @@
             });
 
 
+
             function input(str) {
                 mathField.write(str);
                 mathField.focus();
