@@ -57,16 +57,42 @@
 
             <div class="separator"></div>
 
-            <div>
+            <div class="block_image_and_text1">
                 <div class="image_block">
                     <img src="style/img/image_1.svg" alt="" id="image">
                 </div>
-                <div>
+                <div class='text_cont1'>
                     <h1 class="text image_block_h">КАК РАБОТАЕТ FUISIC?</h1>
                     <p class="image_block_text text image_text_1">Алгоритм, используемый Quizlet</p>
                     <p class="image_block_text text image_text_2">для запоминания карточек, - это</p>
                     <p class="image_block_text text image_text_3">алгоритм интервального</p>
                     <p class="image_block_text text image_text_4">повторения.</p>
+                </div>
+            </div>
+            
+            <div class="block_image_and_text2">
+                <div class='text_cont2'>
+                    <h1 class="text image_block_h_2" id='image_block_h_2'>ПОЧЕМУ ТАК УДОБНЕЕ</h1>                    <p class="image_block_text_2 text image_text_2_1">Идея интервального повторения в </p>
+                    <p class="image_block_text_2 text image_text_2_2">том, чтобы представлять  информацию</p>
+                    <p class="image_block_text_2 text image_text_2_3">через интервальные промежутки</p>
+                    <p class="image_block_text_2 text image_text_2_4">времени для более долгосрочного</p>
+                    <p class="image_block_text_2 text image_text_2_5">запоминания этой информации.</p>
+                </div>
+                <div class="image_block_2">
+                    <img src="style/img/image_2.svg" alt="" id="image_2">
+                </div>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="benefits">
+                <h1 class="benefit_h">ЧТО ВЫ ПОЛУЧИТЕ?</h1>
+                <div class="benefit_img">
+                    <img src="style/img/benefits.svg" alt="" id="image_2">
+                </div>
+                <div class="subjects">
+                    <img src="/style/img/Math.svg" alt="">
+                    <img src="/style/img/Phys.svg" alt="">
                 </div>
             </div>
         </div>
