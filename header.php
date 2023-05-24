@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <link rel="stylesheet" href="style/header_footer_style.css" />
 </head>
@@ -15,3 +17,4 @@
     ?>
     <a href="/" id="logo"></a>
 </div>
+</html>
