@@ -95,6 +95,16 @@
                     <img src="/style/img/Phys.svg" alt="">
                 </div>
             </div>
+
+            <div class="separator"></div>
+
+            <div style="margin-right: 30vw; margin-left: 30vw">
+                <p class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</p>
+            </div>
+
+            <button class="registration_btn">Зарегистрироваться</button>
+
+            <img src="style/img/three_actions.svg" alt="" class="actions">
         </div>
     </body>
 </html>

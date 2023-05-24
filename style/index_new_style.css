@@ -228,5 +228,26 @@ body{
     height: auto;
     margin: 0 10px;
   }
+
+.registration_btn{
+    width: 40vw;
+    height: 7vw;
+    margin-left: 30vw;
+    border-radius: 1.5vw;
+    color: white;
+    text-align: center;
+    background: linear-gradient(180deg, #8E88FF -34.76%, #857DFF 292.67%);
+    border: none;
+    margin-top: 5vw;
+    font-size: 2vw;
+}
   
-  
+.text_center{
+    text-align: center;
+}
+
+.actions{
+    margin-top: 8vw;
+    width: 70vw;
+    margin-left: 15vw;
+}
