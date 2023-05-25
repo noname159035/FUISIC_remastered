@@ -7,7 +7,9 @@ body{
     width: 100vw;
     min-height: 100vh;
     background: rgb(149,194,255);
-    background: linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(255,255,255,1) 9%, rgba(255,255,255,1) 53%, rgba(146,192,255,1) 100%);}
+    background: linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(255,255,255,1) 9%, rgba(255,255,255,1) 53%, rgba(146,192,255,1) 100%);
+    padding-bottom: 5vw;
+}
 
 .areas{
     position: absolute;
