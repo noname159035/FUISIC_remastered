@@ -87,9 +87,7 @@
 
             <div class="benefits">
                 <h1 class="benefit_h">ЧТО ВЫ ПОЛУЧИТЕ?</h1>
-                <div class="benefit_img">
-                    <img src="style/img/benefits.svg" alt="" id="image_2">
-                </div>
+                <img src="style/img/benefits.svg" alt="" style="margin-top: 4vw; width: 60vw;">
                 <div class="subjects">
                     <img src="/style/img/Math.svg" alt="">
                     <img src="/style/img/Phys.svg" alt="">
@@ -105,6 +103,22 @@
             <button class="registration_btn">Зарегистрироваться</button>
 
             <img src="style/img/three_actions.svg" alt="" class="actions">
+
+            <div class="media">
+                <div class="media_left">
+                    <div class="media_left_btn">
+                        <img src="style/img/tg.svg" alt="" style="width: 3vw">
+                        <img src="style/img/mail.svg" alt="" style="width: 3vw; margin-left: 2vw">
+                    </div>
+                    <div class="text media_left_text"> © 2023 FUISIC, Inc </div>
+                </div>
+
+                <div class="media_right">
+                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Поддержка</a></div>
+                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Условия</a></div>
+                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Конфидициальность</a></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
