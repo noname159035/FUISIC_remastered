@@ -3,7 +3,7 @@ document.querySelector("#main").addEventListener('click',function() {
 });
 
 document.querySelector("#collections").addEventListener('click',function() {
-    window.location.href = "collections.php";
+    window.location.href = "collections_new.php";
 });
 
 document.querySelector("#tests").addEventListener('click', function () {
@@ -12,4 +12,8 @@ document.querySelector("#tests").addEventListener('click', function () {
 
 document.querySelector("#help").addEventListener('click', function () {
     window.location.href = "support.php";
+});
+
+document.querySelector(".btn").addEventListener('click', function () {
+    window.location.href = "validation-form/login-form.php";
 });
