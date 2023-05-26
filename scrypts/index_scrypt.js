@@ -1,7 +1,15 @@
-document.querySelector("#menu_physics").addEventListener('click',function() {
+document.querySelector("#main").addEventListener('click',function() {
+    window.location.href = "index_new.php";
+});
+
+document.querySelector("#collections").addEventListener('click',function() {
     window.location.href = "collections.php";
 });
 
-document.querySelector("#menu_math").addEventListener('click',function() {
-    window.location.href = "collections.php";
+document.querySelector("#tests").addEventListener('click', function () {
+    window.location.href = "Test.php";
+});
+
+document.querySelector("#help").addEventListener('click', function () {
+    window.location.href = "support.php";
 });
