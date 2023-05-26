@@ -9,7 +9,7 @@
         <link rel="manifest" href="/favicons/site.webmanifest"/>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
 
-        <link rel="stylesheet" href="style/index_new_style.css" />
+        <link rel="stylesheet" href="style/collections_new_style.css" />
         <link rel="stylesheet" href="style/header_footer_style.css" />
 
         <meta name="msapplication-TileColor" content="#2b5797"/>
@@ -53,69 +53,30 @@
                 </div>
             </div>
             <br>
-
-            <div>
-                <img src="style/img/three_bubbles.svg" alt="" class="three_bubbles">
-                <div class="bubble_cont">
-                    <p class="text bubble_text">Мы не только помогаем запоминать самые</p>
-                    <p class="text bubble_text">сложные законы с помощью особых</p>
-                    <p class="text bubble_text">алгоритмов, но и даем подробное</p>
-                    <p class="text bubble_text">объяснение</p>
-                </div>
-            </div>
-
-            <div class="separator"></div>
-
-            <div class="block_image_and_text1">
-                <div class="image_block">
-                    <img src="style/img/image_1.svg" alt="" id="image">
-                </div>
-                <div class='text_cont1'>
-                    <h1 class="text image_block_h">КАК РАБОТАЕТ FUISIC?</h1>
-                    <p class="image_block_text text image_text_1">Алгоритм, используемый Quizlet</p>
-                    <p class="image_block_text text image_text_2">для запоминания карточек, - это</p>
-                    <p class="image_block_text text image_text_3">алгоритм интервального</p>
-                    <p class="image_block_text text image_text_4">повторения.</p>
+            
+            <div style="align-items: center; flex-direction: column; display: flex;">
+                <div class="search">
+                    <input type="text">
+                    <div>
+                        <img src="style/img/search_ico.svg" alt="">
+                    </div>
                 </div>
             </div>
             
-            <div class="block_image_and_text2">
-                <div class='text_cont2'>
-                    <h1 class="text image_block_h_2" id='image_block_h_2'>ПОЧЕМУ ТАК УДОБНЕЕ</h1>
-                    <p class="image_block_text_2 text image_text_2_1">Идея интервального повторения в </p>
-                    <p class="image_block_text_2 text image_text_2_2">том, чтобы представлять  информацию</p>
-                    <p class="image_block_text_2 text image_text_2_3">через интервальные промежутки</p>
-                    <p class="image_block_text_2 text image_text_2_4">времени для более долгосрочного</p>
-                    <p class="image_block_text_2 text image_text_2_5">запоминания этой информации.</p>
-                </div>
-                <div class="image_block_2">
-                    <img src="style/img/image_2.svg" alt="" id="image_2">
+            <div class="filter_conteiner">
+                <div style="display: flex; height: 100%; justify-content: space-evenly;">
+                    <div class="filter nonselected"><p style="margin-top: 4%">Предмет</p></div>
+                    <div class="filter selected"><p style="margin-top: 4%">Предмет</p></div>
                 </div>
             </div>
 
-            <div class="separator"></div>
+            <div class="collection">
+                <p>Давление в жидкостях</p>
+                <div class="">
 
-            <div class="benefits">
-                <h1 class="benefit_h">ЧТО ВЫ ПОЛУЧИТЕ?</h1>
-                <img src="style/img/benefits.svg" alt="" style="margin-top: 4vw; width: 50vw;">
-                <div class="subjects">
-                    <img src="/style/img/Math.svg" alt="" style="width: 25vw">
-                    <img src="/style/img/Phys.svg" alt="" style="width: 25vw">
                 </div>
             </div>
-
-            <div class="separator"></div>
-
-            <div style="align-items: center">
-                <div style="margin-right: 30vw; margin-left: 30vw; padding-top: 2vw">
-                    <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
-                </div>
-
-                <button class="registration_btn">Зарегистрироваться</button>
-
-                <img src="style/img/three_actions.svg" alt="" class="actions">
-            </div>
-
+            
             <footer>
                 <div class="media">
                     <div class="media_left">

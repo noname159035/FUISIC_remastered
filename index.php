@@ -23,7 +23,7 @@
         <div id="conteiner">
 
             <div class="header">
-                <a href="index.php" class="header-text main_txt">Главная</a>
+                <a href="index_new.php" class="header-text main_txt">Главная</a>
                 <a href="collections.php" class="header-text coll_txt">Подборки</a>
                 <a href="Tests.php" class="header-text test_txt">Тесты</a>
                 <a href="support.php" class="header-text help_txt">Помощь</a>
