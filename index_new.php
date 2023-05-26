@@ -26,22 +26,24 @@
         <div class="conteiner">
             <header>
                <img src="style/img/test.svg" class="hdr logo">
-               <a href="#" class="hdr hdr_txt">Главная</a>
+               <a href="#" class="hdr hdr_txt" id="main">Главная</a>
                <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt">Подборки</a>
+               <a href="#" class="hdr hdr_txt" id="collections">Подборки</a>
                <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt">Тесты</a>
+               <a href="#" class="hdr hdr_txt" id="tests">Тесты</a>
                <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt">Помощь</a>
+               <a href="#" class="hdr hdr_txt" id="help">Помощь</a>
                <button class="hdr btn">Войти</button>
             </header>
 
-            <img src="style/img/Areas_main_page.svg" alt="" class="areas">
+            <div>
+                <img src="style/img/bbl.svg" alt="" class="areas">
 
-            <div class="areas_conteiner">
-                <div class="fuisic_areas text">FUISIC</div>
-                <p class="fuisic_areas areas_top_text text">Тренажер по запоминанию формул</p>
-                <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
+                <div class="areas_conteiner">
+                    <div class="fuisic_areas text">FUISIC</div>
+                    <p class="fuisic_areas areas_top_text text">Тренажер по запоминанию формул</p>
+                    <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
+                </div>
             </div>
             <br>
 
@@ -72,7 +74,8 @@
             
             <div class="block_image_and_text2">
                 <div class='text_cont2'>
-                    <h1 class="text image_block_h_2" id='image_block_h_2'>ПОЧЕМУ ТАК УДОБНЕЕ</h1>                    <p class="image_block_text_2 text image_text_2_1">Идея интервального повторения в </p>
+                    <h1 class="text image_block_h_2" id='image_block_h_2'>ПОЧЕМУ ТАК УДОБНЕЕ</h1>
+                    <p class="image_block_text_2 text image_text_2_1">Идея интервального повторения в </p>
                     <p class="image_block_text_2 text image_text_2_2">том, чтобы представлять  информацию</p>
                     <p class="image_block_text_2 text image_text_2_3">через интервальные промежутки</p>
                     <p class="image_block_text_2 text image_text_2_4">времени для более долгосрочного</p>
@@ -87,22 +90,24 @@
 
             <div class="benefits">
                 <h1 class="benefit_h">ЧТО ВЫ ПОЛУЧИТЕ?</h1>
-                <img src="style/img/benefits.svg" alt="" style="margin-top: 4vw; width: 60vw;">
+                <img src="style/img/benefits.svg" alt="" style="margin-top: 4vw; width: 50vw;">
                 <div class="subjects">
-                    <img src="/style/img/Math.svg" alt="">
-                    <img src="/style/img/Phys.svg" alt="">
+                    <img src="/style/img/Math.svg" alt="" style="width: 25vw">
+                    <img src="/style/img/Phys.svg" alt="" style="width: 25vw">
                 </div>
             </div>
 
             <div class="separator"></div>
 
-            <div style="margin-right: 30vw; margin-left: 30vw">
-                <p class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</p>
+            <div style="align-items: center">
+                <div style="margin-right: 30vw; margin-left: 30vw; padding-top: 2vw">
+                    <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
+                </div>
+
+                <button class="registration_btn">Зарегистрироваться</button>
+
+                <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>
-
-            <button class="registration_btn">Зарегистрироваться</button>
-
-            <img src="style/img/three_actions.svg" alt="" class="actions">
 
             <div class="media">
                 <div class="media_left">
@@ -114,11 +119,13 @@
                 </div>
 
                 <div class="media_right">
-                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Поддержка</a></div>
-                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Условия</a></div>
-                    <div class="media_right_text text"><a href="" style="text-decoration: none;">Конфидициальность</a></div>
+                    <div class="media_right_text text"><p href="" style="text-decoration: none;">Поддержка</p></div>
+                    <div class="media_right_text text"><p href="" style="text-decoration: none;">Условия</p></div>
+                    <div class="media_right_text text"><p href="" style="text-decoration: none;">Конфидициальность</p></div>
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="scrypts/index_scrypt.js"></script>
     </body>
 </html>
