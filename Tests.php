@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>База данных</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,15 +26,33 @@
     </div>
     <form method="GET" action="show_tasks.php">
         <?php
-        $link = new mysqli('localhost', 'root', 'root', 'Test_3');
+        // подключение к базе данных
+        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+
+        // проверка на успешное подключение
+        if ($link->connect_error) {
+            die("Ошибка подключения: " . $link->connect_error);
+        }
+
+        // запрос на выборку данных из таблицы "Разделы"
         $query = "SELECT * FROM Разделы";
         $result = mysqli_query($link, $query);
 
+        // проверка на успешное выполнение запроса
+        if (!$result) {
+            die("Ошибка выполнения запроса: " . mysqli_error($link));
+        }
+
+        // вывод данных на страницу
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<p class="name_of_collections">' . $row['Название'] . '</p>';
 
             $query2 = "SELECT * FROM Тесты WHERE Раздел = '{$row['Код Раздела']}'";
             $result2 = mysqli_query($link, $query2);
+
+            if (!$result2) {
+                die("Ошибка выполнения запроса: " . mysqli_error($link));
+            }
 
             echo '<div class="btn-group-horizontal mt-2" id="conteiner_mt" role="group">';
 
@@ -47,6 +65,7 @@
             mysqli_free_result($result2);
         }
 
+        // очистка результата запроса и закрытие соединения с базой
         mysqli_free_result($result);
         mysqli_close($link);
         ?>
@@ -59,7 +78,8 @@
         window.location.href = "test.php?id="+testId;
     }
 </script>
-<script src="jquery-3.6.1.min.js"></script>
+
+<script src="/libs/jquery-3.6.1.min.js"></script>
 
 </body>
 </html>
