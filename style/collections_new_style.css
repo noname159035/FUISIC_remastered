@@ -7,7 +7,9 @@ body{
     width: 100vw;
     min-height: 100vh;
     background: rgb(149,194,255);
-    background: linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(255,255,255,1) 12%, rgba(255,255,255,1) 75%, rgba(146,192,255,1) 100%);
+    background: -moz-linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(236,242,254,1) 12%, rgba(236,242,254,1) 75%, rgba(146,192,255,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(236,242,254,1) 12%, rgba(236,242,254,1) 75%, rgba(146,192,255,1) 100%);
+    background: linear-gradient(0deg, rgba(149,194,255,1) 0%, rgba(236,242,254,1) 12%, rgba(236,242,254,1) 75%, rgba(146,192,255,1) 100%);
     padding-bottom: 5vw;
 }
 
@@ -61,7 +63,7 @@ body{
     height: 3vw;
     border-radius: 2vw;
     border: none;
-    background-color: #ECF2FE;
+    background-color: #D7E4FE;
     flex-direction: row;
     display: flex;
 }
@@ -70,7 +72,7 @@ body{
     width: 83%;
     margin-left: 4%;
     height: 90%;
-    background-color: #ECF2FE;
+    background-color: #D7E4FE;
     border: none;
     outline:none;
     font-size: 1.2vw;
@@ -91,6 +93,7 @@ body{
 }
 
 .filter_conteiner{
+    cursor: pointer;
     margin-top: 1vw;
     /*width: 2vw;*/
     height: 2.7vw;
@@ -142,10 +145,43 @@ body{
 }
 
 .collection{
+    cursor: pointer;
     background-color: #F2D1FF;
     height: 11vw;
     margin-top: 2.5vw;
     margin-right: 27vw;
     margin-left: 27vw;
     border-radius: 2vw;
+    padding-top: 0.01vw;
+    -webkit-box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.property{
+    display: flex;
+    margin-left: 5%;
+    /*background-color: wheat;*/
+    height: 57%;
+}
+.property div{
+    display: flex;
+}
+
+#name_of_collection{
+    font-family: sans-serif;
+    font-size: 2vw;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+#number_formul{
+    font-size: 2vw;
+    font-family: sans-serif;
+    margin-top: 0;
+    color: #9587FF;
+}
+
+.time_сont{
+    margin-left: 8%;
 }
