@@ -53,16 +53,16 @@
                 </div>
             </div>
             <br>
-            
+
             <div style="align-items: center; flex-direction: column; display: flex;">
                 <div class="search">
-                    <input type="text">
+                    <input type="text" placeholder="Тема подборки или теста">
                     <div>
-                        <img src="style/img/search_ico.svg" alt="">
+                        <img src="style/img/search_ico.svg" alt="" style="cursor: pointer;">
                     </div>
                 </div>
             </div>
-            
+            <a href="show_cards_new.php">asdasdsa</a>
             <div class="filter_conteiner">
                 <div style="display: flex; height: 100%; justify-content: space-evenly;">
                     <div class="filter nonselected"><p style="margin-top: 4%">Предмет</p></div>
@@ -71,26 +71,48 @@
             </div>
 
             <div class="collection">
-                <p>Давление в жидкостях</p>
-                <div class="">
-
+                <p id="name_of_collection">Давление в жидкостях</p>
+                <div class="property">
+                    <div class="quantity_сont">
+                        <p id="number_formul">9</p>
+                        <p style="margin-top: 11%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул</p>
+                    </div>
+                    <div class="time_сont">
+                        <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">
+                        <p id="number_time" style="margin-top: 5%; font-size: 1.3vw; font-family: sans-serif; color: #9587FF">17</p>
+                        <p style="margin-top: 6%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут</p>
+                    </div>
                 </div>
             </div>
-            
+            <div class="collection">
+                <p id="name_of_collection">Давление в жидкостях</p>
+                <div class="property">
+                    <div class="quantity_сont">
+                        <p id="number_formul">9</p>
+                        <p style="margin-top: 11%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул</p>
+                    </div>
+                    <div class="time_сont">
+                        <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">
+                        <p id="number_time" style="margin-top: 5%; font-size: 1.3vw; font-family: sans-serif; color: #9587FF">17</p>
+                        <p style="margin-top: 6%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут</p>
+                    </div>
+                </div>
+            </div>
+
             <footer>
                 <div class="media">
                     <div class="media_left">
                         <div class="media_left_btn">
-                            <img src="style/img/tg.svg" alt="" style="width: 3vw">
-                            <img src="style/img/mail.svg" alt="" style="width: 3vw; margin-left: 2vw">
+                            <img src="style/img/tg.svg" alt="" style="cursor: pointer; width: 3vw">
+                            <img src="style/img/mail.svg" alt="" style="cursor: pointer; width: 3vw; margin-left: 2vw">
                         </div>
                         <div class="text media_left_text"> © 2023 FUISIC, Inc </div>
                     </div>
 
                     <div class="media_right">
-                        <div class="media_right_text text"><p href="" style="text-decoration: none;">Поддержка</p></div>
-                        <div class="media_right_text text"><p href="" style="text-decoration: none;">Условия</p></div>
-                        <div class="media_right_text text"><p href="" style="text-decoration: none;">Конфидициальность</p></div>
+                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Поддержка</p></div>
+                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Условия</p></div>
+                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Конфидициальность</p></div>
                     </div>
                 </div>
             </footer>
