@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="/validation-form/level.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
+    <script>
+        // Инициализация MathQuill
+        var mq = MathQuill.getInterface(2);
+        $('.mathquill-editable').each(function() {
+            mq.MathField(this);
+        });
+    </script>
 </head>
 <body>
 
@@ -85,8 +94,11 @@ if (isset($_GET['card']) && $_GET['card'] >= 0 && $_GET['card'] < count($cardArr
 if (isset($_POST['formula']) && isset($_POST['description']) && isset($_POST['explanation'])) {
     $query = "UPDATE Карточка SET `Формула` = ?, `Описание` = ?, `Пояснение` = ? WHERE `Подборка` = ? AND `Код задания` = ?";
     $stmt = $link->prepare($query);
-    $stmt->bind_param('sssss', $_POST['formula'], $_POST['description'], $_POST['explanation'], $_GET['podbor'], $_POST['card_id']);
-    if ($stmt->execute()) {
+    $str = $_POST['formula'];
+    if(strpos($str, '`') === false){
+        $str = "`" . $str . "`";
+    }
+    $stmt->bind_param('sssss', $str, $_POST['description'], $_POST['explanation'], $_GET['podbor'], $_POST['card_id']);    if ($stmt->execute()) {
         echo "<div class='alert alert-success' role='alert'>Задание успешно изменено!</div>";
         $cardArr[$currentCard]['formula'] = $_POST['formula'];
         $cardArr[$currentCard]['description'] = $_POST['description'];
@@ -108,7 +120,7 @@ else {
     echo "<div class='formula'>";
     echo "<form method='post'>";
     echo "<h5 class='mt-3'>формула:</h5>";
-    echo "<textarea class='form-control' name='formula' rows='3'>" . $card['formula'] . "</textarea>";
+    echo "<textarea class='form-control' name='formula' rows='3'>" . substr($card['formula'], 1, -1) . "</textarea>";
     echo "<h5 class='mt-3'>Описание:</h5>";
     echo "<textarea type='text' class='form-control' name='description' rows='5'>" . $card['description'] . "</textarea>";
     echo "<h5 class='mt-3'>Пояснение:</h5>";
@@ -166,4 +178,3 @@ else {
     }
 </script>
 </html>
-
