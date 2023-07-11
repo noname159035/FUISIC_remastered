@@ -10,7 +10,7 @@
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
 
         <link rel="stylesheet" href="style/collections_new_style.css" />
-        <link rel="stylesheet" href="style/header_footer_style.css" />
+        <link rel="stylesheet" href="style/header_footer_style_black.css" />
 
         <meta name="msapplication-TileColor" content="#2b5797"/>
         <meta
@@ -25,13 +25,13 @@
     <body>
         <div class="conteiner">
             <header>
-               <img src="style/img/test.svg" class="hdr logo">
+               <img src="style/img/Group_2.svg" class="hdr logo">
                <a href="#" class="hdr hdr_txt" id="main">Главная</a>
-               <p class="hdr hdr_txt pnt">•</p>
+
                <a href="#" class="hdr hdr_txt" id="collections">Подборки</a>
-               <p class="hdr hdr_txt pnt">•</p>
+
                <a href="#" class="hdr hdr_txt" id="tests">Тесты</a>
-               <p class="hdr hdr_txt pnt">•</p>
+
                <a href="#" class="hdr hdr_txt" id="help">Помощь</a>
                 <?php
                 // Проверяем, авторизован ли пользователь
@@ -43,17 +43,6 @@
 
             </header>
 
-            <div>
-                <img src="style/img/bbl.svg" alt="" class="areas">
-
-                <div class="areas_conteiner">
-                    <div class="fuisic_areas text">FUISIC</div>
-                    <p class="fuisic_areas areas_top_text text">Тренажер по запоминанию формул</p>
-                    <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
-                </div>
-            </div>
-            <br>
-
             <div style="align-items: center; flex-direction: column; display: flex;">
                 <div class="search">
                     <input type="text" placeholder="Тема подборки или теста">
@@ -62,11 +51,13 @@
                     </div>
                 </div>
             </div>
-            <a href="show_cards_new.php">asdasdsa</a>
+            <a href="show_cards.php">asdasdsa</a>
             <div class="filter_conteiner">
                 <div style="display: flex; height: 100%; justify-content: space-evenly;">
-                    <div class="filter nonselected"><p style="margin-top: 4%">Предмет</p></div>
-                    <div class="filter selected"><p style="margin-top: 4%">Предмет</p></div>
+                    <div class="filter nonselected"><p style="margin-top: 5%">Математика</p></div>
+                    <div class="filter selected sel_purple"><p style="margin-top: 5%">7Класс</p></div>
+                    <div class="filter selected sel_blue"><p style="margin-top: 5%">Давление</p></div>
+                    <div class="filter selected sel_green"><p style="margin-top: 5%">Тип</p></div>
                 </div>
             </div>
 
@@ -98,6 +89,21 @@
                     </div>
                 </div>
             </div>
+            <div class="collection">
+                    <p id="name_of_collection">Давление в жидкостях</p>
+                    <div class="property">
+                        <div class="quantity_сont">
+                            <p id="number_formul">9</p>
+                            <p style="margin-top: 11%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул</p>
+                        </div>
+                        <div class="time_сont">
+                            <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">
+                            <p id="number_time" style="margin-top: 5%; font-size: 1.3vw; font-family: sans-serif; color: #9587FF">17</p>
+                            <p style="margin-top: 6%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут</p>
+                        </div>
+                    </div>
+            </div>
+
 
             <footer>
                 <div class="media">
