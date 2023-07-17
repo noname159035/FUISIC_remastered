@@ -24,7 +24,7 @@
 
 <div class="header">
     <a href="index.php" class="header-text main_txt">Главная</a>
-    <a href="collections.php" class="header-text coll_txt">Подборки</a>
+    <a href="collections_new.php" class="header-text coll_txt">Подборки</a>
     <a href="Tests.php" class="header-text test_txt">Тесты</a>
     <a href="support.php" class="header-text help_txt">Помощь</a>
     <?php
@@ -92,7 +92,7 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
 // Выводим заголовок для списка подборок
         echo '<h4>Подборки:</h4>';
 
-// Выводим список подборок
+        // Выводим список подборок
         echo '<ul class="list-group list-group-flush">';
            while ($row_collections = mysqli_fetch_assoc($result_collections)) {
                echo '<li class="list-group-item d-flex justify-content-between align-items-center" data-collection-id="' . $row_collections['Код подборки'] . '">';

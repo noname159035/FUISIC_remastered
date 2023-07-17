@@ -190,6 +190,21 @@ body{
     font-size: 2vw;
     margin-left: 5%;
     margin-bottom: 5%;
+    color: #000000;
+}
+
+#name_of_chapter{
+    font-family: sans-serif;
+    font-size: 1vw;
+    margin-left: 60%;
+    color: #000000;
+}
+
+#type_of_task{
+    font-family: sans-serif;
+    font-size: 1vw;
+    margin-left: 30%;
+    color: #000000;
 }
 
 #number_formul{
