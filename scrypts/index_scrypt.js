@@ -7,7 +7,7 @@ document.querySelector("#collections").addEventListener('click',function() {
 });
 
 document.querySelector("#tests").addEventListener('click', function () {
-    window.location.href = "Test.php";
+    window.location.href = "Tests.php";
 });
 
 document.querySelector("#help").addEventListener('click', function () {
