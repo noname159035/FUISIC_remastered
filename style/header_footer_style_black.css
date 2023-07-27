@@ -2,74 +2,74 @@ a, u {
     text-decoration: none;
 }
 
-header{
-    padding-left: 4vw;
-    padding-right: 4vw;
-    padding-top: 60px;
-    border-bottom: #ABBEC5 solid 0.2vw;
-    padding-bottom: 1vw;
-    height: 4vw;
-    margin-left: 6vw;
-    margin-right: 6vw;
-    /*margin-bottom: -20vw;*/
-}
+/*header{*/
+/*    padding-left: 4vw;*/
+/*    padding-right: 4vw;*/
+/*    padding-top: 60px;*/
+/*    border-bottom: #ABBEC5 solid 0.2vw;*/
+/*    padding-bottom: 1vw;*/
+/*    height: 4vw;*/
+/*    margin-left: 6vw;*/
+/*    margin-right: 6vw;*/
+/*    !*margin-bottom: -20vw;*!*/
+/*}*/
 
-.hdr{
-    float: left;
-    font-size: 1.5vw;
-    font-family: sans-serif;
-}
+/*.hdr{*/
+/*    float: left;*/
+/*    font-size: 1.5vw;*/
+/*    font-family: sans-serif;*/
+/*}*/
 
-.hdr_txt{
-    margin-left: 6vw;
-    font-style: normal;
-    font-weight: 500;
-    color: black;
-    cursor: pointer;
-}
+/*.hdr_txt{*/
+/*    margin-left: 6vw;*/
+/*    font-style: normal;*/
+/*    font-weight: 500;*/
+/*    color: black;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.hdr_txt:hover{
-    color: #DFEEF9;
-}
+/*.hdr_txt:hover{*/
+/*    color: #DFEEF9;*/
+/*}*/
 
-.hdr_txt:active{
-    color: #C5E3F9;
-}
+/*.hdr_txt:active{*/
+/*    color: #C5E3F9;*/
+/*}*/
 
-.btn{
-    float: right;
-    background: linear-gradient(180deg, #C97878 0%, #1883FF 0.01%, #0495FF 0.02%, #34AAFF 99.99%);
-    border-radius: 0.5vw;
-    border: none;
-    color: white;
-    padding: 0.5%;
-    margin-top: -0.6%;
-    cursor: pointer;
-    font-size: 1.6vw;
-    margin-right: 3vw;
-}
+/*.butn{*/
+/*    float: right;*/
+/*    background: linear-gradient(180deg, #C97878 0%, #1883FF 0.01%, #0495FF 0.02%, #34AAFF 99.99%);*/
+/*    border-radius: 0.5vw;*/
+/*    border: none;*/
+/*    color: white;*/
+/*    padding: 0.5%;*/
+/*    margin-top: -0.6%;*/
+/*    cursor: pointer;*/
+/*    font-size: 1.6vw;*/
+/*    margin-right: 3vw;*/
+/*}*/
 
-.btn:hover{
-    background: linear-gradient(180deg, #BB6F6F 0%, #177FF6 0.01%, #048EF0 0.02%, #32A4F6 99.99%);
-}
+/*.butn:hover{*/
+/*    background: linear-gradient(180deg, #BB6F6F 0%, #177FF6 0.01%, #048EF0 0.02%, #32A4F6 99.99%);*/
+/*}*/
 
-.btn:active{
-    background: linear-gradient(180deg, #B26969 0%, #1679EA 0.01%, #0485E1 0.02%, #309EED 99.99%);
-}
-
-
-.pnt{
-    margin-top: 0%;
-}
+/*.butn:active{*/
+/*    background: linear-gradient(180deg, #B26969 0%, #1679EA 0.01%, #0485E1 0.02%, #309EED 99.99%);*/
+/*}*/
 
 
-.logo {
-    cursor: pointer;
-    width: 13vw;
-    margin-top: -1%;
-    margin-left: 5%;
-    margin-right: -5%;
-}
+/*.pnt{*/
+/*    margin-top: 0%;*/
+/*}*/
+
+
+/*.logo {*/
+/*    cursor: pointer;*/
+/*    width: 13vw;*/
+/*    margin-top: -1%;*/
+/*    margin-left: 5%;*/
+/*    margin-right: -5%;*/
+/*}*/
 
 .media{
     display: flex;

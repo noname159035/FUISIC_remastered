@@ -84,18 +84,19 @@
                 <a class="coll_block ph start_ph p_ph" id="name_of_collection" href="show_cards.php?podbor=<?php echo $row2['Код подборки'];?>">
                     <div class="collection">
                         <p id="name_of_collection" ><?php echo $row2['Название'];?></p>
-                        <p id="name_of_chapter"><?php echo $row['Название'];?></p>
-                        <p id="type_of_task">Тип: Карточки</p>
+
                         <div class="property">
                             <div class="quantity_сont">
-                                <p id="number_formul"><?php echo $row_count_cards;?></p>
-                                <p style="margin-top: 11%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул(ы)</p>
+                                <p id="number_formul" style="margin-top: 5%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_count_cards;?></p>
+                                <p style="margin-top: 15%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул(ы)</p>
                             </div>
                             <div class="time_сont">
-                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">
-                                <p id="number_time" style="margin-top: 5%; font-size: 1.3vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
-                                <p style="margin-top: 6%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
+<!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
+                                <p id="number_time" style="margin-top: 7%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
+                                <p style="margin-top: 17%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
                             </div>
+                            <p id="name_of_chapter" style="margin-top: 2.5%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF"><?php echo $row['Название'];?></p>
+                            <p id="type_of_task" style="margin-top: 2.5%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">Тип: Карточки</p>
                         </div>
                     </div>
                 </a>
@@ -119,18 +120,18 @@
                 <a class="coll_block ph start_ph p_ph" id="name_of_collection" href="show_tasks.php?test=<?php echo $row2['Код_Теста'];?>">
                     <div class="collection">
                         <p id="name_of_collection" ><?php echo $row2['Название'];?></p>
-                        <p id="name_of_chapter"><?php echo $row['Название'];?></p>
-                        <p id="type_of_task">Тип: Тесты</p>
                         <div class="property">
                             <div class="quantity_сont">
-                                <p id="number_formul"><?php echo $row_count_cards;?></p>
-                                <p style="margin-top: 11%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">Задач(а)</p>
+                                <p id="number_formul" style="margin-top: 5%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_count_cards;?></p>
+                                <p style="margin-top: 15%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">Задач(а)</p>
                             </div>
                             <div class="time_сont">
-                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">
-                                <p id="number_time" style="margin-top: 5%; font-size: 1.3vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
-                                <p style="margin-top: 6%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
+<!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
+                                <p id="number_time" style="margin-top: 7%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
+                                <p style="margin-top: 17%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
                             </div>
+                            <p id="name_of_chapter" style="margin-top: 2.5%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF"><?php echo $row['Название'];?></p>
+                            <p id="type_of_task" style="margin-top: 2.5%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">Тип: Тесты</p>
                         </div>
                     </div>
                 </a>

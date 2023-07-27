@@ -1,6 +1,7 @@
 body{
     margin: 0;
     overflow-x: hidden;
+    background-color: #ECF2FE;
 }
 
 .conteiner{
@@ -193,26 +194,7 @@ body{
     color: #000000;
 }
 
-#name_of_chapter{
-    font-family: sans-serif;
-    font-size: 1vw;
-    margin-left: 60%;
-    color: #000000;
-}
 
-#type_of_task{
-    font-family: sans-serif;
-    font-size: 1vw;
-    margin-left: 30%;
-    color: #000000;
-}
-
-#number_formul{
-    font-size: 2vw;
-    font-family: sans-serif;
-    margin-top: 0;
-    color: #9587FF;
-}
 
 .time_сont{
     margin-left: 8%;
