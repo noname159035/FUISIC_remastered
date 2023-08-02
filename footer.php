@@ -14,7 +14,7 @@
             <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Поддержка</p></div>
             <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Условия</p></div>
             <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Конфидициальность</p></div>
-            <div class="media_right_text text"><a href="index.php" style="cursor: pointer; text-decoration: none;">старый дизайн</a></div>
+            <div class="media_right_text text"><a href="/index.php" style="cursor: pointer; text-decoration: none;">старый дизайн</a></div>
         </div>
     </div>
 </footer>

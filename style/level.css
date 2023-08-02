@@ -1,5 +1,4 @@
 .level-info {
-    background-color: #eee;
     padding: 10px;
     border-radius: 4px;
 }
@@ -27,4 +26,10 @@
 }
 .lvl{
 
+}
+
+body{
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #ECF2FE;
 }

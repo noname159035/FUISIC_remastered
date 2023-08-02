@@ -4,7 +4,7 @@ body{
     background-color: #ECF2FE;
 }
 
-.conteiner{
+.container{
     width: 100vw;
     min-height: 100vh;
     background: #ECF2FE;
@@ -18,7 +18,7 @@ body{
     width: 15vw;
 }
 
-.areas_conteiner{
+.areas_container{
     position: absolute;
     top: 5vw;
     width: 100vw;
@@ -90,7 +90,7 @@ body{
     height: 70%;
 }
 
-.filter_conteiner{
+.filter_container{
     cursor: pointer;
     margin-top: 1vw;
     /*width: 2vw;*/

@@ -1,6 +1,10 @@
 #container {
-    margin-top: 2vw;
     padding-left: 10vw;
     padding-right: 10vw;
 }
 
+body{
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #ECF2FE;
+}

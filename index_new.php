@@ -95,7 +95,7 @@
                     <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
                 </div>
 
-                <button class="registration_btn">Зарегистрироваться</button>
+                <button class="registration_btn" onclick="window.location.href='/validation-form/login-form.php'">Зарегистрироваться</button>
 
                 <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>
@@ -103,6 +103,7 @@
             <?php include 'footer.php';?>
 
         </div>
-        <script src="libs/jquery-3.6.1.min.js"></script>
     </body>
+
+    <script src="libs/jquery-3.6.1.min.js"></script>
 </html>
