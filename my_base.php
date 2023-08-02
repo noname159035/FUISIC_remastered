@@ -99,8 +99,8 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
                echo '<span class="collection-title">' . $row_collections['Название'] . '</span>';
                echo '<div class="btn-group" role="group">';
                echo '<button class="btn btn-sm btn-primary ml-auto edit-collection-btn" data-toggle="modal" data-target="#editCollectionModal" data-collection-id="' . $row_collections['Код подборки'] . '">Переименовать</button>'; // *Добавляем кнопку "Редактировать"
-               echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_collection.php?podbor=' . $row_collections['Код подборки'] . '">Редактировать</a>';
-               echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="delete_collection.php?id=' . $row_collections['Код подборки'] . '">Удалить</a>';
+               echo '<a class="btn btn-sm btn-primary ml-auto" href="TaskEditor/edit_collection.php?podbor=' . $row_collections['Код подборки'] . '">Редактировать</a>';
+               echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="TaskEditor/delete_collection.php?id=' . $row_collections['Код подборки'] . '">Удалить</a>';
                echo '</div>';
                echo '</li>';
            }
@@ -131,8 +131,8 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
             echo '<span class="test-title">' . $row_tests['Название'] . '</span>';
             echo '<div class="btn-group" role="group">';
             echo '<button class="btn btn-sm btn-primary ml-auto edit-test-btn" data-toggle="modal" data-target="#editTestModal" data-test-id="' . $row_tests['Код_Теста'] . '">Переименовать</button>'; // *Добавляем кнопку "Редактировать"
-            echo '<a class="btn btn-sm btn-primary ml-auto" href="edit_test.php?test=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
-            echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="delete_test.php?id=' . $row_tests['Код_Теста'] . '">Удалить</a>';
+            echo '<a class="btn btn-sm btn-primary ml-auto" href="TaskEditor/edit_test.php?test=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
+            echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="TaskEditor/delete_test.php?id=' . $row_tests['Код_Теста'] . '">Удалить</a>';
             echo '</div>';
             echo '</li>';
         }
@@ -328,11 +328,11 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
             }
             else {
                 $.ajax({
-                    url: 'create_collection.php',
+                    url: 'TaskEditor/create_collection.php',
                     data: {'title': collectionTitle, 'section': collectionSection}, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
-                        window.location.href = '/edit_collection.php?podbor=' + response;
+                        window.location.href = 'TaskEditor/edit_collection.php?podbor=' + response;
                     }
                 });
             }
@@ -356,11 +356,11 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
             }
             else {
                 $.ajax({
-                    url: 'create_test.php',
+                    url: 'TaskEditor/create_test.php',
                     data: {'title': testTitle, 'section': testSection}, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
-                        window.location.href = '/edit_test.php?test=' + response;
+                        window.location.href = 'TaskEditor/edit_test.php?test=' + response;
                     }
                 });
             }
@@ -386,7 +386,7 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
             }
             else {
                 $.ajax({
-                    url: 'update_collection.php',
+                    url: 'TaskEditor/update_collection.php',
                     data: {'id': collectionId, 'title': collectionTitle},
                     type: 'POST',
                     success: function (response) {
@@ -417,7 +417,7 @@ while ($row_sections = mysqli_fetch_assoc($result_sections)) {
             }
             else {
                 $.ajax({
-                    url: 'update_test.php',
+                    url: 'TaskEditor/update_test.php',
                     data: {'id': testId, 'title': testTitle},
                     type: 'POST',
                     success: function (response) {

@@ -21,18 +21,18 @@
 <body>
 
 <div class="header">
-    <a href="index.php" class="header-text main_txt">Главная</a>
-    <a href="collections.php" class="header-text coll_txt">Подборки</a>
-    <a href="Tests.php" class="header-text test_txt">Тесты</a>
-    <a href="support.php" class="header-text help_txt">Помощь</a>
+    <a href="../index.php" class="header-text main_txt">Главная</a>
+    <a href="../collections.php" class="header-text coll_txt">Подборки</a>
+    <a href="../Tests.php" class="header-text test_txt">Тесты</a>
+    <a href="../support.php" class="header-text help_txt">Помощь</a>
     <?php
     // Проверяем, авторизован ли пользователь
     if (!isset($_COOKIE['user'])) {
-        echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+        echo ("<a href='../validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
     }
-    else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+    else echo ("<a href='../validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
     ?>
-    <a href="index.php" id="logo"></a>
+    <a href="../index.php" id="logo"></a>
 
 </div>
 
@@ -156,7 +156,7 @@ else {
     echo "<button type='button' class='btn btn-danger mt-3' onclick='deleteCard()'>Удалить карточку</button>";
     ?>
     <button type='submit' class='btn btn-primary mt-3'>Сохранить</button>
-    <a href='my_base.php' class='btn btn-info mt-3'>Закончить</a>
+    <a href='../my_base.php' class='btn btn-info mt-3'>Закончить</a>
 </div>
 
 </body>
@@ -166,13 +166,13 @@ else {
 <script>
 
     function addCard() {
-        var url = "/add_card.php?podbor=<?php echo $_GET['podbor'] ?>";
+        var url = "add_card.php?podbor=<?php echo $_GET['podbor'] ?>";
         window.location.href = url;
     }
 
     function deleteCard() {
         if (confirm("Вы уверены, что хотите удалить карточку?")) {
-            var url = "/delete_card.php?podbor=<?php echo $_GET['podbor'] ?>&card=<?php echo $card['card_id'] ?>";
+            var url = "delete_card.php?podbor=<?php echo $_GET['podbor'] ?>&card=<?php echo $card['card_id'] ?>";
             window.location.href = url;
         }
     }

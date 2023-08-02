@@ -8,37 +8,27 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
     <link rel="manifest" href="/favicons/site.webmanifest"/>
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-
+    <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
 
     <meta name="msapplication-TileColor" content="#2b5797"/>
     <meta
             name="theme-color" content="#ffffff"/>
     <!--    <script src="main.js"></script>-->
+
     <title>FUISIC</title>
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+
 </head>
 <body>
 
-<header>
-    <img src="style/img/Group_2.svg" class="hdr logo">
+<?php include 'header.php';?>
 
-    <a href="#" class="hdr hdr_txt" id="main">Главная</a>
-    <a href="#" class="hdr hdr_txt" id="collections">Подборки</a>
-    <a href="#" class="hdr hdr_txt" id="tests">Тесты</a>
-    <a href="#" class="hdr hdr_txt" id="help">Помощь</a>
-    <?php
-    // Проверяем, авторизован ли пользователь
-    if (!isset($_COOKIE['user'])) {
-        echo ("<button class='hdr btn'>Войти</button>");
-    }
-    else echo ("<button class='hdr btn'>Профиль</button>");
-    ?>
-</header>
 <div class="container">
 
     <div style="align-items: center; flex-direction: column; display: flex;">
@@ -49,8 +39,6 @@
             </div>
         </div>
     </div>
-
-    <a href="collections.php">Старый дизайн</a>
 
     <div class="filter_conteiner">
         <div style="display: flex; height: 100%; justify-content: space-evenly;">
@@ -147,25 +135,11 @@
     ?>
 
 </div>
-<footer>
-    <div class="media">
-        <div class="media_left">
-            <div class="media_left_btn">
-                <img src="style/img/tg.svg" alt="" style="cursor: pointer; width: 3vw">
-                <img src="style/img/mail.svg" alt="" style="cursor: pointer; width: 3vw; margin-left: 2vw">
-            </div>
-            <div class="text media_left_text"> © 2023 FUISIC, Inc </div>
-        </div>
 
-        <div class="media_right">
-            <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Поддержка</p></div>
-            <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Условия</p></div>
-            <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Конфидициальность</p></div>
-        </div>
-    </div>
-</footer>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="scrypts/index_scrypt.js"></script>
+<?php include 'footer.php';?>
+
+<script src="libs/jquery-3.6.1.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#search_button').click(function() {
