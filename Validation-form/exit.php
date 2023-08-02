@@ -1,5 +1,5 @@
 <?php
   setcookie('user', $user ['name'], time () - 3600, "/");
 
-  header('Location: /')
+  header('Location: /index_new.php')
 ?>

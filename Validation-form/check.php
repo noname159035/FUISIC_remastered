@@ -26,5 +26,5 @@
 
   setcookie('user', $user['Код пользователя'], time() + 3600, "/"); // устанавливаем куку с кодом пользователя
   $mysql->close();
-  header('Location: /')
+  header('Location: /index_new.php')
 ?>

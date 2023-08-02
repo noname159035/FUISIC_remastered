@@ -2,21 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <!-- Иконки -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-    <link rel="manifest" href="/favicons/site.webmanifest"/>
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
+
     <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
-
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
-
     <meta name="msapplication-TileColor" content="#2b5797"/>
     <meta
             name="theme-color" content="#ffffff"/>
@@ -40,7 +29,7 @@
         </div>
     </div>
 
-    <div class="filter_conteiner">
+    <div class="filter_container">
         <div style="display: flex; height: 100%; justify-content: space-evenly;">
             <div class="filter nonselected"><p style="margin-top: 5%">Математика</p></div>
             <div class="filter selected sel_purple"><p style="margin-top: 5%">7Класс</p></div>
@@ -48,7 +37,6 @@
             <div class="filter selected sel_green"><p style="margin-top: 5%">Тип</p></div>
         </div>
     </div>
-
 
     <?php
     $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
@@ -160,5 +148,6 @@
         });
     });
 </script>
+
 </body>
 </html>

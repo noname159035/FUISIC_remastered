@@ -24,5 +24,5 @@ if (count($user) == 0) {
 
 setcookie('user', $user['Код пользователя'], time() + 3600, "/");
 $mysql->close();
-header('location: /');
+header('location: /index_new.php');
 ?>

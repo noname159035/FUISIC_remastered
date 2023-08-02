@@ -5,7 +5,7 @@
     <title>Редактор тестов</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style/collections_style.css"/>
-    <link rel="stylesheet" href="/validation-form/level.css">
+    <link rel="stylesheet" href="/style/level.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </head>

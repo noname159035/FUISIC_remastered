@@ -2,25 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <!-- Иконки -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-    <link rel="manifest" href="/favicons/site.webmanifest"/>
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
 
     <title>FUISIC</title>
 
     <!-- Стили -->
-    <link rel="stylesheet" href="style/header_footer_style_black.css" />
     <link rel="stylesheet" href="style/support_style.css" />
+    <link rel="stylesheet" href="style/header_footer_style_black.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
 
 <?php include 'header.php'?>
