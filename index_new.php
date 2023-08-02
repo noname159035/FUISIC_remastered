@@ -10,7 +10,7 @@
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
 
         <link rel="stylesheet" href="style/index_new_style.css" />
-        <link rel="stylesheet" href="style/header_footer_style.css" />
+        <link rel="stylesheet" href="style/header_footer_style_black.css" />
 
         <meta name="msapplication-TileColor" content="#2b5797"/>
         <meta
@@ -23,30 +23,14 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
     </head>
     <body>
-        <div class="conteiner">
-            <header>
-               <img src="style/img/test.svg" class="hdr logo">
-               <a href="#" class="hdr hdr_txt" id="main">Главная</a>
-               <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt" id="collections">Подборки</a>
-               <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt" id="tests">Тесты</a>
-               <p class="hdr hdr_txt pnt">•</p>
-               <a href="#" class="hdr hdr_txt" id="help">Помощь</a>
-                <?php
-                // Проверяем, авторизован ли пользователь
-                if (!isset($_COOKIE['user'])) {
-                    echo ("<button class='hdr btn'>Войти</button>");
-                }
-                else echo ("<button class='hdr btn'>Профиль</button>");
-                ?>
+        <div class="container">
 
-            </header>
+            <?php include 'header.php';?>
 
             <div>
                 <img src="style/img/bbl.svg" alt="" class="areas">
 
-                <div class="areas_conteiner">
+                <div class="areas_container">
                     <div class="fuisic_areas text">FUISIC</div>
                     <p class="fuisic_areas areas_top_text text">Тренажер по запоминанию формул</p>
                     <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
@@ -116,25 +100,9 @@
                 <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>
 
-            <footer>
-                <div class="media">
-                    <div class="media_left">
-                        <div class="media_left_btn">
-                            <img src="style/img/tg.svg" alt="" style="cursor: pointer; width: 3vw">
-                            <img src="style/img/mail.svg" alt="" style="cursor: pointer; width: 3vw; margin-left: 2vw">
-                        </div>
-                        <div class="text media_left_text"> © 2023 FUISIC, Inc </div>
-                    </div>
+            <?php include 'footer.php';?>
 
-                    <div class="media_right">
-                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Поддержка</p></div>
-                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Условия</p></div>
-                        <div class="media_right_text text"><p href="" style="cursor: pointer; text-decoration: none;">Конфидициальность</p></div>
-                    </div>
-                </div>
-            </footer>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="scrypts/index_scrypt.js"></script>
+        <script src="libs/jquery-3.6.1.min.js"></script>
     </body>
 </html>

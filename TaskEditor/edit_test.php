@@ -136,7 +136,7 @@ else {
         echo "<button type='button' class='btn btn-danger mt-3' onclick='deleteTask()'>Удалить задачу</button>";
     ?>
     <button type='submit' class='btn btn-primary mt-3'>Сохранить</button>
-    <a href='my_base.php' class='btn btn-info mt-3'>Закончить</a>
+    <a href='../my_base.php' class='btn btn-info mt-3'>Закончить</a>
 </div>
 
 </body>
@@ -146,13 +146,13 @@ else {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script>
     function addTask() {
-        var url = "/add_task.php?test=<?php echo $_GET['test'] ?>";
+        var url = "add_task.php?test=<?php echo $_GET['test'] ?>";
         window.location.href = url;
     }
 
     function deleteTask() {
         if (confirm("Вы уверены, что хотите удалить задачу?")) {
-            var url = "/delete_task.php?test=<?php echo $_GET['test'] ?>&task=<?php echo $task['task_id'] ?>";
+            var url = "delete_task.php?test=<?php echo $_GET['test'] ?>&task=<?php echo $task['task_id'] ?>";
             window.location.href = url;
         }
     }

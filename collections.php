@@ -30,7 +30,7 @@
                 $result = mysqli_query($link, $query);
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<p >' . $row['Название'] . '</p>';
+                    echo '<p class="name_of_collections">' . $row['Название'] . '</p>';
 
                     $query2 = "SELECT * FROM Подборки WHERE Раздел = '{$row['Код Раздела']}'";
                     $result2 = mysqli_query($link, $query2);
