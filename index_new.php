@@ -2,26 +2,28 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
+        <meta name="msapplication-TileColor" content="#2b5797"/>
+        <meta name="theme-color" content="#ffffff"/>
+
         <!-- Иконки -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-        <link rel="manifest" href="/favicons/site.webmanifest"/>
-        <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="style/favicons/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="style/favicons/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="style/favicons/favicon-16x16.png"/>
+        <link rel="manifest" href="style/favicons/site.webmanifest"/>
+        <link rel="mask-icon" href="style/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
+
+        <!-- Стили -->
+        <link rel="stylesheet" href="libs/bootstrap-4/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/index_new_style.css" />
         <link rel="stylesheet" href="style/header_footer_style_black.css" />
 
-
-        <meta name="msapplication-TileColor" content="#2b5797"/>
-        <meta
-        name="theme-color" content="#ffffff"/>
-        <!--    <script src="main.js"></script>-->
-        <title>FUISIC</title>
         <!-- Шрифты -->
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+
+        <title>FUISIC</title>
+
     </head>
     <body>
         <div class="container_1">
@@ -96,7 +98,7 @@
                     <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
                 </div>
 
-                <button class="registration_btn" onclick="window.location.href='/validation-form/login-form.php'">Зарегистрироваться</button>
+                <button class="registration_btn" onclick="window.location.href='/validation-form/register-form.php'">Зарегистрироваться</button>
 
                 <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>
