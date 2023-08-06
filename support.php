@@ -6,40 +6,44 @@
     <title>FUISIC</title>
 
     <!-- Стили -->
-    <link rel="stylesheet" href="style/support_style.css" />
-    <link rel="stylesheet" href="style/header_footer_style_black.css" />
+    <link rel="stylesheet" href="/style/support_style.css" />
+    <link rel="stylesheet" href="/style/header_footer_style_black.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
 
-<?php include 'header.php'?>
+<div class="container_1">
 
+    <?php include 'header.php'?>
 
-<div id="container">
+    <div class="container">
+        <form action="mail.php" method="post">
+            <div class="form-group">
+                <label for="name">Ф.И.О:</label>
+                <input type="text" class="form-control" id="name" name="user_name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" class="form-control" id="email" name="user_email" required>
+            </div>
+            <div class="form-group">
+                <label for="browser">Браузер:</label>
+                <input type="text" class="form-control" id="browser" name="user_browser" required>
+            </div>
+            <div class="form-group">
+                <label for="main_textarea">Опишите вашу проблему:</label>
+                <textarea class="form-control" id="main_textarea" name="user_question" rows="10" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </form>
+    </div>
 
-    <form action="mail.php" method="post">
-        <div class="form-group">
-            <label for="name">Ф.И.О:</label>
-            <input type="text" class="form-control" id="name" name="user_name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="email" class="form-control" id="email" name="user_email" required>
-        </div>
-        <div class="form-group">
-            <label for="browser">Браузер:</label>
-            <input type="text" class="form-control" id="browser" name="user_browser" required>
-        </div>
-        <div class="form-group">
-            <label for="main_textarea">Опишите вашу проблему:</label>
-            <textarea class="form-control" id="main_textarea" name="user_question" rows="10" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
-    </form>
+    <?php include 'footer.php'?>
+
 </div>
 
-<?php include 'footer.php'?>
+
 
 </body>
 

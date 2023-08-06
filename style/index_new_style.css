@@ -3,7 +3,7 @@ body{
     overflow-x: hidden;
 }
 
-.container{
+.container_1{
     width: 100vw;
     min-height: 100vh;
     background: rgb(149,194,255);

@@ -6,6 +6,7 @@
     <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <meta name="msapplication-TileColor" content="#2b5797"/>
     <meta
             name="theme-color" content="#ffffff"/>
@@ -16,9 +17,11 @@
 </head>
 <body>
 
-<?php include 'header.php';?>
 
-<div class="container">
+
+<div class="container_1">
+
+    <?php include 'header.php';?>
 
     <div style="align-items: center; flex-direction: column; display: flex;">
         <div class="search">
@@ -86,6 +89,8 @@
         $query2 = "SELECT * FROM Тесты WHERE Раздел = '{$row['Код Раздела']}'";
         $result2 = mysqli_query($link, $query2);
 
+        echo '<div class="btn-group-horizontal mt-2" id="container_mt" role="group">';
+
         while ($row2 = mysqli_fetch_assoc($result2)) {
             $query3 = "SELECT COUNT(*) FROM Задачи WHERE Тест = '{$row2['Код_Теста']}'";
             $result3 = mysqli_query($link, $query3);
@@ -122,9 +127,10 @@
     mysqli_close($link);
     ?>
 
+    <?php include 'footer.php';?>
 </div>
 
-<?php include 'footer.php';?>
+
 
 <script src="libs/jquery-3.6.1.min.js"></script>
 

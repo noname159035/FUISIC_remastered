@@ -1,30 +1,17 @@
 <html lang="en">
-    <head>
-        <title>Тест</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/cards_style.css">
-        <!-- Подключаем стили и скрипты библиотеки MathQuill -->
-    </head>
-    <body>
-    <div id="conteiner">
+<head>
+    <title>Тест</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/header_footer_style_black.css" />
+    <link rel="stylesheet" href="style/cards_style.css">
+    <!-- Подключаем стили и скрипты библиотеки MathQuill -->
+</head>
+<body>
+<div id="conteiner">
 
-        <div class="header">
-            <a href="index.php" class="header-text main_txt">Главная</a>
-            <a href="collections.php" class="header-text coll_txt">Подборки</a>
-            <a href="Tests.php" class="header-text test_txt">Тесты</a>
-            <a href="support.php" class="header-text help_txt">Помощь</a>
-            <?php
-            // Проверяем, авторизован ли пользователь
-            if (!isset($_COOKIE['user'])) {
-                echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-            }
-            else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-            ?>
-            <a href="index.php" id="logo"></a>
-
-        </div>
+    <?php include 'header.php'?>
 
     <?php
     $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
@@ -190,41 +177,45 @@
         <button onclick="hideExplanation()">Понятно</button>
     </div>
 
+    <?php include 'header.php'?>
 
-    <script>
-        function showExplanation() {
-            document.getElementById("explanation").style.display = "block";
-        }
 
-        function hideExplanation() {
-            document.getElementById("explanation").style.display = "none";
-        }
-        function showExplanationscroll() {
-            var explanation = document.getElementById('explanation');
-            if (explanation.style.display === 'none') {
-                explanation.style.display = 'block';
-                explanation.scrollIntoView();
-            } else {
-                explanation.style.display = 'none';
-            }
-        }
-    </script>
-    <!-- Подключаем скрипт библиотеки MathJax -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
 
-    <!-- Инициализируем MathJax -->
-    <script type="text/javascript">
-        MathJax.Hub.Config({
-            showMathMenu: false,
-            tex2jax: {
-                inlineMath: [ ['$','$'], ['\\(','\\)'] ]
-            }
-        });
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-    </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    </body>
-    <?php
-    $link->close();
-    ?>
+<script>
+    function showExplanation() {
+        document.getElementById("explanation").style.display = "block";
+    }
+
+    function hideExplanation() {
+        document.getElementById("explanation").style.display = "none";
+    }
+    function showExplanationscroll() {
+        var explanation = document.getElementById('explanation');
+        if (explanation.style.display === 'none') {
+            explanation.style.display = 'block';
+            explanation.scrollIntoView();
+        } else {
+            explanation.style.display = 'none';
+        }
+    }
+</script>
+<!-- Подключаем скрипт библиотеки MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<!-- Инициализируем MathJax -->
+<script type="text/javascript">
+    MathJax.Hub.Config({
+        showMathMenu: false,
+        tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+        }
+    });
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<?php
+$link->close();
+?>
 </html>

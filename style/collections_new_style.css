@@ -4,7 +4,7 @@ body{
     background-color: #ECF2FE;
 }
 
-.container{
+.container_1{
     width: 100vw;
     min-height: 100vh;
     background: #ECF2FE;
@@ -171,9 +171,15 @@ body{
     transition-property: transform;
 }
 
+
 .collection:hover{
+    text-decoration: none;
     transform: scale(1.1);
     transition-duration: 0.5s;
+}
+
+#name_of_collection:hover{
+    text-decoration: none;
 }
 
 .property{

@@ -8,9 +8,10 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
         <link rel="manifest" href="/favicons/site.webmanifest"/>
         <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/index_new_style.css" />
         <link rel="stylesheet" href="style/header_footer_style_black.css" />
+
 
         <meta name="msapplication-TileColor" content="#2b5797"/>
         <meta
@@ -23,7 +24,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
     </head>
     <body>
-        <div class="container">
+        <div class="container_1">
 
             <?php include 'header.php';?>
 
