@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="msapplication-TileColor" content="#2b5797"/>
+    <meta name="theme-color" content="#ffffff"/>
 
     <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <meta name="msapplication-TileColor" content="#2b5797"/>
-    <meta
-            name="theme-color" content="#ffffff"/>
-    <!--    <script src="main.js"></script>-->
+    <link rel="stylesheet" href="libs/bootstrap-4/css/bootstrap.min.css">
 
     <title>FUISIC</title>
 

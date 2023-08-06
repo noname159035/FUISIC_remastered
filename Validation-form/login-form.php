@@ -6,13 +6,19 @@
         <meta http-equiv="X-UA-Compatible" content=" ie=edge">
         <title>FUISIC</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="/style/support_style.css">
+        <link rel="stylesheet" href="/style/header_footer_style_black.css" />
     </head>
     <body>
-        <div class="container-md mx-auto mt-6">
-            <?php
-            if($_COOKIE['user'] == ''):
-            ?>
+    <div class="container_1">
+
+        <?php include '../header.php'?>
+
+        <div class="container">
+            <div class="container-md mx-auto mt-6">
+                <?php
+                if($_COOKIE['user'] == ''):
+                ?>
                 <div class="col">
                     <h1>Авторизациия</h1>
                     <form action="/validation-form/auth.php" method="post">
@@ -33,14 +39,18 @@
                         <button class="btn btn-primary" type ="submit">Авторизоваться</button>
 
                         <a href="register-form.php" class="header-text auth_txt">зарегистрироваться</a>
-                        <a href="/index.php" class="header-text auth_txt">Отмена</a>
+                        <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
                     </form>
-                <?php else: ?>
-                <?php header('Location: /validation-form/profile.php') ?>
-                <?php endif;?>
+                    <?php else: ?>
+                        <?php header('Location: /validation-form/profile.php') ?>
+                    <?php endif;?>
+                </div>
             </div>
         </div>
 
+        <?php include '../footer.php'?>
+
+    </div>
     </body>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
