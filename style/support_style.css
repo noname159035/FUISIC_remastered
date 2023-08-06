@@ -1,9 +1,15 @@
-#container {
+.container {
     padding-left: 10vw;
     padding-right: 10vw;
 }
 
-body{
+.container_1{
+    width: 100vw;
+    min-height: 100vh;
+    background: #ECF2FE;
+    padding-bottom: 5vw;
+}
+.body{
     margin: 0;
     overflow-x: hidden;
     background-color: #ECF2FE;
