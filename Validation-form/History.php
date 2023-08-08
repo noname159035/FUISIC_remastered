@@ -1,127 +1,126 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>История прохождения заданий</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/style/collections_style.css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+<head>
+    <title>История прохождения заданий</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <body>
-
-    <div class="header">
-        <a href="index.php" class="header-text main_txt">Главная</a>
-        <a href="collections.php" class="header-text coll_txt">Подборки</a>
-        <a href="Tests.php" class="header-text test_txt">Тесты</a>
-        <a href="support.php" class="header-text help_txt">Помощь</a>
-        <?php
-        // Проверяем, авторизован ли пользователь
-        if (!isset($_COOKIE['user'])) {
-            echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+    <link rel="stylesheet" href="/style/support_style.css"/>
+    <link rel="stylesheet" href="/style/header_footer_style_black.css" />
+    <link rel="stylesheet" href="/libs/bootstrap-4/css/bootstrap.min.css">
+    <style>
+        .container-md {
+            margin: 0 10vw;
         }
-        else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-        ?>
-        <a href="index.php" id="logo"></a>
+    </style>
 
-    </div>
-        <div class="container">
-            <h2>История прохождения заданий</h2>
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <h4>Сортировать по:</h4>
-                </div>
-                <div class="col-md-4 text-right">
-                    <button class="btn btn-default" id="sort-date-asc">По возрастанию</button>
-                    <button class="btn btn-default" id="sort-date-desc">По убыванию</button>
-                </div>
+</head>
+
+<body>
+
+<div class="container_1">
+    <?php include '../header.php'?>
+    <div class="container-md">
+        <h2>История прохождения заданий</h2>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <h4>Сортировать по:</h4>
             </div>
-            <?php
-            // Подключение к БД
-            $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+            <div class="col-md-4 text-right">
+                <button class="btn btn-default" id="sort-date-asc">По возрастанию</button>
+                <button class="btn btn-default" id="sort-date-desc">По убыванию</button>
+            </div>
+        </div>
+        <?php
+        // Подключение к БД
+        $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 
-            // Получение данных о зарегистрированном пользователе
-            if (!isset($_COOKIE['user'])) {
-                header('Location: /validation-form/login-form.php');
-                exit();
-            }
+        // Получение данных о зарегистрированном пользователе
+        if (!isset($_COOKIE['user'])) {
+            header('Location: /validation-form/login-form.php');
+            exit();
+        }
 
-            $user_id = $_COOKIE['user'];
+        $user_id = $_COOKIE['user'];
 
-            // Определяем выбранную сортировку
-            $sort = $_GET['sort'] ?? 'date_desc';
-            $order = ($sort == 'date_asc') ? 'ASC' : 'DESC';
+        // Определяем выбранную сортировку
+        $sort = $_GET['sort'] ?? 'date_desc';
+        $order = ($sort == 'date_asc') ? 'ASC' : 'DESC';
 
-            // Выборка всех записей истории для зарегистрированного пользователя, отсортированных по дате
-            $query = "SELECT `История`.`Дата прохождения задания`, `Подборки`.`Название` FROM `История` JOIN `Подборки`
+        // Выборка всех записей истории для зарегистрированного пользователя, отсортированных по дате
+        $query = "SELECT `История`.`Дата прохождения задания`, `Подборки`.`Название` FROM `История` JOIN `Подборки`
           ON `История`.`Подборка` = `Подборки`.`Код подборки`
           WHERE `История`.`Пользователь` = $user_id ORDER BY `История`.`Дата прохождения задания` $order";
-            $result = mysqli_query($db, $query);
-            if (!$result) {
-                die('Ошибка запроса: ' . mysqli_error($db));
-            }
+        $result = mysqli_query($db, $query);
+        if (!$result) {
+            die('Ошибка запроса: ' . mysqli_error($db));
+        }
 
-            $query2 = "SELECT `История тестов`.Дата_прохождения_задания, Тесты.Название, `История тестов`.Результат FROM `История тестов` JOIN Тесты
+        $query2 = "SELECT `История тестов`.Дата_прохождения_задания, Тесты.Название, `История тестов`.Результат FROM `История тестов` JOIN Тесты
           ON `История тестов`.Тест = Тесты.Код_Теста
           WHERE `История тестов`.Пользователь = $user_id ORDER BY `История тестов`.Дата_прохождения_задания $order";
-            $result2 = mysqli_query($db, $query2);
-            if (!$result2) {
-                die('Ошибка запроса: ' . mysqli_error($db));
-            }
+        $result2 = mysqli_query($db, $query2);
+        if (!$result2) {
+            die('Ошибка запроса: ' . mysqli_error($db));
+        }
 
-            // Формирование HTML-таблицы с данными
-            echo '<table class="table">';
-            echo '<thead>';
-            echo '<tr><th>#</th><th>Подборка</th><th>Дата прохождения задания</th></tr>';
-            echo '</thead>';
-            echo '<tbody>';
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата прохождения задания'].'</td></tr>';
-                $i++;
-            }
-            echo '</tbody>';
-            echo '</table>';
-            $result = mysqli_query($db, $query);
+        // Формирование HTML-таблицы с данными
+        echo '<table class="table">';
+        echo '<thead>';
+        echo '<tr><th>#</th><th>Подборка</th><th>Дата прохождения задания</th></tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        $i = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата прохождения задания'].'</td></tr>';
+            $i++;
+        }
+        echo '</tbody>';
+        echo '</table>';
+        $result = mysqli_query($db, $query);
 
-            if (!$result) {
-                die('Ошибка запроса: ' . mysqli_error($db));
-            }
+        if (!$result) {
+            die('Ошибка запроса: ' . mysqli_error($db));
+        }
 
-            echo '<table class="table">';
-            echo '<thead>';
-            echo '<tr><th>#</th><th>Тест</th><th>Дата прохождения задания</th><th>Результат</th></tr>';
-            echo '</thead>';
-            echo '<tbody>';
-            $i = 1;
-            while ($row = mysqli_fetch_assoc($result2)) {
-                echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата_прохождения_задания'].'</td><td>'.$row['Результат'].'</td></tr>';
-                $i++;
-            }
-            echo '</tbody>';
-            echo '</table>';
-            $result2 = mysqli_query($db, $query2);
+        echo '<table class="table">';
+        echo '<thead>';
+        echo '<tr><th>#</th><th>Тест</th><th>Дата прохождения задания</th><th>Результат</th></tr>';
+        echo '</thead>';
+        echo '<tbody>';
+        $i = 1;
+        while ($row = mysqli_fetch_assoc($result2)) {
+            echo '<tr><td>'.$i.'</td><td>'.$row['Название'].'</td><td>'.$row['Дата_прохождения_задания'].'</td><td>'.$row['Результат'].'</td></tr>';
+            $i++;
+        }
+        echo '</tbody>';
+        echo '</table>';
+        $result2 = mysqli_query($db, $query2);
 
-            if (!$result2) {
-                die('Ошибка запроса: ' . mysqli_error($db));
-            }
-            // Закрытие соединения с БД
-            mysqli_close($db);
-            ?>
+        if (!$result2) {
+            die('Ошибка запроса: ' . mysqli_error($db));
+        }
+        // Закрытие соединения с БД
+        mysqli_close($db);
+        ?>
 
-        </div>
+    </div>
+    <?php include '../footer.php'?>
+</div>
 
-        <script>
-            // Обработчики клика по кнопкам сортировки
-            $('#sort-date-asc').on('click', function() {
-                window.location.href = '/Validation-form/history.php?sort=date_asc';
-            });
+</body>
 
-            $('#sort-date-desc').on('click', function() {
-                window.location.href = '/Validation-form/history.php?sort=date_desc';
-            });
-        </script>
-    </body>
+<script>
+    // Обработчики клика по кнопкам сортировки
+    $('#sort-date-asc').on('click', function() {
+        window.location.href = '/Validation-form/history.php?sort=date_asc';
+    });
+
+    $('#sort-date-desc').on('click', function() {
+        window.location.href = '/Validation-form/history.php?sort=date_desc';
+    });
+</script>
+<script src="/libs/jquery-3.6.1.min.js"></script>
+<script src="/libs/bootstrap-4/js/bootstrap.min.js"></script>
+
 </html>

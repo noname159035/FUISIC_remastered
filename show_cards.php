@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
     <link rel="stylesheet" href="style/cards_style.css">
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #ECF2FE;
+        }
+    </style>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA==" crossorigin="anonymous" />
 
 </head>
@@ -110,7 +118,6 @@
                         echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
 
                     }
-
                     echo "</div>";
 
                     // Скрипт для переворота карточки при клике на нее

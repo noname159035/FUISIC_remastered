@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/header_footer_style_black.css" />
     <link rel="stylesheet" href="style/cards_style.css">
+
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+            background-color: #ECF2FE;
+        }
+    </style>
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
 </head>
 <body>
