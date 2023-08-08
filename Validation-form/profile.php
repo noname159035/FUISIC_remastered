@@ -83,12 +83,12 @@ mysqli_close($mysql);
                 <li class="list-group-item"><a href="/validation-form/profile.php"><i class="fas fa-heart"></i> Избранное</a></li>
                 <li class="list-group-item"><a href="/validation-form/profile.php"><i class="fas fa-trophy"></i> Достижения</a></li>
                 <li class="list-group-item"><a href="/validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
-                <li class="list-group-item"><a href="/validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
                 <?php
                 if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
-                    echo "<li class='list-group-item'><a href='/my_base.php'><i class='fas fa-user'></i>Мои задания</a></li>";
+                    echo "<li class='list-group-item'><a href='/TaskEditor/my_base.php'><i class='fas fa-user'></i>Мои задания</a></li>";
                 }
                 ?>
+                <li class="list-group-item"><a href="/validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
             </ul>
 
 
