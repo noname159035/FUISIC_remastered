@@ -61,7 +61,7 @@
             }
 
 // Перенаправление на страницу Tests.php
-            header("Location: Tests.php");
+            header("Location: /collections_new.php");
             exit();
 
         } else {
@@ -140,14 +140,14 @@
                 } else {
                     session_unset();
                     session_destroy();
-                    header('Location: /Tests.php');
+                    header('Location: /collections_new.php');
                     exit();
                 }
 
             } else {
                 session_unset();
                 session_destroy();
-                header('Location: /');
+                header('Location: /collections_new.php');
                 exit();
             }
         }
@@ -177,7 +177,7 @@
         <button onclick="hideExplanation()">Понятно</button>
     </div>
 
-    <?php include 'header.php'?>
+    <?php include 'footer.php'?>
 
 
 </body>
