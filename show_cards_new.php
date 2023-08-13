@@ -26,21 +26,20 @@
 
     <div style="background-color: #ECF2FE;">
         <div class="container   ">
-            <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between mb-4 border-bottom">
-                <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                    <img src="style/img/Group_2.svg" alt="" class="bi me-2" role="img" aria-label="Bootstrap">
+            <header class="d-flex pb-2 flex-wrap align-items-center justify-content-center justify-content-md-between mb-4 border-bottom">
+                <a href="/" class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+                    <img src="style/img/Group_2_1.svg" alt="" class="bi me-2" role="img" aria-label="Bootstrap">
                 </a>
 
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-secondary">Главная</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Подборки</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Тесты</a></li>
-                    <li><a href="#" class="nav-link px-2 link-dark">Помощь</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark fs-4">Главная</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark fs-4">Подборки</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark fs-4">Тесты</a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark fs-4">Помощь</a></li>
                 </ul>
 
-                <div class="col-md-3 text-end">
-                    <button type="button" class="btn btn-outline-primary me-2">Login</button>
-                    <button type="button" class="btn btn-primary">Sign-up</button>
+                <div class="col-md-2 text-end">
+                    <button type="button" class="btn btn-outline-primary me-2 fs-5">Login</button>
                 </div>
             </header>
 
@@ -58,11 +57,7 @@
 
             <div class="container d-flex flex-wrap align-items-center justify-content-center mt-lg-5 ">
                 <div id="slider" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="card carousel-item active">abababababababababababababababababababaabababababababa</div>
-                        <div class="card carousel-item">oboboboboobobobobobobobobobobobobobobobobobobobobob</div>
-                        <div class="card carousel-item">bibibibibibbibibibibibibibibibiibbiibbiibibibib</div>
-                    </div>
+                    <div class="card carousel-item active">abababababababababababababababababababaabababababababa</div>
                     <a href="#slider" class="carousel-control-prev" role="button" data-slide="prev" style="color: black">
                         PREV
                     </a>
