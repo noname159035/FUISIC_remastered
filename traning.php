@@ -4,27 +4,33 @@
         <title>Карточки</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/style/header_footer_style_black.css" />
-        <link rel="stylesheet" href="/libs/bootstrap-4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/cards_style.css">
         <link rel="stylesheet" href="style/keyboardcommon2.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
         <!-- Подключаем стили и скрипты библиотеки MathQuill -->
         <link rel="stylesheet" href="/libs/mathquill-0.10.1/mathquill.css" />
-        <style>
-            body{
-                margin: 0;
-                overflow-x: hidden;
-                background-color: #ECF2FE;
-            }
-        </style>
 
     </head>
 
 
     <body>
 
-    <?php include 'header.php'?>
+        <div id="conteiner">
+            <div class="header">
+                <a href="index.php" class="header-text main_txt">Главная</a>
+                <a href="collections.php" class="header-text coll_txt">Подборки</a>
+                <a href="Tests.php" class="header-text test_txt">Тесты</a>
+                <a href="support.php" class="header-text help_txt">Помощь</a>
+                <?php
+                // Проверяем, авторизован ли пользователь
+                if (!isset($_COOKIE['user'])) {
+                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
+                }
+                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+                ?>
+                <a href="index.php" id="logo"></a>
+            </div>
 
             <?php
             // Подключение к базе данных
@@ -162,13 +168,18 @@
                     <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
                 </form>
             </div>
+        </div>
 <!--        Пояснение-->
         <div id="explanation" style="display:none;">
             <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
             <button onclick="hideExplanation()">Понятно</button>
         </div>
-
-    <?php include 'footer.php'?>
+        
+        <div id="footer">
+            <p id="footer_heading">FUISIC</p>
+            <br />
+            <p id="footer_text">Контакты: avmineev@edu.hse.ru</p>
+        </div>
         
         <!-- Клавиатура-->
         <div id = "keyboard">

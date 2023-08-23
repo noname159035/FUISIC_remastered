@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>FUISIC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style/support_style.css">
-    <link rel="stylesheet" href="/style/header_footer_style_black.css" />
 </head>
 <body>
 <div class="container_1">
@@ -21,7 +19,7 @@
         <div class="row">
             <div class="col">
                 <h1>Регистрация</h1>
-                <form action="/validation-form/check.php" method="post">
+                <form action="/Validation-form/check.php" method="post">
 
                     <!-- E-mail -->
                     <div class="form-group">
@@ -75,9 +73,9 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="/libs/jquery-3.6.1.min.js"></script>
+<script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+
 <script>
     $('form').on('submit', function(event) {
         var login = $('[name="login"]').val();

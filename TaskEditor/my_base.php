@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Мои задания</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style/header_footer_style_black.css" />
     <link rel="stylesheet" href="/style/support_style.css"/>
     <!-- Добавляем стили -->
     <style>
@@ -85,8 +83,8 @@
                     echo '<span class="collection-title">' . $row_collections['Название'] . '</span>';
                     echo '<div class="btn-group" role="group">';
                     echo '<button class="btn btn-sm btn-primary ml-auto edit-collection-btn" data-toggle="modal" data-target="#editCollectionModal" data-collection-id="' . $row_collections['Код подборки'] . '">Переименовать</button>'; // *Добавляем кнопку "Редактировать"
-                    echo '<a class="btn btn-sm btn-primary ml-auto" href="TaskEditor/edit_collection.php?podbor=' . $row_collections['Код подборки'] . '">Редактировать</a>';
-                    echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="TaskEditor/delete_collection.php?id=' . $row_collections['Код подборки'] . '">Удалить</a>';
+                    echo '<a class="btn btn-sm btn-primary ml-auto" href="/TaskEditor/edit_collection.php?podbor=' . $row_collections['Код подборки'] . '">Редактировать</a>';
+                    echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="/TaskEditor/delete_collection.php?id=' . $row_collections['Код подборки'] . '">Удалить</a>';
                     echo '</div>';
                     echo '</li>';
                 }
@@ -117,8 +115,8 @@
                     echo '<span class="test-title">' . $row_tests['Название'] . '</span>';
                     echo '<div class="btn-group" role="group">';
                     echo '<button class="btn btn-sm btn-primary ml-auto edit-test-btn" data-toggle="modal" data-target="#editTestModal" data-test-id="' . $row_tests['Код_Теста'] . '">Переименовать</button>'; // *Добавляем кнопку "Редактировать"
-                    echo '<a class="btn btn-sm btn-primary ml-auto" href="TaskEditor/edit_test.php?test=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
-                    echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="TaskEditor/delete_test.php?id=' . $row_tests['Код_Теста'] . '">Удалить</a>';
+                    echo '<a class="btn btn-sm btn-primary ml-auto" href="/TaskEditor/edit_test.php?test=' . $row_tests['Код_Теста'] . '">Редактировать</a>';
+                    echo '<a class="btn btn-sm btn-danger mr-auto" href="#" data-toggle="modal" data-target="#confirmDeleteModal" data-href="/TaskEditor/delete_test.php?id=' . $row_tests['Код_Теста'] . '">Удалить</a>';
                     echo '</div>';
                     echo '</li>';
                 }
@@ -420,7 +418,6 @@
 
 <?php
 // Освобождаем ресурсы
-mysqli_free_result($result_sections);
 mysqli_close($link);
 ?>
 

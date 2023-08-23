@@ -13,10 +13,7 @@
         <link rel="mask-icon" href="style/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
 
         <!-- Стили -->
-        <link rel="stylesheet" href="libs/bootstrap-4/css/bootstrap.min.css">
         <link rel="stylesheet" href="style/index_new_style.css" />
-        <link rel="stylesheet" href="style/header_footer_style_black.css" />
-
         <!-- Шрифты -->
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>

@@ -1,0 +1,37 @@
+a, u {
+    text-decoration: none;
+}
+
+.media{
+    display: flex;
+}
+
+.media_left{
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 15vw;
+    float: left;
+}
+
+.media_right{
+    display: block;
+    margin-top: 13vw;
+    float: right;
+}
+
+.media_left_btn{
+    display: flex;
+}
+
+.media_left_text{
+    margin-top: 2vw;
+    font-size: 1.5vw;
+    color: black;
+}
+
+.media_right_text{
+    text-align: right;
+    color: black;
+    font-size: 1.25vw;
+    margin-bottom: 1vw;
+}

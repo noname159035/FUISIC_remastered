@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактор подборок</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style/collections_style.css"/>
     <link rel="stylesheet" href="/style/level.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
@@ -20,24 +18,9 @@
 </head>
 <body>
 
-<div class="header">
-    <a href="../index.php" class="header-text main_txt">Главная</a>
-    <a href="../collections.php" class="header-text coll_txt">Подборки</a>
-    <a href="../Tests.php" class="header-text test_txt">Тесты</a>
-    <a href="../support.php" class="header-text help_txt">Помощь</a>
-    <?php
-    // Проверяем, авторизован ли пользователь
-    if (!isset($_COOKIE['user'])) {
-        echo ("<a href='../validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-    }
-    else echo ("<a href='../validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-    ?>
-    <a href="../index.php" id="logo"></a>
+<?php include '../header.php';?>
 
-</div>
-
-
-<div class="container">
+<div class="container-md">
     <?php
 
     if (!isset($_COOKIE['user'])) {
@@ -117,6 +100,7 @@ if (count($cardArr) == 0) {
 }
 else {
     // Вывод формы редактирования
+    echo "<div class='container-md'>";
     echo "<div class='formula'>";
     echo "<form method='post'>";
     echo "<h5 class='mt-3'>формула:</h5>";
@@ -127,6 +111,7 @@ else {
     echo "<textarea class='form-control' name='explanation' rows='10'>" . $card['explanation'] . "</textarea>";
     echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardArr) . "</p>";
     echo "<input type='hidden' name='card_id' value=' " . $card['card_id'] . "'>";
+    echo "</div>";
 }
 
 ?>
@@ -156,8 +141,10 @@ else {
     echo "<button type='button' class='btn btn-danger mt-3' onclick='deleteCard()'>Удалить карточку</button>";
     ?>
     <button type='submit' class='btn btn-primary mt-3'>Сохранить</button>
-    <a href='../my_base.php' class='btn btn-info mt-3'>Закончить</a>
+    <a href='/TaskEditor/my_base.php' class='btn btn-info mt-3'>Закончить</a>
 </div>
+
+<?php include '../footer.php';?>
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

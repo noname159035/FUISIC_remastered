@@ -32,8 +32,8 @@ $(document).ready(function() {
         $('.counter').text((index + 1) + ' of ' + cards.length);
 
         // Обновление состояния кнопок "Next" и "Previous"
-        $('.btn-next').attr('disabled', index === cards.length - 1);
-        $('.btn-previous').attr('disabled', index === 0);
+        $('.btn-next').attr('disabled', index == cards.length - 1);
+        $('.btn-previous').attr('disabled', index == 0);
     }
     // Отображение первой карточки
     showCard(currentCardIndex);
