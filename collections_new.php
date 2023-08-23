@@ -7,8 +7,6 @@
 
     <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
-    <link rel="stylesheet" href="style/header_footer_style_black.css" />
-    <link rel="stylesheet" href="libs/bootstrap-4/css/bootstrap.min.css">
 
     <title>FUISIC</title>
 
@@ -68,7 +66,7 @@
                                 <p style="margin-top: 15%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">формул(ы)</p>
                             </div>
                             <div class="time_сont">
-<!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
+                                <!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
                                 <p id="number_time" style="margin-top: 7%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
                                 <p style="margin-top: 17%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
                             </div>
@@ -105,7 +103,7 @@
                                 <p style="margin-top: 15%; margin-left: 7%;font-size: 1.2vw; font-family: sans-serif; color: #9587FF">Задач(а)</p>
                             </div>
                             <div class="time_сont">
-<!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
+                                <!--                                <img src="style/img/clock.svg" style="width: 15%; margin-top: -35%; margin-right: 3%">-->
                                 <p id="number_time" style="margin-top: 7%; font-size: 2vw; font-family: sans-serif; color: #9587FF"><?php echo $row_time_cards;?></p>
                                 <p style="margin-top: 17%; margin-left: 4%; font-size: 1.2vw; font-family: sans-serif; color: #9587FF">минут(ы)</p>
                             </div>
@@ -126,6 +124,7 @@
     ?>
 
     <?php include 'footer.php';?>
+
 </div>
 
 

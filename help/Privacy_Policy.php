@@ -6,8 +6,6 @@
 
     <!-- Стили -->
     <link rel="stylesheet" href="/style/support_style.css" />
-    <link rel="stylesheet" href="/style/header_footer_style_black.css" />
-    <link rel="stylesheet" href="/libs/bootstrap-4/css/bootstrap.min.css">
 
     <title>Конфиденциальность</title>
 </head>

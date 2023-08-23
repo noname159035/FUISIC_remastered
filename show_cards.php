@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/header_footer_style_black.css" />
     <link rel="stylesheet" href="style/cards_style.css">
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA==" crossorigin="anonymous" />
@@ -15,9 +14,10 @@
 
 <body>
 
-<div id="conteiner">
-
-    <?php include 'header.php'?>
+<div id="container">
+    <?php
+    include("header.php");
+    ?>
 
     <?php
     // Подключение к базе данных
@@ -54,7 +54,7 @@
                 echo "Error: " . mysqli_error($link);
             }
             // Перенаправление на страницу example.php с передачей данных в POST-запросе
-            header("Location: collections_new.php");
+            header("Location: collections.php");
             exit();
 
         } else {
@@ -121,12 +121,12 @@
                     });
                     </script>";
                 } else {
-                    header('Location: /collections_new.php');
+                    header('Location: /collections.php');
                     exit();
                 }
 
             } else {
-                header('Location: /collections_new.php');
+                header('Location: /');
                 exit();
             }
         }
@@ -156,9 +156,10 @@
     <button onclick="hideExplanation()">Понятно</button>
 </div>
 
-<?php include 'footer.php'?>
+<?php
+include("footer.php");
+?>
 
-</body>
 <script>
     function showExplanation() {
         document.getElementById("explanation").style.display = "block";
@@ -200,6 +201,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="scrypts/cards_scrypt.js"></script>
+</body>
 <?php
 $link->close();
 ?>

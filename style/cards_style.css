@@ -8,8 +8,9 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    min-height: 250px;
+    min-height: 600px;
+    position: relative;
+    padding-top: 3%;
 }
 
 #main_text{
@@ -89,7 +90,7 @@
 .buttons {
     display: flex;
     justify-content: center;
-    margin-top: 1vh;
+    margin-top: 300px;
     gap: 0.5vw;
     text-align: center;
     
@@ -209,10 +210,7 @@
 }
 
 
-.container_1 {
-    position: relative;
-    padding-top: 3%;
-}
+
 
 #counter {
     position: absolute;
@@ -234,7 +232,7 @@ body {
 /* Пиздец */
 /* Согласен */
 
-#conteiner {
+#container {
     /*    height: 100vh;*/
     min-width: 600px;
     /*    overflow: hidden;*/

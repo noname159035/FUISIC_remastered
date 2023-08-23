@@ -53,18 +53,8 @@ mysqli_close($mysql);
     <meta charset="UTF-8">
     <title>Данные пользователя</title>
 
-    <!-- Иконки -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-    <link rel="manifest" href="/favicons/site.webmanifest"/>
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/style/level.css">
-    <link rel="stylesheet" href="/style/header_footer_style_black.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
@@ -79,16 +69,16 @@ mysqli_close($mysql);
             <!-- Здесь будут наши кнопки -->
             <ul class="list-group">
                 <li class="list-group-item"><a href="/"><i class="fa-solid fa-house"></i> Главная страница</a></li>
-                <li class="list-group-item"><a href="/validation-form/History.php"><i class="fas fa-user"></i> История</a></li>
-                <li class="list-group-item"><a href="/validation-form/profile.php"><i class="fas fa-heart"></i> Избранное</a></li>
-                <li class="list-group-item"><a href="/validation-form/profile.php"><i class="fas fa-trophy"></i> Достижения</a></li>
-                <li class="list-group-item"><a href="/validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
+                <li class="list-group-item"><a href="/Validation-form/History.php"><i class="fas fa-user"></i> История</a></li>
+                <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-heart"></i> Избранное</a></li>
+                <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-trophy"></i> Достижения</a></li>
+                <li class="list-group-item"><a href="/Validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
                 <?php
                 if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
                     echo "<li class='list-group-item'><a href='/TaskEditor/my_base.php'><i class='fas fa-user'></i>Мои задания</a></li>";
                 }
                 ?>
-                <li class="list-group-item"><a href="/validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+                <li class="list-group-item"><a href="/Validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
             </ul>
 
 
@@ -233,8 +223,9 @@ mysqli_close($mysql);
 <?php include '../footer.php';?>
 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<script src="/libs/jquery-3.6.1.min.js"></script>
+<script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
 <script>
 
     // функция для проверки полей на корректность
