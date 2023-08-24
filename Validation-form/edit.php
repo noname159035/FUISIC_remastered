@@ -1,6 +1,6 @@
 <?php
 if (!isset($_COOKIE['user'])) {
-    header('Location: /login.php');
+    header('Location: /Validation-form/login-form.php');
     exit();
 }
 
@@ -14,5 +14,5 @@ $birth_day = filter_var(trim($_POST['birth_day']), FILTER_SANITIZE_STRING);
 $mysql->query("UPDATE `Пользователи` SET `Имя`='$name', `Фамилия`='$second_name', `Дата рождения`='$birth_day' WHERE `Код пользователя`='$user_code'");
 $mysql->close();
 
-header('Location: /profile.php');
+header('Location: /Validation-form/profile.php');
 ?>

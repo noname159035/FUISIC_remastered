@@ -54,7 +54,7 @@
                 echo "Error: " . mysqli_error($link);
             }
             // Перенаправление на страницу example.php с передачей данных в POST-запросе
-            header("Location: collections.php");
+            header("Location: collections_new.php");
             exit();
 
         } else {
@@ -121,12 +121,12 @@
                     });
                     </script>";
                 } else {
-                    header('Location: /collections.php');
+                    header('Location: /collections_new.php');
                     exit();
                 }
 
             } else {
-                header('Location: /');
+                header('Location: /collections_new.php');
                 exit();
             }
         }

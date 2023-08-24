@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>FUISIC</title>
     <link rel="stylesheet" href="/style/support_style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
 </head>
 <body>
 <div class="container_1">
@@ -13,7 +17,14 @@
     <?php include '../header.php'?>
     <div class="container-md mx-auto mt-6">
         <?php
-        if($_COOKIE['user'] == ''):
+        if (!isset($_COOKIE['user'])):
+
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            if ($error == 'email-exists') {
+                echo "<div class='alert alert-danger' role='alert'>Этот e-mail уже занят.</div>";
+            }
+        }
         ?>
 
         <div class="row">
@@ -25,7 +36,7 @@
                     <div class="form-group">
                         <label for="login">E-mail:</label>
                         <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
-                        <div class="invalid-feedback"></div>
+                        <div class="invalid-feedback" id="email-error"></div>
                     </div>
 
                     <!-- Password -->
@@ -52,9 +63,10 @@
                     <!-- Date of birth -->
                     <div class="form-group">
                         <label for="birth_day">Дата рождения:</label>
-                        <input type="date" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения" required>
+                        <input type="text" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения" required>
                         <div class="invalid-feedback"></div>
                     </div>
+
 
                     <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
 
@@ -75,36 +87,46 @@
 
 <script src="/libs/jquery-3.6.1.min.js"></script>
 <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
+
+    flatpickr("#birth_day", {
+        allowInput: true,
+        dateFormat: "d.m.Y",
+        maxDate: "today",
+        minDate: "01.01.1900",
+        defaultDate: "01.01.2000"
+    });
+
     $('form').on('submit', function(event) {
-        var login = $('[name="login"]').val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Проверяем, существует ли e-mail в базе данных
+        const login = document.getElementById('login').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(login)) {
-            $('[name="login"]').addClass('is-invalid');
-            $('[name="login"]').siblings('.invalid-feedback').text('Введите корректный e-mail');
-            event.preventDefault();
-            return;
-        }
-        $.ajax({
-            url: 'http://localhost/validation-form/check-email.php',
-            method: 'post',
-            data: {login: login},
-            success: function(response) {
-                if (response == 'exists') {
-                    $('[name="login"]').addClass('is-invalid');
-                    $('[name="login"]').siblings('.invalid-feedback').text('Пользователь с таким e-mail уже существует');
-                    event.preventDefault();
-                } else {
-                    form.submit();
+            document.getElementById('email-error').textContent = 'Введите корректный e-mail';
+            document.querySelector('button[type="submit"]').disabled = true;
+        } else {
+            $.ajax({
+                url: '/Validation-form/check.php',
+                type: 'POST',
+                data: { login: login },
+                success: function(response) {
+                    if (response === 'true') {
+                        document.getElementById('email-error').textContent = 'Такой e-mail уже существует';
+                        document.querySelector('button[type="submit"]').disabled = true;
+                    } else {
+                        document.getElementById('email-error').textContent = '';
+                        document.querySelector('button[type="submit"]').disabled = false;
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     $('input[name="pass"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var pass = $(this).val();
+        const form = $(this).closest('form')[0];
+        const pass = $(this).val();
         if (pass.length < 5) {
             $(this).addClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
@@ -117,9 +139,9 @@
     });
 
     $('input[name="name"], input[name="second_name"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var name = $(this).val();
-        var nameRegex = /^[А-Яа-яёЁ]+$/;
+        const form = $(this).closest('form')[0];
+        const name = $(this).val();
+        const nameRegex = /^[A-Я][a-я]*$/;
         if (!nameRegex.test(name)) {
             $(this).addClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('Имя и фамилия должны содержать только буквы русского алфавита');
@@ -131,20 +153,6 @@
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
 
-    $('input[name="birth_day"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var birthDay = new Date($(this).val());
-        var today = new Date();
-        if (birthDay >= today) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Дата рождения не может быть больше или равна текущей дате');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
-    });
 </script>
 </body>
 </html>

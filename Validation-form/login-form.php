@@ -1,25 +1,26 @@
 <! DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content=" ie=edge">
-        <title>FUISIC</title>
-        <link rel="stylesheet" href="/style/support_style.css">
-    </head>
-    <body>
-    <div class="container_1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content=" ie=edge">
+    <title>FUISIC</title>
+    <link rel="stylesheet" href="/style/support_style.css">
+</head>
+<body>
+<div class="container_1">
 
-        <?php include '../header.php'?>
+    <?php include '../header.php'?>
 
-        <div class="container">
-            <div class="container-md mx-auto mt-6">
-                <?php
-                if($_COOKIE['user'] == ''):
+    <div class="container">
+        <div class="container-md mx-auto mt-6">
+            <?php
+            if (!isset($_COOKIE['user'])) {
+                // Выводите форму авторизации
                 ?>
                 <div class="col">
-                    <h1>Авторизациия</h1>
-                    <form action="/validation-form/auth.php" method="post">
+                    <h1>Авторизация</h1>
+                    <form action="/Validation-form/auth.php" method="post">
                         <!-- E-mail -->
                         <div class="form-group">
                             <label for="login">E-mail:</label>
@@ -39,47 +40,54 @@
                         <a href="register-form.php" class="header-text auth_txt">зарегистрироваться</a>
                         <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
                     </form>
-                    <?php else: ?>
-                        <?php header('Location: /validation-form/profile.php') ?>
-                    <?php endif;?>
                 </div>
-            </div>
+                <?php
+            } else {
+                // Перенаправление на страницу профиля
+                header('Location: /Validation-form/profile.php');
+                exit();
+            }
+            ?>
+
         </div>
-
-        <?php include '../footer.php'?>
-
     </div>
-    </body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script>
-        $('input[name="login"]').on('input', function() {
-            var form = $(this).closest('form')[0];
-            var login = $(this).val();
-            var loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!loginRegex.test(login)) {
-                $(this).addClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
-            } else {
-                $(this).removeClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('');
-            }
-            const invalidCount = form.querySelectorAll('.is-invalid').length;
-            form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
-        });
 
-        $('input[name="pass"]').on('input', function() {
-            var form = $(this).closest('form')[0];
-            var pass = $(this).val();
-            if (pass.length < 5) {
-                $(this).addClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
-            } else {
-                $(this).removeClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('');
-            }
-            const invalidCount = form.querySelectorAll('.is-invalid').length;
-            form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
-        });
-    </script>
+    <?php include '../footer.php'?>
+
+</div>
+</body>
+
+<script src="/libs/jquery-3.6.1.min.js"></script>
+<script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+
+<script>
+    $('input[name="login"]').on('input', function() {
+        var form = $(this).closest('form')[0];
+        var login = $(this).val();
+        var loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!loginRegex.test(login)) {
+            $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
+    $('input[name="pass"]').on('input', function() {
+        var form = $(this).closest('form')[0];
+        var pass = $(this).val();
+        if (pass.length < 5) {
+            $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+</script>
 </html>

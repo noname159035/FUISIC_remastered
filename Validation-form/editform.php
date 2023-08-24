@@ -1,12 +1,12 @@
 <?php
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
-    header('Location: /login.php');
+    header('Location: /Validation-form/login-form.php');
     exit();
 }
 
 // Получаем данные пользователя по коду из куки
-$user_code = $_COOKIE['user_code'];
+$user_code = $_COOKIE['user'];
 $mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
 $result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_code'");
 $user = $result->fetch_assoc();
@@ -21,7 +21,7 @@ $mysql->close();
     </head>
     <body>
         <h1>Редактирование данных пользователя</h1>
-        <form action="/edit.php" method="post">
+        <form action="/Validation-form/edit.php" method="post">
             <p>
                 <label for="name">Имя:</label>
                 <input type="text" id="name" name="name" value="<?php echo $user['Имя']; ?>">
