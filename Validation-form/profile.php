@@ -68,7 +68,7 @@ mysqli_close($mysql);
         <div class="col-md-3">
             <!-- Здесь будут наши кнопки -->
             <ul class="list-group">
-                <li class="list-group-item"><a href="/"><i class="fa-solid fa-house"></i> Главная страница</a></li>
+                <li class="list-group-item"><a href="/index_new.php"><i class="fa-solid fa-house"></i> Главная страница</a></li>
                 <li class="list-group-item"><a href="/Validation-form/History.php"><i class="fas fa-user"></i> История</a></li>
                 <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-heart"></i> Избранное</a></li>
                 <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-trophy"></i> Достижения</a></li>

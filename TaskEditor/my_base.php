@@ -26,7 +26,7 @@
         <?php
         // Проверяем, авторизован ли пользователь
         if (!isset($_COOKIE['user'])) {
-            header("Location: /validation-form/login-form.php");
+            header("Location: /Validation-form/login-form.php");
             exit;
         }
 
