@@ -40,16 +40,21 @@
         $stmt = $link->prepare($query);
         $stmt->bind_param('s', $_GET['test']);
         $stmt->execute();
+
         $result = $stmt->get_result();
-        $userId = $_COOKIE['user'];
+
+        if (isset($_COOKIE['user'])) {
+            $userId = $_COOKIE['user'];
+        }
         $testId = $_GET['test'];
         $time = date("Y-m-d H:i:s");
 
         if (isset($_POST['finish'])) {
-// Количество правильных ответов
+            // Количество правильных ответов
             $correctAnswers = $_SESSION['correct_answers'];
 
-// Код для записи данных в таблицу "История"
+        // Код для записи данных в таблицу "История"
+        if (isset($_COOKIE['user'])) {
             $query = "INSERT INTO `История тестов` (Пользователь, Дата_прохождения_задания, Тест, Результат) VALUES (?, ?, ?, ?)";
             $stmt = $link->prepare($query);
             $stmt->bind_param('sssi', $userId, $time, $testId, $correctAnswers);
@@ -59,8 +64,8 @@
             if (!$stmt) {
                 echo "Error: " . mysqli_error($link);
             }
-
-// Перенаправление на страницу Tests.php
+        }
+            // Перенаправление на страницу Tests.php
             header("Location: /collections_new.php");
             exit();
 
@@ -120,13 +125,13 @@
                         $currentTask = isset($_POST['task']) ? (int)$_POST['task'] : null;
 
                         if (in_array($currentTask, $_SESSION['answered_tasks'])) {
-// Если на это задание уже ответили, выводим сообщение
+                            // Если на это задание уже ответили, выводим сообщение
                             echo "<div class='alert alert-warning'>Вы уже ответили на это задание. Повторная проверка невозможна.</div>";
                         } elseif (empty($userAnswer)) {
-// Если ответ пустой, выводим сообщение об ошибке
+                            // Если ответ пустой, выводим сообщение об ошибке
                             echo "<div class='alert alert-danger'>Введите ответ.</div>";
                         } else {
-// Если это новый ответ и ответ не пустой, проверяем его на правильность
+                            // Если это новый ответ и ответ не пустой, проверяем его на правильность
                             if ($userAnswer == $taskArr[$currentTask]['answer']) {
                                 array_push($_SESSION['answered_tasks'], $currentTask);
                                 $_SESSION['correct_answers']++;

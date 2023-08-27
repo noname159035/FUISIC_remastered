@@ -40,23 +40,28 @@
         $stmt->bind_param('s', $_GET['podbor']);
         $stmt->execute();
         $result = $stmt->get_result();
-        $userId = $_COOKIE['user'];
+
+        if (isset($_COOKIE['user'])) {
+            $userId = $_COOKIE['user'];
+        }
+
         $podborId = $_GET['podbor'];
         $time = date("Y-m-d H:i:s");
 
         if (isset($_POST['finish'])) {
-            // Код для записи данных в таблицу "История"
-            $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
-            $stmt = $link->prepare($query);
-            $stmt->bind_param('sss', $userId, $time, $podborId);
-            $stmt->execute();
-            if (!$stmt) {
-                echo "Error: " . mysqli_error($link);
+            if (isset($_COOKIE['user'])) {
+                // Код для записи данных в таблицу "История"
+                $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
+                $stmt = $link->prepare($query);
+                $stmt->bind_param('sss', $userId, $time, $podborId);
+                $stmt->execute();
+                if (!$stmt) {
+                    echo "Error: " . mysqli_error($link);
+                }
             }
             // Перенаправление на страницу example.php с передачей данных в POST-запросе
             header("Location: collections_new.php");
             exit();
-
         } else {
             // Код для вывода карточек
             if (isset($_GET['podbor']) && $_GET['podbor'] != 0) {

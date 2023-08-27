@@ -70,9 +70,9 @@ mysqli_close($mysql);
             <ul class="list-group">
                 <li class="list-group-item"><a href="/index_new.php"><i class="fa-solid fa-house"></i> Главная страница</a></li>
                 <li class="list-group-item"><a href="/Validation-form/History.php"><i class="fas fa-user"></i> История</a></li>
-                <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-heart"></i> Избранное</a></li>
-                <li class="list-group-item"><a href="/Validation-form/profile.php"><i class="fas fa-trophy"></i> Достижения</a></li>
-                <li class="list-group-item"><a href="/Validation-form/raiting.php"><i class="fas fa-star"></i> Рейтинг</a></li>
+                <li class="list-group-item"><a href="/Validation-form/favorites.php"><i class="fas fa-heart"></i> Избранное</a></li>
+                <li class="list-group-item"><a href="/Validation-form/archives.php"><i class="fas fa-trophy"></i> Достижения</a></li>
+                <li class="list-group-item"><a href="/Validation-form/rating.php"><i class="fas fa-star"></i> Рейтинг</a></li>
                 <?php
                 if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
                     echo "<li class='list-group-item'><a href='/TaskEditor/my_base.php'><i class='fas fa-user'></i>Мои задания</a></li>";
