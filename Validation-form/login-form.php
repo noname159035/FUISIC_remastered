@@ -6,50 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>FUISIC</title>
     <link rel="stylesheet" href="/style/support_style.css">
+    <style>
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 <div class="container_1">
 
     <?php include '../header.php'?>
 
-    <div class="container">
-        <div class="container-md mx-auto mt-6">
-            <?php
-            if (!isset($_COOKIE['user'])) {
-                // Выводите форму авторизации
-                ?>
-                <div class="col">
-                    <h1>Авторизация</h1>
-                    <form action="/Validation-form/auth.php" method="post">
-                        <!-- E-mail -->
-                        <div class="form-group">
-                            <label for="login">E-mail:</label>
-                            <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+    <div class="container-md mx-auto mt-6">
+        <?php
+        if (!isset($_COOKIE['user'])) {
+            // Выводите форму авторизации
+            ?>
+            <div class="col">
+                <h1>Авторизация</h1>
+                <form action="/Validation-form/auth.php" method="post">
+                    <!-- E-mail -->
+                    <div class="form-group">
+                        <label for="login">E-mail:</label>
+                        <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
 
-                        <!-- Password -->
-                        <div class="form-group">
-                            <label for="pass">Пароль:</label>
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="введите пароль" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="pass">Пароль:</label>
+                        <input type="password" class="form-control" name="pass" id="pass" placeholder="введите пароль" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
 
+                    <div class="buttons" style="margin-top: 24px">
                         <button class="btn btn-primary" type ="submit">Авторизоваться</button>
 
-                        <a href="register-form.php" class="header-text auth_txt">зарегистрироваться</a>
+                        <a href="register-form.php" class="header-text auth_txt">Зарегистрироваться</a>
                         <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
-                    </form>
-                </div>
-                <?php
-            } else {
-                // Перенаправление на страницу профиля
-                header('Location: /Validation-form/profile.php');
-                exit();
-            }
-            ?>
+                    </div>
 
-        </div>
+                    <div class="buttons" style="margin-top: 24px">
+                        <a href="forgot_pass.php" class="header-text auth_txt">Забыли пароль?</a>
+                    </div>
+
+                </form>
+            </div>
+            <?php
+        } else {
+            // Перенаправление на страницу профиля
+            header('Location: /Validation-form/profile.php');
+            exit();
+        }
+        ?>
     </div>
 
     <?php include '../footer.php'?>

@@ -6,9 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>FUISIC</title>
     <link rel="stylesheet" href="/style/support_style.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+    <style>
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 
 </head>
 <body>
@@ -42,22 +48,33 @@
                     <!-- Password -->
                     <div class="form-group">
                         <label for="pass">Пароль:</label>
-                        <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; height: 100%;">
+                                    <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
 
-                    <!-- First name -->
-                    <div class="form-group">
-                        <label for="name">Имя:</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
-                        <div class="invalid-feedback"></div>
-                    </div>
 
-                    <!-- Last name -->
+                    <!-- First and Last name -->
                     <div class="form-group">
-                        <label for="second_name">Фамилия:</label>
-                        <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
-                        <div class="invalid-feedback"></div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="name">Имя:</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col">
+                                <label for="second_name">Фамилия:</label>
+                                <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Date of birth -->
@@ -67,11 +84,14 @@
                         <div class="invalid-feedback"></div>
                     </div>
 
+                    <div class="buttons" style="margin-top: 24px">
+                        <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
 
-                    <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
+                        <a href="login-form.php" class="header-text auth_txt">Уже есть аккаунт?</a>
+                        <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
+                    </div>
 
-                    <a href="login-form.php" class="header-text auth_txt">войти</a>
-                    <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
+
                 </form>
             </div>
 
@@ -144,7 +164,7 @@
         const nameRegex = /^[A-Я][a-я]*$/;
         if (!nameRegex.test(name)) {
             $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Имя и фамилия должны содержать только буквы русского алфавита');
+            $(this).siblings('.invalid-feedback').text('Имя и фамилия должны начинаться с заглавной буквы');
         } else {
             $(this).removeClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('');
@@ -154,5 +174,22 @@
     });
 
 </script>
+
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("pass");
+        const passwordToggleIcon = document.getElementById("password-toggle-icon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggleIcon.classList.remove("bi-eye-slash");
+            passwordToggleIcon.classList.add("bi-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordToggleIcon.classList.remove("bi-eye");
+            passwordToggleIcon.classList.add("bi-eye-slash");
+        }
+    }
+</script>
+
 </body>
 </html>
