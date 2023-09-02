@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
-    <title>FUISIC</title>
-    <link rel="stylesheet" href="/style/support_style.css">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="/style/background_style.css">
     <style>
         .buttons {
             display: flex;
@@ -15,14 +15,19 @@
     </style>
 </head>
 <body>
-<div class="container_1">
+<div class="background">
 
     <?php include '../header.php'?>
 
     <div class="container-md mx-auto mt-6">
         <?php
         if (!isset($_COOKIE['user'])) {
-            // Выводите форму авторизации
+            if (isset($_GET['error'])) {
+                $error = $_GET['error'];
+                if ($error == 'account-doesnt_exists') {
+                    echo "<div class='alert alert-danger' role='alert'>Неверный e-mail или пароль</div>";
+                }
+            }
             ?>
             <div class="col">
                 <h1>Авторизация</h1>
@@ -73,9 +78,9 @@
 
 <script>
     $('input[name="login"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var login = $(this).val();
-        var loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const form = $(this).closest('form')[0];
+        const login = $(this).val();
+        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!loginRegex.test(login)) {
             $(this).addClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
@@ -88,8 +93,8 @@
     });
 
     $('input[name="pass"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var pass = $(this).val();
+        const form = $(this).closest('form')[0];
+        const pass = $(this).val();
         if (pass.length < 5) {
             $(this).addClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');

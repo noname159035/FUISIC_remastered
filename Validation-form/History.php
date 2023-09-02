@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>История прохождения заданий</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style/collections_style.css"/>
-
+    <link rel="stylesheet" href="/style/background_style.css"/>
 </head>
 
 <body>
+<div class="background">
 
-<?php include '../header.php'?>
+    <?php include '../header.php'?>
 
-<div class="container">
+    <div class="container">
     <h2>История прохождения заданий</h2>
     <div class="row">
         <div class="col-md-4 text-center">
@@ -98,7 +98,9 @@
 
 </div>
 
-<?php include '../footer.php'?>
+    <?php include '../footer.php'?>
+
+</div>
 
 <script src="/libs/jquery-3.6.1.min.js"></script>
 <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>

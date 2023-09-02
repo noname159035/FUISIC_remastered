@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
-    <title>FUISIC</title>
-    <link rel="stylesheet" href="/style/support_style.css">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/style/background_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <style>
         .buttons {
             display: flex;
@@ -17,10 +18,13 @@
     </style>
 
 </head>
+
 <body>
-<div class="container_1">
+
+<div class="background">
 
     <?php include '../header.php'?>
+
     <div class="container-md mx-auto mt-6">
         <?php
         if (!isset($_COOKIE['user'])):

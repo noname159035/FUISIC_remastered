@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/cards_style.css">
+    <link rel="stylesheet" href="style/background_style.css">
+
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA==" crossorigin="anonymous" />
 
@@ -13,157 +15,158 @@
 
 
 <body>
+<div class="background">
 
-<div id="container">
-    <?php
-    include("header.php");
-    ?>
+    <?php include("header.php"); ?>
 
-    <?php
-    // Подключение к базе данных
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-    $query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
-    $stmt = $link->prepare($query);
-    $stmt->bind_param('s', $_GET['podbor']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
-    ?>
-    <h1 class="podbor_name">Подборка: <?php echo $podborName ?></h1>
-    <div class="container_1">
+    <div id="container">
+
+
         <?php
-
         // Подключение к базе данных
         $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-        $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
+        $query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
         $stmt = $link->prepare($query);
         $stmt->bind_param('s', $_GET['podbor']);
         $stmt->execute();
         $result = $stmt->get_result();
+        $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
+        ?>
+        <h1 class="podbor_name">Подборка: <?php echo $podborName ?></h1>
+        <div class="container_1">
+            <?php
 
-        if (isset($_COOKIE['user'])) {
-            $userId = $_COOKIE['user'];
-        }
+            // Подключение к базе данных
+            $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+            $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
+            $stmt = $link->prepare($query);
+            $stmt->bind_param('s', $_GET['podbor']);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        $podborId = $_GET['podbor'];
-        $time = date("Y-m-d H:i:s");
-
-        if (isset($_POST['finish'])) {
             if (isset($_COOKIE['user'])) {
-                // Код для записи данных в таблицу "История"
-                $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
-                $stmt = $link->prepare($query);
-                $stmt->bind_param('sss', $userId, $time, $podborId);
-                $stmt->execute();
-                if (!$stmt) {
-                    echo "Error: " . mysqli_error($link);
-                }
+                $userId = $_COOKIE['user'];
             }
-            // Перенаправление на страницу example.php с передачей данных в POST-запросе
-            header("Location: collections_new.php");
-            exit();
-        } else {
-            // Код для вывода карточек
-            if (isset($_GET['podbor']) && $_GET['podbor'] != 0) {
 
-                if ($link->connect_error) {
-                    die("Connection failed: " . $link->connect_error);
+            $podborId = $_GET['podbor'];
+            $time = date("Y-m-d H:i:s");
+
+            if (isset($_POST['finish'])) {
+                if (isset($_COOKIE['user'])) {
+                    // Код для записи данных в таблицу "История"
+                    $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
+                    $stmt = $link->prepare($query);
+                    $stmt->bind_param('sss', $userId, $time, $podborId);
+                    $stmt->execute();
+                    if (!$stmt) {
+                        echo "Error: " . mysqli_error($link);
+                    }
                 }
+                // Перенаправление на страницу example.php с передачей данных в POST-запросе
+                header("Location: collections_new.php");
+                exit();
+            } else {
+                // Код для вывода карточек
+                if (isset($_GET['podbor']) && $_GET['podbor'] != 0) {
 
-                // Подготовка запроса
-
-
-                // Создание массива всех карточек
-                $cardsArr = [];
-                while ($row = $result->fetch_assoc()) {
-                    $card = [
-                        'formula' => $row['Формула'],
-                        'description' => $row['Описание'],
-                        'explanation'=> $row['Пояснение']
-                    ];
-                    array_push($cardsArr, $card);
-                }
-
-                // Проверка на наличие карточек
-                if (count($cardsArr) > 0) {
-                    // Определение текущей карточки
-                    $currentCard = 0;
-                    if (isset($_GET['card']) && $_GET['card'] >= 0 && $_GET['card'] < count($cardsArr)) {
-                        $currentCard = $_GET['card'];
+                    if ($link->connect_error) {
+                        die("Connection failed: " . $link->connect_error);
                     }
 
-                    // Вывод текущей карточки
-                    $card = $cardsArr[$currentCard];
-                    echo "<div class='card'>";
-                    echo "<div class='card-front'>";
-                    echo "<h3><div class='mathjax-latex'>" . $card['formula'] . "</div></h3>";
-                    echo "</div>";
-                    echo "<div class='card-back'>";
-                    echo "<p>" . $card['description'] . "</p>";
-                    echo "</div>";
-                    echo "</div>";
+                    // Подготовка запроса
 
-                    // Кнопки переключения карточек
-                    echo "<div class='buttons'>";
 
-                    if ($currentCard > 0) {
-                        $prevCard = $currentCard - 1;
-                        echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-                    }
-                    if ($currentCard < count($cardsArr) - 1) {
-                        $nextCard = $currentCard + 1;
-                        echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-
+                    // Создание массива всех карточек
+                    $cardsArr = [];
+                    while ($row = $result->fetch_assoc()) {
+                        $card = [
+                            'formula' => $row['Формула'],
+                            'description' => $row['Описание'],
+                            'explanation'=> $row['Пояснение']
+                        ];
+                        array_push($cardsArr, $card);
                     }
 
-                    echo "</div>";
+                    // Проверка на наличие карточек
+                    if (count($cardsArr) > 0) {
+                        // Определение текущей карточки
+                        $currentCard = 0;
+                        if (isset($_GET['card']) && $_GET['card'] >= 0 && $_GET['card'] < count($cardsArr)) {
+                            $currentCard = $_GET['card'];
+                        }
 
-                    // Скрипт для переворота карточки при клике на нее
-                    echo "<script>
+                        // Вывод текущей карточки
+                        $card = $cardsArr[$currentCard];
+                        echo "<div class='card'>";
+                        echo "<div class='card-front'>";
+                        echo "<h3><div class='mathjax-latex'>" . $card['formula'] . "</div></h3>";
+                        echo "</div>";
+                        echo "<div class='card-back'>";
+                        echo "<p>" . $card['description'] . "</p>";
+                        echo "</div>";
+                        echo "</div>";
+
+                        // Кнопки переключения карточек
+                        echo "<div class='buttons'>";
+
+                        if ($currentCard > 0) {
+                            $prevCard = $currentCard - 1;
+                            echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
+                        }
+                        if ($currentCard < count($cardsArr) - 1) {
+                            $nextCard = $currentCard + 1;
+                            echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
+
+                        }
+
+                        echo "</div>";
+
+                        // Скрипт для переворота карточки при клике на нее
+                        echo "<script>
                     var card = document.querySelector('.card');
                     card.addEventListener('click', function() {
                         card.classList.toggle('is-flipped');
                     });
                     </script>";
+                    } else {
+                        header('Location: /collections_new.php');
+                        exit();
+                    }
+
                 } else {
                     header('Location: /collections_new.php');
                     exit();
                 }
-
-            } else {
-                header('Location: /collections_new.php');
-                exit();
             }
-        }
-        ?>
-        <form method="POST" action="/show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>">
+            ?>
+            <form method="POST" action="/show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>">
 
-            <!-- Счетчик карточек и кнопка "Finish" -->
-            <div class="buttons" id="counter">
-                <div>
-                    <!-- <div class="counter"> -->
-                    <?php
-                    // Вывод счетчика всех карточек и текущей
-                    echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
-                    ?>
-                    <!-- </div>     -->
+                <!-- Счетчик карточек и кнопка "Finish" -->
+                <div class="buttons" id="counter">
+                    <div>
+                        <!-- <div class="counter"> -->
+                        <?php
+                        // Вывод счетчика всех карточек и текущей
+                        echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
+                        ?>
+                        <!-- </div>     -->
+                    </div>
                 </div>
-            </div>
-            <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
-            <button id="button_tren" class="button buttons training-button" type="button">Тренажер</button>
-            <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
-        </form>
+                <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
+                <button id="button_tren" class="button buttons training-button" type="button">Тренажер</button>
+                <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
+            </form>
+        </div>
     </div>
-</div>
 
-<div id="explanation" style="display:none;">
-    <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
-    <button onclick="hideExplanation()">Понятно</button>
-</div>
+    <div id="explanation" style="display:none;">
+        <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
+        <button onclick="hideExplanation()">Понятно</button>
+    </div>
 
-<?php
-include("footer.php");
-?>
+    <?php include("footer.php"); ?>
+
+</div>
 
 <script>
     function showExplanation() {

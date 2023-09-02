@@ -10,7 +10,7 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/index_new.php" class="nav-link px-2 link-dark fs-4">Главная</a></li>
             <li><a href="/collections_new.php" class="nav-link px-2 link-dark fs-4">Задания</a></li>
-            <li><a href="/support.php" class="nav-link px-2 link-dark fs-4">Помощь</a></li>
+            <li><a href="/help.php" class="nav-link px-2 link-dark fs-4">Помощь</a></li>
         </ul>
 
         <div class="col-md-2 text-end">

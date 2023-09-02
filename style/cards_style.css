@@ -232,11 +232,6 @@ body {
 /* Пиздец */
 /* Согласен */
 
-#container {
-    /*    height: 100vh;*/
-    min-width: 600px;
-    /*    overflow: hidden;*/
-}
 
 .header {
     background-color: #0c507c;

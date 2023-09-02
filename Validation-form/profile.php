@@ -18,52 +18,81 @@ $user = $result->fetch_assoc();
 if (!$result) {
     die('Ошибка запроса: ' . mysqli_error($mysql));
 }
-// Обработка изменений данных пользователя
 if (isset($_POST['submit'])) {
     $new_email = $_POST['new_email'];
     $new_first_name = $_POST['new_first_name'];
     $new_last_name = $_POST['new_last_name'];
     $new_date_of_birth = $_POST['new_date_of_birth'];
+    $current_password = $_POST['current_password'];
+    $new_password = $_POST['new_password'];
+    $confirm_password = $_POST['confirm_password'];
+    $user_id = $_POST['user_id'];
 
-    $new_password = "";
+    // Проверка текущего пароля
+    if (md5($current_password. "sadfasd123")!= $user['Password']) {
+        // Текущий пароль неверный
+        $error = "Неверный текущий пароль";
+    } else {
+        // Текущий пароль верный, продолжаем
+        if (!empty($new_password)) {
+            // Новый пароль задан, проверяем его
+            if ($new_password!= $confirm_password) {
+                // Пароли не совпадают
+                $error = "Пароли не совпадают";
+            } else {
+                // Пароли совпадают, сохраняем новый пароль
+                $new_password = md5($new_password. "sadfasd123");
+            }
+        } else {
+            // Новый пароль не задан, сохраняем старый пароль
+            $new_password = $user['Password'];
+        }
 
-    if(!empty($_POST['new_password'])) {
-        $new_password = md5($_POST['new_password'] . "sadfasd123");
-        $mysql->query("UPDATE Пользователи SET Password='$new_password' WHERE `Код пользователя`='$user_id'");
+        // Проверка корректности введенных данных
+        if (!filter_var($new_email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Некорректный e-mail";
+        } elseif (strlen($new_first_name) < 2 || strlen($new_first_name) > 30) {
+            $error = "Имя должно содержать от 2 до 30 символов";
+        } elseif (strlen($new_last_name) < 2 || strlen($new_last_name) > 30) {
+            $error = "Фамилия должна содержать от 2 до 30 символов";
+        } elseif (!preg_match('/^\d{2}\.\d{2}\.\d{4}$/', $new_date_of_birth)) {
+            $error = "Некорректная дата рождения";
+        }
+
+        // Если есть ошибки, выводим их
+        if (!isset($error)){
+            // Обновляем данные пользователя в базе данных
+            $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth', Password='$new_password' WHERE `Код пользователя`='$user_id'";
+            $mysql->query($query);
+            header('Location: /validation-form/profile.php');
+            exit();
+        }
     }
-
-    // Обновляем данные пользователя в базе данных
-    $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth'";
-    if (!empty($new_password)) {
-        $query .= ", Password='$new_password'";
-    }
-    $query .= " WHERE `Код пользователя`='$user_id'";
-    $mysql->query($query);
-
-    // Обновляем данные в переменной $user, чтобы они были актуальны на странице
-    $result = $mysql->query("SELECT * FROM Пользователи WHERE `Код пользователя`='$user_id'");
-    $user = $result->fetch_assoc();
 }
-mysqli_close($mysql);
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>Данные пользователя</title>
-
     <link rel="stylesheet" href="/style/level.css">
+    <link rel="stylesheet" href="/style/background_style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 </head>
 <body>
 
-<?php include '../header.php';?>
+<div class="background">
 
-<div class="container">
+    <?php include '../header.php';?>
+
+    <div class="container">
     <div class="row">
         <div class="col-md-3">
             <!-- Здесь будут наши кнопки -->
@@ -83,47 +112,85 @@ mysqli_close($mysql);
 
 
         </div>
+
         <div class="col-md-6">
             <h1>Личный кабинет</h1>
-            <?php if(isset($_GET['edit'])): ?>
+            <?php if(isset($_GET['edit'])):
+                if (isset($error)) {
+                echo "<div class='alert alert-danger' role='alert'>$error</div>";}?>
                 <form method="post">
+
+                    <!-- E-mail -->
                     <div class="form-group">
                         <label for="new_email">E-mail:</label>
-                        <input type="email" class="form-control" name="new_email" value="<?php echo $user['e-mail']; ?>" required>
+                        <input type="email" class="form-control" name="new_email" value="<?php echo $user['e-mail'];?>" required>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Имя -->
                     <div class="form-group">
                         <label for="new_first_name">Имя:</label>
-                        <input type="text" class="form-control" name="new_first_name" value="<?php echo $user['Имя']; ?>" required>
+                        <input type="text" class="form-control" name="new_first_name" value="<?php echo $user['Имя'];?>" required>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Фамилия -->
                     <div class="form-group">
                         <label for="new_last_name">Фамилия:</label>
-                        <input type="text" class="form-control" name="new_last_name" value="<?php echo $user['Фамилия']; ?>" required>
+                        <input type="text" class="form-control" name="new_last_name" value="<?php echo $user['Фамилия'];?>" required>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Дата рождения -->
                     <div class="form-group">
                         <label for="new_date_of_birth">Дата рождения:</label>
-                        <div class="input-group date">
-                            <input type="date" class="form-control" name="new_date_of_birth" value="<?php echo $user['Дата рождения']; ?>" min="1900-01-01" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
+                        <input type="text" class="form-control" name="new_date_of_birth" id="new_date_of_birth" value="<?php echo $user['Дата рождения'];?>" required >
+                        <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Текущий пароль -->
                     <div class="form-group">
                         <label for="current_password">Текущий пароль:</label>
-                        <input type="password" class="form-control" name="current_password" required>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="current_password" id="current_password" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('current_password')" style="border-top-left-radius: 0; border-bottom-left-radius: 0; height: 100%;">
+                                    <i class="bi bi-eye-slash" id="current_password_toggle_icon"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Новый пароль -->
                     <div class="form-group">
                         <label for="new_password">Новый пароль:</label>
-                        <input type="password" class="form-control" name="new_password">
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="new_password" id="new_password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('new_password')" style="border-top-left-radius: 0; border-bottom-left-radius: 0; height: 100%;">
+                                    <i class="bi bi-eye-slash" id="new_password_toggle_icon"></i>
+                                </button>
+                            </div>
+                        </div>
                         <div class="invalid-feedback"></div>
                     </div>
+
+                    <!-- Подтвердите новый пароль -->
                     <div class="form-group">
                         <label for="confirm_password">Подтвердите новый пароль:</label>
-                        <input type="password" class="form-control" name="confirm_password">
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="confirm_password" id="confirm_password">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility('confirm_password')" style="border-top-left-radius: 0; border-bottom-left-radius: 0; height: 100%;">
+                                    <i class="bi bi-eye-slash" id="confirm_password_toggle_icon"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+
+                    <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+
                     <button type="submit" class="btn btn-primary" name="submit">Сохранить изменения</button>
                     <a href="?cancel" class="btn btn-secondary">Отменить</a>
                 </form>
@@ -134,8 +201,10 @@ mysqli_close($mysql);
                 <p><strong>Фамилия:</strong> <?php echo $user['Фамилия']; ?></p>
                 <p><strong>Дата рождения:</strong> <?php echo $user['Дата рождения']; ?></p>
                 <a href="?edit=<?php echo $user_id; ?>" class="btn btn-primary">Редактировать данные</a>
-            <?php endif; ?>
+            <?php endif;
+            ?>
         </div>
+
         <div class="col-md-3">
             <?php
             $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
@@ -220,127 +289,40 @@ mysqli_close($mysql);
     </div>
 </div>
 
-<?php include '../footer.php';?>
+    <?php include '../footer.php';?>
+
+</div>
 
 </body>
 
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="/libs/jquery-3.6.1.min.js"></script>
 <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 <script>
-
-    // функция для проверки полей на корректность
-
-    $('input[name="current_password"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var $this = $(this); // сохраняем значение $(this) в переменной $this
-        var currentPassword = $this.val();
-        $.post('check_password.php', {password: currentPassword}, function(response) {
-            if (response !== 'OK') {
-                $this.addClass('is-invalid');
-                $this.siblings('.invalid-feedback').text('Текущий пароль введен неверно');
-            } else {
-                $this.removeClass('is-invalid');
-                $this.siblings('.invalid-feedback').text('');
-            }
-            const form = $('form')[0];
-            const invalidCount = form.querySelectorAll('.is-invalid').length;
-            form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-        });
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="new_email"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var email = $(this).val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="new_password"], input[name="confirm_password"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var newPassword = $('input[name="new_password"]').val();
-        var confirmPassword = $('input[name="confirm_password"]').val();
-        if (newPassword !== confirmPassword) {
-            $('input[name="new_password"], input[name="confirm_password"]').addClass('is-invalid');
-            $('input[name="new_password"]').siblings('.invalid-feedback').text('Пароли не совпадают');
-        } else {
-            $('input[name="new_password"], input[name="confirm_password"]').removeClass('is-invalid');
-            $('input[name="new_password"]').siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="new_first_name"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var firstName = $(this).val();
-        var firstNameRegex = /^[a-zA-Zа-яА-ЯёЁ\s\-']+$/u;
-        if (!firstNameRegex.test(firstName)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Введите корректное имя');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="new_last_name"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var lastName = $(this).val();
-        var lastNameRegex = /^[a-zA-Zа-яА-ЯёЁ\s\-']+$/u;
-        if (!lastNameRegex.test(lastName)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Введите корректную фамилию');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="new_date_of_birth"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var dob = $(this).val();
-        var today = new Date();
-        var dobDate = new Date(dob);
-        var maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        if (dobDate > maxDate) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Дата рождения не должна превышать текущую дату');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
-    });
-
-    $('input[name="current_password"]').on('input', function() {
-        var form = $(this).closest('form')[0];
-        var currentPassword = $(this).val();
-        $.post('check_password.php', {password: currentPassword}, function(response) {
-            if (response !== 'OK') {
-                $(this).addClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('Текущий пароль введен неверно');
-            } else {
-                $(this).removeClass('is-invalid');
-                $(this).siblings('.invalid-feedback').text('');
-            }
-        });
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[name="submit"]').disabled = invalidCount > 0;
+    flatpickr("#new_date_of_birth", {
+        allowInput: true,
+        dateFormat: "d.m.Y",
+        maxDate: "today",
+        minDate: "01.01.1900",
     });
 </script>
+<script>
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const passwordToggleIcon = document.getElementById(`${inputId}_toggle_icon`);
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggleIcon.classList.remove("bi-eye-slash");
+            passwordToggleIcon.classList.add("bi-eye");
+        } else {
+            passwordInput.type = "password";
+            passwordToggleIcon.classList.remove("bi-eye");
+            passwordToggleIcon.classList.add("bi-eye-slash");
+        }
+    }
+</script>
+
 </html>

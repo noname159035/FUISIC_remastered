@@ -10,6 +10,7 @@
     <link rel="mask-icon" href="style/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
 
     <link rel="stylesheet" href="style/cards_style_new.css" />
+    <link rel="stylesheet" href="style/background_style.css" />
 
     <meta name="msapplication-TileColor" content="#2b5797"/>
     <meta
@@ -22,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
-<div class="container_1">
+<div class="background">
 
     <?php include 'header.php';?>
 

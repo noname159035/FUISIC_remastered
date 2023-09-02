@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Рейтинг пользователей</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/style/collections_style.css"/>
-
+        <link rel="stylesheet" href="/style/background_style.css"/>
     </head>
+
     <body>
+
+    <div class="background">
+
         <?php include '../header.php'?>
 
         <div class="container">
@@ -70,8 +73,12 @@
 
         <?php include '../footer.php'?>
 
-        <script src="/libs/jquery-3.6.1.min.js"></script>
-        <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+
+    </div>
+
+    <script src="/libs/jquery-3.6.1.min.js"></script>
+    <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
 
     </body>
+
 </html>
