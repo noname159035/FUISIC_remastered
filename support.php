@@ -6,12 +6,12 @@
     <title>FUISIC</title>
 
     <!-- Стили -->
-    <link rel="stylesheet" href="/style/support_style.css" />
+    <link rel="stylesheet" href="/style/background_style.css" />
 </head>
 
 <body>
 
-<div class="container_1">
+<div class="background">
 
     <?php include 'header.php'?>
 
@@ -40,8 +40,6 @@
     <?php include 'footer.php'?>
 
 </div>
-
-
 
 </body>
 

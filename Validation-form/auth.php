@@ -17,12 +17,14 @@ if (!$result) {
 
 $user = $result->fetch_assoc();
 
-if (count($user) == 0) {
-  echo "Такой пользователь не найден";
-  exit ();
+if ($user) {
+  setcookie('user', $user['Код пользователя'], time() + 3600, "/");
+  header('location: /index_new.php');
+} else {
+  header('Location: /Validation-form/login-form.php?error=account-doesnt_exists');
+  exit();
 }
 
-setcookie('user', $user['Код пользователя'], time() + 3600, "/");
 $mysql->close();
-header('location: /index_new.php');
+
 ?>

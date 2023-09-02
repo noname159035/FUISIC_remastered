@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Стили -->
-    <link rel="stylesheet" href="/style/support_style.css" />
+    <link rel="stylesheet" href="/style/background_style.css" />
 
     <title>Конфиденциальность</title>
 </head>
 <body>
-<div class="container_1">
+<div class="background">
 
     <?php include '../header.php'?>
 

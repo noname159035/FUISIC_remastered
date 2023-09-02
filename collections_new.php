@@ -7,15 +7,14 @@
 
     <!-- Стили -->
     <link rel="stylesheet" href="style/collections_new_style.css" />
+    <link rel="stylesheet" href="style/background_style.css" />
 
-    <title>FUISIC</title>
+    <title>Задания</title>
 
 </head>
 <body>
 
-
-
-<div class="container_1">
+<div class="background">
 
     <?php include 'header.php';?>
 

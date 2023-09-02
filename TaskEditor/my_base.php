@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Мои задания</title>
-    <link rel="stylesheet" href="/style/support_style.css"/>
+    <link rel="stylesheet" href="/style/background_style.css"/>
     <!-- Добавляем стили -->
     <style>
         .btn-success{

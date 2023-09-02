@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>FUISIC</title>
-    <link rel="stylesheet" href="/style/support_style.css">
+    <link rel="stylesheet" href="/style/background_style.css">
 </head>
 <body>
-<div class="container_1">
+
+<div class="background">
 
     <?php include '../header.php'?>
 
@@ -21,6 +22,7 @@
     <?php include '../footer.php'?>
 
 </div>
+
 </body>
 </html>
 
