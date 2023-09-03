@@ -62,6 +62,7 @@ if (isset($_POST['submit'])) {
         // Если есть ошибки, выводим их
         if (!isset($error)){
             // Обновляем данные пользователя в базе данных
+            $new_date_of_birth = date('Y-m-d', strtotime($new_date_of_birth));
             $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth', Password='$new_password' WHERE `Код пользователя`='$user_id'";
             $mysql->query($query);
             header('Location: /validation-form/profile.php');
@@ -95,9 +96,10 @@ if (isset($_POST['submit'])) {
     <div class="container">
     <div class="row">
         <div class="col-md-3">
+            <h1>Меню</h1>
             <!-- Здесь будут наши кнопки -->
             <ul class="list-group">
-                <li class="list-group-item"><a href="/index_new.php"><i class="fa-solid fa-house"></i> Главная страница</a></li>
+<!--                <li class="list-group-item"><a href="/index_new.php"><i class="fa-solid fa-house"></i> Главная страница</a></li>-->
                 <li class="list-group-item"><a href="/Validation-form/History.php"><i class="fas fa-user"></i> История</a></li>
                 <li class="list-group-item"><a href="/Validation-form/favorites.php"><i class="fas fa-heart"></i> Избранное</a></li>
                 <li class="list-group-item"><a href="/Validation-form/archives.php"><i class="fas fa-trophy"></i> Достижения</a></li>
@@ -144,8 +146,8 @@ if (isset($_POST['submit'])) {
                     <!-- Дата рождения -->
                     <div class="form-group">
                         <label for="new_date_of_birth">Дата рождения:</label>
-                        <input type="text" class="form-control" name="new_date_of_birth" id="new_date_of_birth" value="<?php echo $user['Дата рождения'];?>" required >
-                        <div class="invalid-feedback"></div>
+
+                        <div class="invalid-feedback"></div> <input type="text" class="form-control" name="new_date_of_birth" id="new_date_of_birth" value="<?php echo date('d.m.Y', strtotime($user['Дата рождения']));?>" required >
                     </div>
 
                     <!-- Текущий пароль -->
@@ -191,24 +193,54 @@ if (isset($_POST['submit'])) {
 
                     <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 
-                    <button type="submit" class="btn btn-primary" name="submit">Сохранить изменения</button>
-                    <a href="?cancel" class="btn btn-secondary">Отменить</a>
+
+                    <div class="button">
+                        <button type="submit" class="btn btn-primary" name="submit">Сохранить изменения</button>
+                        <a href="?cancel" class="btn btn-secondary" style="float: right;">Отменить</a>
+                    </div>
                 </form>
             <?php else: ?>
-                <p><strong>Тип пользователя:</strong> <?php echo $user['Тип']; ?></p>
-                <p><strong>E-mail:</strong> <?php echo $user['e-mail']; ?></p>
-                <p><strong>Имя:</strong> <?php echo $user['Имя']; ?></p>
-                <p><strong>Фамилия:</strong> <?php echo $user['Фамилия']; ?></p>
-                <p><strong>Дата рождения:</strong> <?php echo $user['Дата рождения']; ?></p>
-                <a href="?edit=<?php echo $user_id; ?>" class="btn btn-primary">Редактировать данные</a>
+                <div class="table-responsive border">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Тип пользователя</th>
+                            <td><?php echo $user['Тип'];?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">E-mail</th>
+                            <td><?php echo $user['e-mail'];?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Имя</th>
+                            <td><?php echo $user['Имя'];?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Фамилия</th>
+                            <td><?php echo $user['Фамилия'];?></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" style="border-bottom-width: 0 !important;">Дата рождения</th>
+                            <td style="border-bottom-width: 0 !important;"><?php echo date('d.m.Y', strtotime($user['Дата рождения']));?></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="button d-flex justify-content-end">
+                    <a href="?edit=<?php echo $user_id;?>" class="btn btn-primary">Редактировать данные</a>
+                </div>
+
             <?php endif;
             ?>
         </div>
 
         <div class="col-md-3">
+            <h1>Прогресс</h1>
             <?php
             $db = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-            $query = "SELECT * FROM Уровни ORDER BY id ASC";
+            $query = "SELECT * FROM Уровни ORDER BY id";
             $result = mysqli_query($db, $query);
             $levels = []; // массив с информацией о каждом уровне
 
@@ -219,10 +251,10 @@ if (isset($_POST['submit'])) {
             } else {
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
-            $query = "SELECT (SELECT COUNT(*) FROM История WHERE Пользователь = $user_id) + (SELECT COUNT(*) FROM История тестов WHERE Пользователь = $user_id) AS Количество_заданий";
+            $query = "SELECT IFNULL((SELECT COUNT(*) FROM История WHERE Пользователь = $user_id), 0) + IFNULL((SELECT COUNT(*) FROM История тестов WHERE Пользователь = $user_id), 0) AS Количество_заданий";
             $result = mysqli_query($db, $query);
             $row = mysqli_fetch_assoc($result);
-            $count = $row['Количество_заданий'];
+            $count = $row['Количество_заданий']/2;
             $currentLevel = 0; // текущий уровень пользователя
 
             foreach ($levels as $level) {
@@ -251,22 +283,30 @@ if (isset($_POST['submit'])) {
                 $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min_value)) * 100;
 
                 ?>
-                <div class="level-info">
+                <div class="level-info border">
                     <div class="current-level">
-                        Текущий уровень: <?php echo $levels[$currentLevel - 1]['название_уровня']; ?>
+                        <p>Текущий уровень: <?php echo $levels[$currentLevel - 1]['название_уровня'];?></p>
+                        <p>Выполнено заданий: <?php echo $count;?></p>
                     </div>
                     <div class="next-level">
-                        <p>Следующий уровень: <?php echo $nextLevel['название_уровня']; ?></p>
+                        <p>Следующий уровень: <?php echo $nextLevel['название_уровня'];?></p>
                     </div>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar"
-                             aria-valuenow="<?php echo $count; ?>" aria-valuemin="<?php echo $current_min_value; ?>"
-                             aria-valuemax="<?php echo $next_max_value; ?>" style="width: <?php echo $next_percent; ?>%;">
-                            <?php echo $count; ?>
+                    <div class="progress-container" style="display: flex;">
+                        <span><?php echo $levels[$currentLevel - 1]['мин_кол_заданий'];?></span>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar"
+                                 aria-valuenow="<?php echo $count;?>"
+                                 aria-valuemin="<?php echo $current_min_value;?>"
+                                 aria-valuemax="<?php echo $next_max_value;?>"
+                                 style="width: <?php echo $next_percent;?>%;">
+                            </div>
                         </div>
+                        <span><?php echo $next_max_value;?></span>
                     </div>
-                    <p>(осталось решить <?php echo $remaining; ?> заданий)</p>
+
+                    <p>(осталось решить <?php echo $remaining;?> заданий)</p>
                 </div>
+
                 <?php
             } else {
                 // Все уровни пройдены
