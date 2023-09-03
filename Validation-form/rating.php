@@ -66,9 +66,14 @@
             if (!$result2) {
                 die('Ошибка запроса: ' . mysqli_error($db));
             }
+
             // Закрытие соединения с БД
             mysqli_close($db);
             ?>
+
+            <div class="button">
+                <a href="profile.php" class="btn btn-secondary" style="float: right;">Отменить</a>
+            </div>
         </div>
 
         <?php include '../footer.php'?>

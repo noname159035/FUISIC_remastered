@@ -4,6 +4,7 @@ $pass = filter_var(trim($_POST['pass']), FILTER_SANITIZE_STRING);
 $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
 $second_name = filter_var(trim($_POST['second_name']), FILTER_SANITIZE_STRING);
 $birth_day = filter_var(trim($_POST['birth_day']), FILTER_SANITIZE_STRING);
+$birth_day = date('Y-m-d', strtotime($birth_day));
 
 // Проверяем, существует ли e-mail в базе данных
 $mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
