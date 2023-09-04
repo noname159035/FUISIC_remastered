@@ -59,6 +59,13 @@ if (isset($_POST['submit'])) {
             $error = "Некорректная дата рождения";
         }
 
+        // Проверка наличия e-mail в базе данных
+        $email_check_query = "SELECT * FROM Пользователи WHERE `e-mail`='$new_email' AND `Код пользователя` != '$user_id'";
+        $email_check_result = $mysql->query($email_check_query);
+        if ($email_check_result->num_rows > 0) {
+            $error = "E-mail уже занят";
+        }
+
         // Если есть ошибки, выводим их
         if (!isset($error)){
             // Обновляем данные пользователя в базе данных
@@ -285,14 +292,14 @@ if (isset($_POST['submit'])) {
                 ?>
                 <div class="level-info border">
                     <div class="current-level">
-                        <p>Текущий уровень: <?php echo $levels[$currentLevel - 1]['название_уровня'];?></p>
-                        <p>Выполнено заданий: <?php echo $count;?></p>
+                        <p>Текущий уровень: <b><?php echo $levels[$currentLevel - 1]['название_уровня'];?></b></p>
+                        <p>Выполнено заданий: <b><?php echo $count;?></b></p>
                     </div>
                     <div class="next-level">
-                        <p>Следующий уровень: <?php echo $nextLevel['название_уровня'];?></p>
+                        <p>Следующий уровень: <b><?php echo $nextLevel['название_уровня'];?></b> </p>
                     </div>
                     <div class="progress-container" style="display: flex;">
-                        <span><?php echo $levels[$currentLevel - 1]['мин_кол_заданий'];?></span>
+                        <span><b><?php echo $levels[$currentLevel - 1]['мин_кол_заданий'];?></b></span>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar"
                                  aria-valuenow="<?php echo $count;?>"
@@ -301,7 +308,7 @@ if (isset($_POST['submit'])) {
                                  style="width: <?php echo $next_percent;?>%;">
                             </div>
                         </div>
-                        <span><?php echo $next_max_value;?></span>
+                        <span><b><?php echo $next_max_value;?></b></span>
                     </div>
 
                     <p>(осталось решить <?php echo $remaining;?> заданий)</p>
@@ -348,6 +355,22 @@ if (isset($_POST['submit'])) {
         maxDate: "today",
         minDate: "01.01.1900",
     });
+
+    $('input[name="new_first_name"], input[name="new_last_name"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const name = $(this).val();
+        const nameRegex = /^[A-Я][a-я]*$/;
+        if (!nameRegex.test(name)) {
+            $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('Имя и фамилия должны начинаться с заглавной буквы');
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
 </script>
 <script>
     function togglePasswordVisibility(inputId) {
