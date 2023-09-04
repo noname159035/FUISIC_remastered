@@ -55,11 +55,19 @@
                         <div class="input-group">
                             <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; height: 100%;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
                                     <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
                                 </button>
                             </div>
+
+                            <div class="invalid-feedback"></div>
                         </div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Повторите пароль:</label>
+                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Повторите пароль" required>
                         <div class="invalid-feedback"></div>
                     </div>
 
@@ -123,29 +131,45 @@
         defaultDate: "01.01.2000"
     });
 
-    $('form').on('submit', function(event) {
-        // Проверяем, существует ли e-mail в базе данных
-        const login = document.getElementById('login').value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(login)) {
-            document.getElementById('email-error').textContent = 'Введите корректный e-mail';
-            document.querySelector('button[type="submit"]').disabled = true;
+    $('input[name="login"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const login = $(this).val();
+        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!loginRegex.test(login)) {
+            $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
         } else {
-            $.ajax({
-                url: '/Validation-form/check.php',
-                type: 'POST',
-                data: { login: login },
-                success: function(response) {
-                    if (response === 'true') {
-                        document.getElementById('email-error').textContent = 'Такой e-mail уже существует';
-                        document.querySelector('button[type="submit"]').disabled = true;
-                    } else {
-                        document.getElementById('email-error').textContent = '';
-                        document.querySelector('button[type="submit"]').disabled = false;
-                    }
-                }
-            });
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
         }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
+    $('form').on('submit', function(event) {
+        event.preventDefault(); // Отменяем отправку формы
+
+        const login = $('input[name="login"]').val();
+
+        $.ajax({
+            url: '/Validation-form/check.php',
+            type: 'POST',
+            data: { login: login },
+            success: function(response) {
+                const $submitButton = $('button[type="submit"]');
+
+                if (response === 'true') {
+                    $('#email-error').text('Такой e-mail уже существует');
+                    $submitButton.prop('disabled', true);
+                } else if (response === 'false') {
+                    $('#email-error').text('Введите корректный e-mail');
+                    $submitButton.prop('disabled', true);
+                } else {
+                    $('#email-error').text('');
+                    $submitButton.prop('disabled', false);
+                }
+            }
+        });
     });
 
     $('input[name="pass"]').on('input', function() {
@@ -176,6 +200,22 @@
         const invalidCount = form.querySelectorAll('.is-invalid').length;
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
+
+    $('input[name="confirm_password"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const password = $(this).val();
+        const passwordInput = form.querySelector('input[name="pass"]');
+        if (password!== passwordInput.value) {
+            $(this).addClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('Пароли не совпадают');
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
 
 </script>
 
