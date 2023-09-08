@@ -29,88 +29,81 @@
         <?php
         if (!isset($_COOKIE['user'])):
 
-        if (isset($_GET['error'])) {
-            $error = $_GET['error'];
-            if ($error == 'email-exists') {
-                echo "<div class='alert alert-danger' role='alert'>Этот e-mail уже занят.</div>";
+            if (isset($_GET['error'])) {
+                $error = $_GET['error'];
+                if ($error == 'email-exists') {
+                    echo "<div class='alert alert-danger' role='alert'>Этот e-mail уже занят.</div>";
+                }
             }
-        }
-        ?>
+            ?>
+            <h1>Регистрация</h1>
+            <form action="/Validation-form/check.php" method="post">
 
-        <div class="row">
-            <div class="col">
-                <h1>Регистрация</h1>
-                <form action="/Validation-form/check.php" method="post">
+                <!-- E-mail -->
+                <div class="form-group">
+                    <label for="login">E-mail:</label>
+                    <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
+                    <div class="invalid-feedback" id="email-error"></div>
+                </div>
 
-                    <!-- E-mail -->
-                    <div class="form-group">
-                        <label for="login">E-mail:</label>
-                        <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
-                        <div class="invalid-feedback" id="email-error"></div>
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="pass">Пароль:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
+                                <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
+                            </button>
+                        </div>
+
+                        <div class="invalid-feedback"></div>
                     </div>
+                </div>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label for="pass">Пароль:</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
-                                    <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
-                                </button>
-                            </div>
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm_password">Повторите пароль:</label>
+                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Повторите пароль" required>
+                    <div class="invalid-feedback"></div>
+                </div>
 
+
+                <!-- First and Last name -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="name">Имя:</label>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="col">
+                            <label for="second_name">Фамилия:</label>
+                            <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Confirm Password -->
-                    <div class="form-group">
-                        <label for="confirm_password">Повторите пароль:</label>
-                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Повторите пароль" required>
-                        <div class="invalid-feedback"></div>
-                    </div>
+                <!-- Date of birth -->
+                <div class="form-group">
+                    <label for="birth_day">Дата рождения:</label>
+                    <input type="text" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения в формате ДД.ММ.ГГГГ" required>
+                    <div class="invalid-feedback"></div>
+                </div>
 
+                <div class="buttons" style="margin-top: 24px">
+                    <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
 
-                    <!-- First and Last name -->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label for="name">Имя:</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
-                                <div class="invalid-feedback"></div>
-                            </div>
+                    <a href="login-form.php" class="header-text auth_txt">Уже есть аккаунт?</a>
+                    <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
+                </div>
+            </form>
 
-                            <div class="col">
-                                <label for="second_name">Фамилия:</label>
-                                <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Date of birth -->
-                    <div class="form-group">
-                        <label for="birth_day">Дата рождения:</label>
-                        <input type="text" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения" required>
-                        <div class="invalid-feedback"></div>
-                    </div>
-
-                    <div class="buttons" style="margin-top: 24px">
-                        <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
-
-                        <a href="login-form.php" class="header-text auth_txt">Уже есть аккаунт?</a>
-                        <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
-                    </div>
-
-
-                </form>
-            </div>
-
-            <?php else: ?>
-                <?php header('Location: /validation-form/profile.php') ?>
-            <?php endif;?>
-        </div>
+        <?php else: ?>
+            <?php header('Location: /validation-form/profile.php') ?>
+        <?php endif;?>
     </div>
 
     <?php include '../footer.php'?>
@@ -122,28 +115,11 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-
     flatpickr("#birth_day", {
         allowInput: true,
         dateFormat: "d.m.Y",
         maxDate: "today",
         minDate: "01.01.1900",
-        defaultDate: "01.01.2000"
-    });
-
-    $('input[name="login"]').on('input', function() {
-        const form = $(this).closest('form')[0];
-        const login = $(this).val();
-        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!loginRegex.test(login)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('');
-        }
-        const invalidCount = form.querySelectorAll('.is-invalid').length;
-        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
 
     $('form').on('submit', function(event) {
@@ -172,12 +148,18 @@
         });
     });
 
-    $('input[name="pass"]').on('input', function() {
+    $('input[name="login"]').on('input', function() {
         const form = $(this).closest('form')[0];
-        const pass = $(this).val();
-        if (pass.length < 5) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
+        const login = $(this).val();
+        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (login.length !== 0 ) {
+            if (!loginRegex.test(login)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
         } else {
             $(this).removeClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('');
@@ -186,13 +168,17 @@
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
 
-    $('input[name="name"], input[name="second_name"]').on('input', function() {
+    $('input[name="pass"]').on('input', function() {
         const form = $(this).closest('form')[0];
-        const name = $(this).val();
-        const nameRegex = /^[A-Я][a-я]*$/;
-        if (!nameRegex.test(name)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Имя и фамилия должны начинаться с заглавной буквы');
+        const pass = $(this).val();
+        if (pass.length !== 0 ) {
+            if (pass.length < 5) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Длина пароля должна быть не менее 5 символов');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
         } else {
             $(this).removeClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('');
@@ -205,9 +191,14 @@
         const form = $(this).closest('form')[0];
         const password = $(this).val();
         const passwordInput = form.querySelector('input[name="pass"]');
-        if (password!== passwordInput.value) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Пароли не совпадают');
+        if (password.length !== 0 ) {
+            if (password!== passwordInput.value) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Пароли не совпадают');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
         } else {
             $(this).removeClass('is-invalid');
             $(this).siblings('.invalid-feedback').text('');
@@ -216,7 +207,25 @@
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
 
-
+    $('input[name="name"], input[name="second_name"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const name = $(this).val();
+        const nameRegex = /^[A-Я][а-я]*$/; // Изменяем регулярное выражение, чтобы разрешить только кириллицу
+        if (name.length !== 0 ) {
+            if (!nameRegex.test(name)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Имя и фамилия должны начинаться с заглавной буквы');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
 </script>
 
 <script>

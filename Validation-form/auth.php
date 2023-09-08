@@ -26,5 +26,3 @@ if ($user) {
 }
 
 $mysql->close();
-
-?>

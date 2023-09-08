@@ -35,4 +35,3 @@ $mysql->close();
 
 // Перенаправляем пользователя на страницу профиля
 header('Location: /validation-form/profile.php');
-?>
