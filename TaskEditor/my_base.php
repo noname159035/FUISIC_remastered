@@ -5,22 +5,10 @@
     <title>Мои задания</title>
     <link rel="stylesheet" href="/style/background_style.css"/>
     <!-- Добавляем стили -->
-    <style>
-        .btn-success{
-            margin-top: 100px;
-        }
-        h3 {
-            margin-top: 50px;
-        }
-
-        .mb-3 {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
 <body>
 
-<div class="container_1">
+<div class="background">
     <?php include '../header.php' ?>
     <div class="container-md">
         <?php
@@ -290,9 +278,9 @@
     $(document).ready(function () {
         // Обработчик клика на кнопке подтверждения удаления
         $('#confirmDeleteModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var href = button.data('href');
-            var confirmBtn = $(this).find('#confirmDeleteButton');
+            const button = $(event.relatedTarget);
+            const href = button.data('href');
+            const confirmBtn = $(this).find('#confirmDeleteButton');
             confirmBtn.attr('href', href);
         });
     });
@@ -306,19 +294,18 @@
         // Обработчик клика на кнопку "Создать подборку" в модальном окне
         $('#createCollectionSubmit').click(function (e) {
             e.preventDefault();
-            var collectionTitle = $('#collectionTitle').val();
-            var collectionSection = $('#collectionSection').val();
-            if (collectionTitle == '') {
+            const collectionTitle = $('#collectionTitle').val();
+            const collectionSection = $('#collectionSection').val();
+            if (collectionTitle === '') {
                 alert('Введите название подборки');
-                return;
             }
             else {
                 $.ajax({
-                    url: 'TaskEditor/create_collection.php',
+                    url: '/TaskEditor/create_collection.php',
                     data: {'title': collectionTitle, 'section': collectionSection}, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
-                        window.location.href = 'TaskEditor/edit_collection.php?podbor=' + response;
+                        window.location.href = '/TaskEditor/edit_collection.php?podbor=' + response;
                     }
                 });
             }
@@ -334,19 +321,18 @@
         // Обработчик клика на кнопку "Создать тест" в модальном окне
         $('#createTestSubmit').click(function (e) {
             e.preventDefault();
-            var testTitle = $('#testTitle').val();
-            var testSection = $('#testSection').val();
-            if (testTitle == '') {
+            const testTitle = $('#testTitle').val();
+            const testSection = $('#testSection').val();
+            if (testTitle === '') {
                 alert('Введите название теста');
-                return;
             }
             else {
                 $.ajax({
-                    url: 'TaskEditor/create_test.php',
+                    url: '/TaskEditor/create_test.php',
                     data: {'title': testTitle, 'section': testSection}, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
-                        window.location.href = 'TaskEditor/edit_test.php?test=' + response;
+                        window.location.href = '/TaskEditor/edit_test.php?test=' + response;
                     }
                 });
             }
@@ -356,26 +342,25 @@
     $(document).ready(function () {
 // Обработчик клика на кнопке "Редактировать"
         $('.edit-collection-btn').click(function () {
-            var collectionId = $(this).data('collection-id');
-            var collectionTitle = $(this).parent().siblings('.collection-title').text();
+            const collectionId = $(this).data('collection-id');
+            const collectionTitle = $(this).parent().siblings('.collection-title').text();
             $('#editCollectionId').val(collectionId);
             $('#editCollectionTitle').val(collectionTitle);
         });
 
 // Обработчик клика на кнопку "Сохранить изменения"
         $('#editCollectionSubmit').click(function () {
-            var collectionId = $('#editCollectionId').val();
-            var collectionTitle = $('#editCollectionTitle').val();
-            if (collectionTitle == '') {
+            const collectionId = $('#editCollectionId').val();
+            const collectionTitle = $('#editCollectionTitle').val();
+            if (collectionTitle === '') {
                 alert('Введите название подборки');
-                return;
             }
             else {
                 $.ajax({
-                    url: 'TaskEditor/update_collection.php',
+                    url: '/TaskEditor/update_collection.php',
                     data: {'id': collectionId, 'title': collectionTitle},
                     type: 'POST',
-                    success: function (response) {
+                    success: function () {
                         $('#editCollectionModal').modal('hide');
                         window.location.reload();
                     }
@@ -387,26 +372,25 @@
     $(document).ready(function () {
         // Обработчик клика на кнопке "Редактировать"
         $('.edit-test-btn').click(function () {
-            var testId = $(this).data('test-id');
-            var testTitle = $(this).parent().siblings('.test-title').text();
+            const testId = $(this).data('test-id');
+            const testTitle = $(this).parent().siblings('.test-title').text();
             $('#editTestId').val(testId);
             $('#editTestTitle').val(testTitle);
         });
 
         // Обработчик клика на кнопку "Сохранить изменения"
         $('#editTestSubmit').click(function () {
-            var testId = $('#editTestId').val();
-            var testTitle = $('#editTestTitle').val();
-            if (testTitle == '') {
+            const testId = $('#editTestId').val();
+            const testTitle = $('#editTestTitle').val();
+            if (testTitle === '') {
                 alert('Введите название теста');
-                return;
             }
             else {
                 $.ajax({
-                    url: 'TaskEditor/update_test.php',
+                    url: '/TaskEditor/update_test.php',
                     data: {'id': testId, 'title': testTitle},
                     type: 'POST',
-                    success: function (response) {
+                    success: function () {
                         $('#editTestModal').modal('hide');
                         window.location.reload();
                     }

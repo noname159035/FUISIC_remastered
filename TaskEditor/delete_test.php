@@ -38,6 +38,6 @@ $query = "DELETE FROM Тесты WHERE `Код_Теста`=$test_id";
 mysqli_query($link, $query);
 
 // Возвращаемся на страницу со списком тестов
-header("Location: /my_base.php");
+header("Location: /TaskEditor/my_base.php");
 exit;
 ?>
