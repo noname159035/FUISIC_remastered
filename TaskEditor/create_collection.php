@@ -27,6 +27,6 @@ if (mysqli_query($link, $query)) {
     echo "Ошибка: " . mysqli_error($link);
 }
 
+
 // Освобождаем ресурсы
 mysqli_close($link);
-?>

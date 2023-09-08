@@ -39,6 +39,6 @@ $query = "DELETE FROM Подборки WHERE `Код подборки`=$collecti
 mysqli_query($link, $query);
 
 // Возвращаемся на страницу со списком подборок
-header("Location: /my_base.php");
+header("Location: /TaskEditor/my_base.php");
 exit;
 ?>

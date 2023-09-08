@@ -1,3 +1,20 @@
+<?php
+// Проверяем, авторизован ли пользователь
+if (!isset($_COOKIE['user'])) {
+    header('Location: /validation-form/login-form.php');
+    exit();
+}
+
+$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+$user_id = $_COOKIE['user'];
+$result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
+$sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
+        INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
+        WHERE `Пользователи`.`Код пользователя`='$user_id'";
+$result = $mysql->query($sql);
+$user = $result->fetch_assoc();
+
+?>
 <! DOCTYPE html>
 <html lang="en">
 <head>
