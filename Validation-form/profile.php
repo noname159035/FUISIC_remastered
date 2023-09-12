@@ -65,8 +65,6 @@ if (isset($_POST['submit'])) {
         if ($email_check_result->num_rows > 0) {
             $error = "E-mail уже занят";
         }
-
-        // Если есть ошибки, выводим их
         if (!isset($error)){
             // Обновляем данные пользователя в базе данных
             $new_date_of_birth = date('Y-m-d', strtotime($new_date_of_birth));
@@ -102,6 +100,7 @@ if (isset($_POST['submit'])) {
 
     <div class="container">
         <div class="row">
+            <!-- Блок кнопок -->
             <div class="col-md-3">
                 <h1>Меню</h1>
                 <!-- Здесь будут наши кнопки -->
@@ -115,17 +114,21 @@ if (isset($_POST['submit'])) {
                     if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
                         echo "<li class='list-group-item'><a href='/TaskEditor/my_base.php'><i class='fas fa-user'></i>Мои задания</a></li>";
                     }
+                    if ($user['Тип'] == 'Администратор') {
+                        echo "<li class='list-group-item'><a href='/Validation-form/Users.php'><i class='fas fa-user'></i>Пользователи</a></li>";
+                    }
                     ?>
+
                     <li class="list-group-item"><a href="/Validation-form/exit.php"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
                 </ul>
-
-
             </div>
-
+            <!-- Блок профиля -->
             <div class="col-md-6">
                 <h1>Личный кабинет</h1>
                 <?php if(isset($_GET['edit'])):
                     if (isset($error)) {
+
+                        // Если есть ошибки, выводим их
                         echo "<div class='alert alert-danger' role='alert'>$error</div>";}?>
                     <form method="post">
 
@@ -242,7 +245,7 @@ if (isset($_POST['submit'])) {
 
                 <?php endif; ?>
             </div>
-
+            <!-- Блок Прогресса -->
             <div class="col-md-3">
                 <h1>Прогресс</h1>
                 <?php
@@ -341,21 +344,22 @@ if (isset($_POST['submit'])) {
 </div>
 
 </body>
-
-
+<!-- Календарь -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<!-- Остальное -->
 <script src="/libs/jquery-3.6.1.min.js"></script>
 <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
+    // свойства календаря
     flatpickr("#new_date_of_birth", {
         allowInput: true,
         dateFormat: "d.m.Y",
         maxDate: "today",
         minDate: "01.01.1900",
     });
-
+    <!-- Валидация имени и фамилии -->
     $('input[name="new_first_name"], input[name="new_last_name"]').on('input', function() {
         const form = $(this).closest('form')[0];
         const name = $(this).val();
@@ -375,7 +379,7 @@ if (isset($_POST['submit'])) {
         const invalidCount = form.querySelectorAll('.is-invalid').length;
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
-
+    <!-- Валидация текущего пароля -->
     $('input[name="current_password"]').on('input', function() {
         const form = $(this).closest('form')[0];
         const pass = $(this).val();
@@ -394,7 +398,7 @@ if (isset($_POST['submit'])) {
         const invalidCount = form.querySelectorAll('.is-invalid').length;
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
-
+    <!-- Валидация нового пароля -->
     $('input[name="new_password"]').on('input', function() {
         const form = $(this).closest('form')[0];
         const pass = $(this).val();
@@ -413,7 +417,7 @@ if (isset($_POST['submit'])) {
         const invalidCount = form.querySelectorAll('.is-invalid').length;
         form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
     });
-
+    <!-- Валидация подтверждающего пароля -->
     $('input[name="confirm_password"]').on('input', function() {
         const form = $(this).closest('form')[0];
         const pass = $(this).val();
@@ -441,6 +445,7 @@ if (isset($_POST['submit'])) {
 
 </script>
 <script>
+    <!-- скрипт для кнопки раскрытия пароля -->
     function togglePasswordVisibility(inputId) {
         const passwordInput = document.getElementById(inputId);
         const passwordToggleIcon = document.getElementById(`${inputId}_toggle_icon`);

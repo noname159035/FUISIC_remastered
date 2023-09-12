@@ -4,7 +4,8 @@ $link = mysqli_connect('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test
 // Получаем название подборки из POST-запроса
 $title = $_POST['title'];
 $section = $_POST['section'];
-
+$dif = $_POST['dif'];
+$class = $_POST['class'];
 
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
@@ -16,7 +17,7 @@ if (!isset($_COOKIE['user'])) {
 $user_id = $_COOKIE['user'];
 
 // Выполняем запрос INSERT для создания новой записи в таблице
-$query = "INSERT INTO Тесты (Название, Раздел, Автор) VALUES ('$title', '$section', '$user_id')";
+$query = "INSERT INTO Тесты (Название, Раздел, Сложность, Классификация, Автор) VALUES ('$title', '$section', '$dif', '$class', '$user_id')";
 if (mysqli_query($link, $query)) {
     // Если запись успешно создана, получаем ее код
     $collection_id = mysqli_insert_id($link);
@@ -29,5 +30,4 @@ if (mysqli_query($link, $query)) {
 
 // Освобождаем ресурсы
 mysqli_close($link);
-?>
 

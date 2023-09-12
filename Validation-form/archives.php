@@ -15,7 +15,7 @@
     <div class="container">
         <h1>Данная страница еще не готова, наберитесь терпения!</h1>
 
-        <a href="login-form.php" class="header-text auth_txt">Вернуться</a>
+        <a href="profile.php" class="header-text auth_txt">Вернуться</a>
     </div>
 
     <?php include '../footer.php'?>

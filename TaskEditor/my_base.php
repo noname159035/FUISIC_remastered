@@ -9,7 +9,9 @@
 <body>
 
 <div class="background">
+
     <?php include '../header.php' ?>
+
     <div class="container-md">
         <?php
         // Проверяем, авторизован ли пользователь
@@ -61,7 +63,7 @@
             $result_collections = mysqli_query($link, $query_collections);
 
             if (mysqli_num_rows($result_collections) > 0) {
-// Выводим заголовок для списка подборок
+                // Выводим заголовок для списка подборок
                 echo '<h4>Подборки:</h4>';
 
                 // Выводим список подборок
@@ -117,7 +119,6 @@
 
         }
         ?>
-
 
         <div class="modal fade" id="editCollectionModal" tabindex="-1" role="dialog" aria-labelledby="editCollectionModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -175,12 +176,13 @@
             <div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createCollectionModalLabel">Создание подборки</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
+                            <?php
+                            ?>
                             <label for="collectionSection">Раздел</label>
                             <select class="form-control" id="collectionSection" name="collectionSection" required>
                                 <?php
@@ -190,10 +192,39 @@
                                 while ($row_sections = mysqli_fetch_assoc($result_sections)) {
                                     echo '<option value="' . $row_sections['Код Раздела'] . '">' . $row_sections['Название'] . '</option>';
                                 }
-
                                 mysqli_free_result($result_sections);
                                 ?>
                             </select>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="collectionDif">Сложность</label>
+                                    <select class="form-control" id="collectionDif" name="collectionDif" required>
+                                        <?php
+                                        $query_dif = "SELECT * FROM Сложность";
+                                        $result_dif = mysqli_query($link, $query_dif);
+
+                                        while ($row_dif = mysqli_fetch_assoc($result_dif)) {
+                                            echo '<option value="' . $row_dif['Код_Сложности'] . '">' . $row_dif['Название'] . '</option>';
+                                        }
+                                        mysqli_free_result($result_dif);
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="collectionClass">Для кого</label>
+                                    <select class="form-control" id="collectionClass" name="collectionClass" required>
+                                        <?php
+                                        $query_class = "SELECT * FROM Классификация";
+                                        $result_class = mysqli_query($link, $query_class);
+
+                                        while ($row_class = mysqli_fetch_assoc($result_class)) {
+                                            echo '<option value="' . $row_class['Код_Классификации'] . '">' . $row_class['Название'] . '</option>';
+                                        }
+                                        mysqli_free_result($result_class);
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <form id="createCollectionForm">
                             <div class="form-group">
@@ -214,8 +245,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createTestLabel">Создание теста</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
                         </button>
                     </div>
                     <div class="modal-body">
@@ -233,6 +263,36 @@
                                 mysqli_free_result($result_sections);
                                 ?>
                             </select>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="testDif">Сложность</label>
+                                    <select class="form-control" id="testDif" name="testDif" required>
+                                        <?php
+                                        $query_dif = "SELECT * FROM Сложность";
+                                        $result_dif = mysqli_query($link, $query_dif);
+
+                                        while ($row_dif = mysqli_fetch_assoc($result_dif)) {
+                                            echo '<option value="' . $row_dif['Код_Сложности'] . '">' . $row_dif['Название'] . '</option>';
+                                        }
+                                        mysqli_free_result($result_dif);
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="testClass">Для кого</label>
+                                    <select class="form-control" id="testClass" name="testClass" required>
+                                        <?php
+                                        $query_class = "SELECT * FROM Классификация";
+                                        $result_class = mysqli_query($link, $query_class);
+
+                                        while ($row_class = mysqli_fetch_assoc($result_class)) {
+                                            echo '<option value="' . $row_class['Код_Классификации'] . '">' . $row_class['Название'] . '</option>';
+                                        }
+                                        mysqli_free_result($result_class);
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <form id="createTestForm">
                             <div class="form-group">
@@ -296,13 +356,15 @@
             e.preventDefault();
             const collectionTitle = $('#collectionTitle').val();
             const collectionSection = $('#collectionSection').val();
+            const collectionDif = $('#collectionDif').val();
+            const collectionClass = $('#collectionClass').val();
             if (collectionTitle === '') {
                 alert('Введите название подборки');
             }
             else {
                 $.ajax({
                     url: '/TaskEditor/create_collection.php',
-                    data: {'title': collectionTitle, 'section': collectionSection}, // Добавляем передачу кода раздела
+                    data: {'title': collectionTitle, 'section': collectionSection, 'dif': collectionDif, 'class': collectionClass }, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
                         window.location.href = '/TaskEditor/edit_collection.php?podbor=' + response;
@@ -323,13 +385,15 @@
             e.preventDefault();
             const testTitle = $('#testTitle').val();
             const testSection = $('#testSection').val();
+            const testDif = $('#testDif').val();
+            const testClass = $('#testClass').val();
             if (testTitle === '') {
                 alert('Введите название теста');
             }
             else {
                 $.ajax({
                     url: '/TaskEditor/create_test.php',
-                    data: {'title': testTitle, 'section': testSection}, // Добавляем передачу кода раздела
+                    data: {'title': testTitle, 'section': testSection, 'dif' : testDif, 'class' : testClass }, // Добавляем передачу кода раздела
                     type: 'POST',
                     success: function (response) {
                         window.location.href = '/TaskEditor/edit_test.php?test=' + response;
