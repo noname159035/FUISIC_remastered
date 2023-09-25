@@ -36,7 +36,7 @@
                     <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
                 </div>
             </div>
-            <br>
+
 
             <div>
                 <img src="style/img/three_bubbles.svg" alt="" class="three_bubbles">

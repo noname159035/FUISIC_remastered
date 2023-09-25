@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
-<div class="background">
+<div class="background" style="overflow: hidden">
 
     <?php include 'header.php';?>
 
@@ -40,15 +40,15 @@
             </div>
         </div>
 
-        <div class="container d-flex flex-wrap align-items-center justify-content-center mt-lg-5 ">
+        <div class="container d-flex flex-wrap align-items-center justify-content-center mt-lg-5">
             <div id="slider" class="carousel slide" data-ride="carousel">
-                <div class="card carousel-item active">abababababababababababababababababababaabababababababa</div>
-                <a href="#slider" class="carousel-control-prev" role="button" data-slide="prev" style="color: black">
-                    PREV
-                </a>
-                <a href="#slider" class="carousel-control-next" role="button" data-slide="next" style="color: black">
-                    NEXT
-                </a>
+                    <div class="card active"></div>
+                    <a id="prev_btn" class="carousel-control-prev" role="button" data-slide="prev" style="color: black">
+                        PREV
+                    </a>
+                    <a id="next_btn" class="carousel-control-next" role="button" data-slide="next" style="color: black">
+                        NEXT
+                    </a>
             </div>
         </div>
 
@@ -57,6 +57,61 @@
     <?php include 'footer.php';?>
 </div>
 <script src="/libs/jquery-3.6.1.min.js"></script>
+<script src="/libs/anime.min.js"></script>
+<script>
+    document.querySelector("#prev_btn").addEventListener('click', function (){
+        anime({
+            targets: "#slider",
+            translateX: -2050,
+            duration: 300,
+            easing: 'easeInOutExpo',
+            complete: function(anim){
+                //       card.style.visibility = "hidden";
+                anime({
+                    targets: "#slider",
+                    translateX: +2050,
+                    duration: 0,
+                    complete: function(anim){
+                        anime({
+                            targets: "#slider",
+                            translateX: 0,
+                            easing: 'easeInOutExpo',
+                            duration: 300,
+                        });
+                    }
+                });
+            }
+        });
+    });
+    document.querySelector("#next_btn").addEventListener('click', function (){
+        anime({
+            targets: "#slider",
+            translateX: +2050,
+            duration: 300,
+            easing: 'easeInOutExpo',
+            complete: function(anim){
+                playing = false;
+                //       card.style.visibility = "hidden";
+                anime({
+                    targets: "#slider",
+                    translateX: -2050,
+                    duration: 0,
+                    complete: function(anim){
+                        anime({
+                            targets: "#slider",
+                            translateX: 0,
+                            easing: 'easeInOutExpo',
+                            duration: 300,
+                        });
+                    }
+                });
+            }
+        });
+    });
+    document.querySelector(".card").addEventListener('click', function (){
+
+    });
+</script>
 <!--<script src="scrypts/index_scrypt.js"></script>-->
 </body>
 </html>

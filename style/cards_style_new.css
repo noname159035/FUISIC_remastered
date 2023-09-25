@@ -78,9 +78,9 @@
 
 .card {
     box-sizing: border-box;
-    width: 700px;
-    min-width: 700px;
+    width: 500px;
+    min-width: 500px;
     /*background-color: red;*/
-    height: 500px;
-    min-height: 250px;
+    height: 300px;
+    min-height: 300px;
 }

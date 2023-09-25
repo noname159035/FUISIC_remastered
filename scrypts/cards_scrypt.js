@@ -38,3 +38,4 @@ $(document).ready(function() {
     // Отображение первой карточки
     showCard(currentCardIndex);
 });
+
