@@ -54,6 +54,8 @@
 
     </div>
 
+
+
     <?php include 'footer.php';?>
 </div>
 <script src="/libs/jquery-3.6.1.min.js"></script>

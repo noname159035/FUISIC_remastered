@@ -60,12 +60,12 @@ body{
 .three_bubbles{
     display: inline-block;
     width: 15vw;
-    margin-top: 100%;
+    margin-top: 10%;
     margin-left: 22%;
 }
 
 .bubble_cont{
-    margin-top: 25vw;
+    margin-top: 11vw;
     display: inline-block;
     float: right;
 }
