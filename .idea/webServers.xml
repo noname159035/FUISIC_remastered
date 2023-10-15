@@ -2,8 +2,11 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="35dc04f4-594a-41fd-8aa6-5dc58ba371e4" name="FUISIC" url="http://localhost:8888">
+      <webServer id="35dc04f4-594a-41fd-8aa6-5dc58ba371e4" name="FUISIC" url="http://localhost:8888/">
         <fileTransfer mountedRoot="$PROJECT_DIR$" accessType="MOUNT" port="0" />
+      </webServer>
+      <webServer id="ef4d5065-9a10-406e-98a2-849e8f38cc66" name="Test" url="http://localhost:8888/Test/">
+        <fileTransfer mountedRoot="$PROJECT_DIR$/../Test" accessType="MOUNT" port="0" />
       </webServer>
     </option>
   </component>

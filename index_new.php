@@ -95,7 +95,7 @@
                     <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
                 </div>
 
-                <button class="registration_btn" onclick="window.location.href='/validation-form/register-form.php'">Зарегистрироваться</button>
+                <button class="registration_btn" onclick="window.location.href='/Validation-form/register-form.php'">Зарегистрироваться</button>
 
                 <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>

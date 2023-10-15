@@ -17,7 +17,7 @@ $user = mysqli_fetch_assoc($result);
 // Обработка удаления пользователя
 if (isset($_POST['confirm_delete'])) {
     $mysql->query("DELETE FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
-    header('Location: users.php');
+    header('Location: Users.php');
     exit();
 }
 ?>
