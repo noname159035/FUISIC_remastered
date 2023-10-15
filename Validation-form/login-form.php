@@ -27,6 +27,7 @@
                 $error = $_GET['error'];
                 if ($error == 'account-doesnt_exists') {
                     echo "<div class='alert alert-danger' role='alert'>Неверный e-mail или пароль</div>";
+
                 }
             }
             ?>
