@@ -1,210 +1,80 @@
-<html lang="en">
+<?php
+if (isset($_COOKIE['user'])) {
+    $userId = $_COOKIE['user'];
+}
+
+$testId = $_GET['id'];
+
+$time = date("Y-m-d H:i:s");
+
+$link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+$query = "SELECT Название FROM Тесты WHERE Код_Теста = $testId";
+$result = $link->query($query);
+
+$row = $result->fetch_assoc();
+
+$query = "SELECT * FROM Задачи WHERE `Тест` =?";
+$stmt = $link->prepare($query);
+$stmt->bind_param('s', $testId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+?>
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 <head>
     <title>Тест</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/cards_style.css">
-    <link rel="stylesheet" href="style/background_style.css">
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
 </head>
-<body>
+<body class="bg-light d-flex flex-column h-100">
 
-<div class="background">
+<?php include("inc/header.php");?>
 
-    <?php include("header.php"); ?>
+<div class="container">
 
-        <?php
-        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-        $query = "SELECT Название FROM Тесты WHERE `Код_Теста` = ?";
-        $stmt = $link->prepare($query);
-        $stmt->bind_param('s', $_GET['test']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $testName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
-        session_start();
-        if (!isset($_SESSION['correct_answers'])) {
-            $_SESSION['correct_answers'] = 0;
-        }
-
-        if (!isset($_SESSION['answered_tasks'])) {
-            $_SESSION['answered_tasks'] = [];
-        }
-
-        ?>
-        <h1 class="podbor_name">Тест: <?php echo $testName ?></h1>
-        <div class="container_1">
-            <?php
-            // Подключение к базе данных
-            $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-            $query = "SELECT * FROM `Задачи` WHERE Тест = ?";
-            $stmt = $link->prepare($query);
-            $stmt->bind_param('s', $_GET['test']);
-            $stmt->execute();
-
-            $result = $stmt->get_result();
-
-            if (isset($_COOKIE['user'])) {
-                $userId = $_COOKIE['user'];
-            }
-            $testId = $_GET['test'];
-            $time = date("Y-m-d H:i:s");
-
-            if (isset($_POST['finish'])) {
-                // Количество правильных ответов
-                $correctAnswers = $_SESSION['correct_answers'];
-
-                // Код для записи данных в таблицу "История"
-                if (isset($_COOKIE['user'])) {
-                    $query = "INSERT INTO `История тестов` (Пользователь, Дата_прохождения_задания, Тест, Результат) VALUES (?, ?, ?, ?)";
-                    $stmt = $link->prepare($query);
-                    $stmt->bind_param('sssi', $userId, $time, $testId, $correctAnswers);
-                    $stmt->execute();
-                    session_unset();
-                    session_destroy();
-                    if (!$stmt) {
-                        echo "Error: " . mysqli_error($link);
-                    }
-                }
-                // Перенаправление на страницу Tests.php
-                header("Location: /collections_new.php");
-                exit();
-
-            } else {
-                // Код для вывода карточек
-                if (isset($_GET['test']) && $_GET['test'] != 0) {
-
-                    if ($link->connect_error) {
-                        die("Connection failed: " . $link->connect_error);
-                    }
-
-                    // Подготовка запроса
+    <h2>Тест: <?php echo $row['Название']?></h2>
 
 
-                    // Создание массива всех карточек
-                    $taskArr = [];
-                    while ($row = $result->fetch_assoc()) {
-                        $task = [
-                            'task' => $row['Задача'],
-                            'answer' => $row['Ответ'],
-                            'explanation'=> $row['Решение']
-                        ];
-                        array_push($taskArr, $task);
-                    }
 
-                    // Проверка на наличие карточек
-                    if (count($taskArr) > 0) {
-                        // Определение текущей карточки
-                        $currentTask = 0;
-                        if (isset($_GET['task']) && $_GET['task'] >= 0 && $_GET['task'] < count($taskArr)) {
-                            $currentTask = $_GET['task'];
-                        }
+    <?php while ($row = $result->fetch_assoc()) { ?>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo $row['Задача']?></h5>
+                <label>
+                    <input type="text" class="form-control" placeholder="Введите ответ">
+                </label>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#explanationModal<?php echo $row['Код_задачи'] ?>">Решение</button>
+            </div>
+        </div>
 
-                        // Вывод текущей карточки
-                        $task = $taskArr[$currentTask];
-                        echo "<div class='task'>";
-                        echo "<h3><div class='mathjax-latex' id='main_text'>" . $task['task'] . "</div></h3>";
-                        echo "</div>";
-                        unset($_SESSION['answered_tasks'][$currentTask]);
-
-                        // Кнопки переключения карточек
-                        echo "<div class='buttons'>";
-
-                        if ($currentTask > 0) {
-                            $prevCard = $currentTask - 1;
-                            echo "<a href='?test=" . $_GET['test'] . "&task=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-                        }
-                        if ($currentTask < count($taskArr) - 1) {
-                            $nextCard = $currentTask + 1;
-                            echo "<a href='?test=" . $_GET['test'] . "&task=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-
-                        }
-                        echo "</div>";
-
-                        if (isset($_POST['check-answer'])) {
-                            $userAnswer = $_POST['user-answer'];
-                            $currentTask = isset($_POST['task']) ? (int)$_POST['task'] : null;
-
-                            if (in_array($currentTask, $_SESSION['answered_tasks'])) {
-                                // Если на это задание уже ответили, выводим сообщение
-                                echo "<div class='alert alert-warning'>Вы уже ответили на это задание. Повторная проверка невозможна.</div>";
-                            } elseif (empty($userAnswer)) {
-                                // Если ответ пустой, выводим сообщение об ошибке
-                                echo "<div class='alert alert-danger'>Введите ответ.</div>";
-                            } else {
-                                // Если это новый ответ и ответ не пустой, проверяем его на правильность
-                                if ($userAnswer == $taskArr[$currentTask]['answer']) {
-                                    array_push($_SESSION['answered_tasks'], $currentTask);
-                                    $_SESSION['correct_answers']++;
-                                    echo "<div class='alert alert-success'>Правильно!</div>";
-                                } else {
-                                    echo "<div class='alert alert-danger'>Неправильно! Попробуйте еще раз.</div>";
-                                }
-                            }
-                        }
-
-                    } else {
-                        session_unset();
-                        session_destroy();
-                        header('Location: /collections_new.php');
-                        exit();
-                    }
-
-                } else {
-                    session_unset();
-                    session_destroy();
-                    header('Location: /collections_new.php');
-                    exit();
-                }
-            }
-            ?>
-            <form method="POST" action="/show_tasks.php<?php echo"?test=" . $_GET['test'] . "&task=" . $currentTask ?>">
-                <input type="hidden" name="task" value="<?php echo $currentTask ?>">
-                <!-- Счетчик карточек и кнопка "Finish" -->
-                <div class="buttons" id="counter">
-                    <div>
-                        <?php
-                        // Вывод счетчика всех карточек и текущей
-                        echo "<p>Задача " . ($currentTask + 1) . " из " . count($taskArr) . "</p>";
-                        ?>
+        <div class="modal fade" id="explanationModal<?php echo $row['Код_задачи']?>" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel<?php echo $row['Код_задачи']?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="explanationModalLabel<?php echo $row['Код_задачи']?>">Решение</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="explanationText<?php echo $row['Код_задачи']?>"><?php echo $row['Решение']?></p>
                     </div>
                 </div>
-                <div class="answer">
-                    <label for="user-answer">Ответ:</label>
-                    <input type="text" id="user-answer" name="user-answer">
-                </div>
-                <button type="submit" name="check-answer" class="button buttons check-button">Проверить</button>
-                <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
-                <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanationscroll()"></button>
-            </form>
+            </div>
         </div>
-        <div id="explanation" style="display:none;">
-            <?php echo "<h2>Решение</h2>" . $task['explanation']?>
-            <button onclick="hideExplanation()">Понятно</button>
-        </div>
+    <?php } ?>
 
-    <?php include("footer.php"); ?>
+    <a href="/check_answers/" class="btn btn-outline-primary">Закончить</a>
 
-</div>
+    <?php include("inc/footer.php");?>
 
 </body>
 
 <script>
-    function showExplanation() {
-        document.getElementById("explanation").style.display = "block";
-    }
-
-    function hideExplanation() {
-        document.getElementById("explanation").style.display = "none";
-    }
-    function showExplanationscroll() {
-        var explanation = document.getElementById('explanation');
-        if (explanation.style.display === 'none') {
-            explanation.style.display = 'block';
-            explanation.scrollIntoView();
-        } else {
-            explanation.style.display = 'none';
-        }
+    function showExplanation(explanation) {
+        document.getElementById("explanationText").innerHTML = explanation;
     }
 </script>
 <!-- Подключаем скрипт библиотеки MathJax -->
@@ -213,14 +83,21 @@
 <!-- Инициализируем MathJax -->
 <script type="text/javascript">
     MathJax.Hub.Config({
-        showMathMenu: false,
+        showMathMenu: true,
         tex2jax: {
             inlineMath: [ ['$','$'], ['\\(','\\)'] ]
         }
     });
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script src="libs/jquery-3.6.1.min.js"></script>
+
+<!-- Подключаем библиотеку Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 <?php
 $link->close();

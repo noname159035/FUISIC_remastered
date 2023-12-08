@@ -19,7 +19,7 @@ $user = $result->fetch_assoc();
 
 if ($user) {
   setcookie('user', $user['Код пользователя'], time() + 3600, "/");
-  header('location: /index_new.php');
+  header('location: /index.php');
 } else {
   header('Location: /Validation-form/login-form.php?error=account-doesnt_exists');
   exit();

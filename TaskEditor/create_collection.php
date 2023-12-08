@@ -9,7 +9,7 @@ $class = $_POST['class'];
 
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
-    header("Location: /Validation-form/login-form.php");
+    header("Location: /login/");
     exit;
 }
 

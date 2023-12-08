@@ -1,74 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
     <head>
         <meta charset="UTF-8"/>
-        <!-- Иконки -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png"/>
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png"/>
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png"/>
-        <link rel="manifest" href="/favicons/site.webmanifest"/>
-        <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
-        <link rel="stylesheet" href="style/index_style.css" />
         <meta name="msapplication-TileColor" content="#2b5797"/>
-        <meta
-        name="theme-color" content="#ffffff"/>
-        <!--    <script src="main.js"></script>-->
-        <title>FUISIC</title>
+
+        <!-- Иконки -->
+        <link rel="apple-touch-icon" sizes="180x180" href="style/favicons/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="style/favicons/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="style/favicons/favicon-16x16.png"/>
+        <link rel="manifest" href="style/favicons/site.webmanifest"/>
+        <link rel="mask-icon" href="style/favicons/safari-pinned-tab.svg" color="#5bbads5"/>
+
+        <!-- Стили -->
+        <link rel="stylesheet" href="style/index_new_style.css" />
         <!-- Шрифты -->
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+
+        <title>FUISIC</title>
+
     </head>
-    <body>
-        <div id="conteiner">
+    <body class="d-flex flex-column">
+        <div class="container_1">
 
-            <div class="header">
-                <a href="index.php" class="header-text main_txt">Главная</a>
-                <a href="collections.php" class="header-text coll_txt">Подборки</a>
-                <a href="Tests.php" class="header-text test_txt">Тесты</a>
-                <a href="support.php" class="header-text help_txt">Помощь</a>
-                <?php
-                // Проверяем, авторизован ли пользователь
-                if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-                }
-                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
-                ?>
-                <a href="index_new.php" id="logo"></a>
+            <?php include 'inc/header.php';?>
 
+            <div>
+                <img src="style/img/bbl.svg" alt="" class="areas">
+
+                <div class="areas_container">
+                    <div class="fuisic_areas text">FUISIC</div>
+                    <p class="fuisic_areas areas_top_text text">Тренажер по запоминанию формул</p>
+                    <p class="fuisic_areas areas_bottom_text text">физики и математики</p>
+                </div>
+            </div>
+            <br>
+
+            <div>
+                <img src="style/img/three_bubbles.svg" alt="" class="three_bubbles">
+                <div class="bubble_cont">
+                    <p class="text bubble_text">Мы не только помогаем запоминать самые</p>
+                    <p class="text bubble_text">сложные законы с помощью особых</p>
+                    <p class="text bubble_text">алгоритмов, но и даем подробное</p>
+                    <p class="text bubble_text">объяснение</p>
+                </div>
             </div>
 
-            <div id="back_img_1"></div>
-            <div id="triangle">
-                <p id="trang_heading">FUISIC</p>
-                <p id="trang_text">ТРЕНАЖЕР ДЛЯ ЗАПОМИНАНИЯ</p>
-                <p id="trang_text">ФОРМУЛ ПО ФИЗИКЕ И МАТЕМАТИКЕ</p>
+            <div class="separator"></div>
+
+            <div class="block_image_and_text1">
+                <div class="image_block">
+                    <img src="style/img/image_1.svg" alt="" id="image">
+                </div>
+                <div class='text_cont1'>
+                    <h1 class="text image_block_h">КАК РАБОТАЕТ FUISIC?</h1>
+                    <p class="image_block_text text image_text_1">Алгоритм, используемый Quizlet</p>
+                    <p class="image_block_text text image_text_2">для запоминания карточек, - это</p>
+                    <p class="image_block_text text image_text_3">алгоритм интервального</p>
+                    <p class="image_block_text text image_text_4">повторения.</p>
+                </div>
             </div>
-            <div id="conteiner_background_img"></div>
-            <div id="top_info_block">
-                <p id="top_info_toptext" class="top_info_text">
-                    Мы не только помогаем запоминать самые сложные законы с помощью особых
-                                                  алгоритмов, но и даем подробное объяснение
-                </p>
-                <p id="top_info_bottomtext" class="top_info_text">
-                    Выберите предмет, формулы (законы) которого хотите изучить
-                </p>
+            
+            <div class="block_image_and_text2">
+                <div class='text_cont2'>
+                    <h1 class="text image_block_h_2" id='image_block_h_2'>ПОЧЕМУ ТАК УДОБНЕЕ</h1>
+                    <p class="image_block_text_2 text image_text_2_1">Идея интервального повторения в </p>
+                    <p class="image_block_text_2 text image_text_2_2">том, чтобы представлять  информацию</p>
+                    <p class="image_block_text_2 text image_text_2_3">через интервальные промежутки</p>
+                    <p class="image_block_text_2 text image_text_2_4">времени для более долгосрочного</p>
+                    <p class="image_block_text_2 text image_text_2_5">запоминания этой информации.</p>
+                </div>
+                <div class="image_block_2">
+                    <img src="style/img/image_2.svg" alt="" id="image_2">
+                </div>
             </div>
-            <div class="menu_button" id="menu_physics">
-                <h1 class="button_name" id="phys_name">ФИЗИКА</h1>
+
+            <div class="separator"></div>
+
+            <div class="benefits">
+                <h1 class="benefit_h">ЧТО ВЫ ПОЛУЧИТЕ?</h1>
+                <img src="style/img/benefits.svg" alt="" style="margin-top: 4vw; width: 50vw;">
+                <div class="subjects">
+                    <img src="/style/img/Math.svg" alt="" style="width: 25vw">
+                    <img src="/style/img/Phys.svg" alt="" style="width: 25vw">
+                </div>
             </div>
-            <div class="menu_button" id="menu_math">
-                <h1 class="button_name" id="math_name">МАТЕМАТИКА</h1>
+
+            <div class="separator"></div>
+
+            <div style="align-items: center">
+                <div style="margin-right: 30vw; margin-left: 30vw; padding-top: 2vw">
+                    <h1 class="benefit_h text_center">СДЕЛАЙТЕ ОБУЧЕНИЕ ПРОСТЫМ И УДОБНЫМ ВМЕСТЕ С НАМИ</h1>
+                </div>
+
+                <button class="registration_btn" onclick="window.location.href='/register/'">Зарегистрироваться</button>
+
+                <img src="style/img/three_actions.svg" alt="" class="actions">
             </div>
-            <div id="bottom_info_block">
-                <p id="bottom_info_toptext" class="top_info_text">
-                    Подборки всех необходимых формул в рамках школьных программ
-                                                  “Математики” и “Физики”
-                </p>
-            </div>
-            <a href="index_new.php">asdasd</a>
+
+            <?php include 'inc/footer.php';?>
 
         </div>
-        <script src="scrypts/index_scrypt.js"></script>
     </body>
+
+    <script src="libs/jquery-3.6.1.min.js"></script>
 </html>

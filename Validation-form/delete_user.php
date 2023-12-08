@@ -1,6 +1,6 @@
 <?php
 if (!isset($_COOKIE['user'])) {
-    header('Location: /validation-form/login-form.php');
+    header('Location: /login/');
     exit();
 }
 
@@ -17,7 +17,7 @@ $user = mysqli_fetch_assoc($result);
 // Обработка удаления пользователя
 if (isset($_POST['confirm_delete'])) {
     $mysql->query("DELETE FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
-    header('Location: Users.php');
+    header('Location: /users/');
     exit();
 }
 ?>
@@ -29,25 +29,22 @@ if (isset($_POST['confirm_delete'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Пользователи</title>
-    <link rel="stylesheet" href="/style/background_style.css">
 </head>
-<body>
-<div class="background">
+<body class="bg-light">
 
-    <?php include '../header.php'?>
+<?php include '../inc/header.php' ?>
 
-    <div class="container">
-        <h1>Удаление пользователя</h1>
-        <p>Вы действительно хотите удалить пользователя <?php echo $user['Имя']. ' ' . $user['Фамилия']?>?</p>
-        <form method="post">
-            <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
-            <button type="submit" name="confirm_delete" class="btn btn-danger">Удалить</button>
-            <a href="/Validation-form/Users.php" class="btn btn-secondary">Отменить</a>
-        </form>
-    </div>
-
-    <?php include '../footer.php'?>
-
+<div class="container">
+    <h1>Удаление пользователя</h1>
+    <p>Вы действительно хотите удалить пользователя <?php echo $user['Имя']. ' ' . $user['Фамилия']?>?</p>
+    <form method="post">
+        <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+        <button type="submit" name="confirm_delete" class="btn btn-danger">Удалить</button>
+        <a href="/users/" class="btn btn-secondary">Отменить</a>
+    </form>
 </div>
+
+<?php include '../inc/footer.php' ?>
+
 </body>
 </html>

@@ -1,33 +1,22 @@
-<! DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>Регистрация</title>
-    <link rel="stylesheet" href="/style/background_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-    <style>
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-    </style>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="bg-light d-flex flex-column h-100">
 
-<div class="background">
+<?php include '../inc/header.php' ?>
 
-    <?php include '../header.php'?>
-
-    <div class="container-md mx-auto mt-6">
-        <?php
-        if (!isset($_COOKIE['user'])):
+<div class="container col-3 justify-content-center">
+    <div class="card mt-5">
+        <div class="m-3">
+            <?php
+            if (!isset($_COOKIE['user'])):
 
             if (isset($_GET['error'])) {
                 $error = $_GET['error'];
@@ -36,79 +25,87 @@
                 }
             }
             ?>
-            <h1>Регистрация</h1>
-            <form action="/Validation-form/check.php" method="post">
-
-                <!-- E-mail -->
-                <div class="form-group">
-                    <label for="login">E-mail:</label>
-                    <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
-                    <div class="invalid-feedback" id="email-error"></div>
-                </div>
-
-                <!-- Password -->
-                <div class="form-group">
-                    <label for="pass">Пароль:</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
-                                <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
-                            </button>
-                        </div>
-
+                <h1 class="text-center">Регистрация</h1>
+                <form action="/Validation-form/check.php" method="post">
+                    <!-- First and Last name -->
+                    <div class="form-group">
+                        <label for="name">Имя:</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
                         <div class="invalid-feedback"></div>
                     </div>
-                </div>
 
-                <!-- Confirm Password -->
-                <div class="form-group">
-                    <label for="confirm_password">Повторите пароль:</label>
-                    <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Повторите пароль" required>
-                    <div class="invalid-feedback"></div>
-                </div>
+                    <div class="form-group">
+                        <label for="second_name">Фамилия:</label>
+                        <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
 
+                    <!-- E-mail -->
+                    <div class="form-group">
+                        <label for="login">E-mail:</label>
+                        <input type="email" class="form-control" name="login" id="login" placeholder="Введите адрес электронной почты" required>
+                        <div class="invalid-feedback" id="email-error"></div>
+                    </div>
 
-                <!-- First and Last name -->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <label for="name">Имя:</label>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Введите имя" required>
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="col">
-                            <label for="second_name">Фамилия:</label>
-                            <input type="text" class="form-control" name="second_name" id="second_name" placeholder="Введите фамилию" required>
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="pass">Пароль:</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
+                                    <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
+                                </button>
+                            </div>
                             <div class="invalid-feedback"></div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Date of birth -->
-                <div class="form-group">
-                    <label for="birth_day">Дата рождения:</label>
-                    <input type="text" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения в формате ДД.ММ.ГГГГ" required>
-                    <div class="invalid-feedback"></div>
-                </div>
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm_password">Повторите пароль:</label>
+                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Повторите пароль" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
 
-                <div class="buttons" style="margin-top: 24px">
-                    <button class="btn btn-primary" type="submit" disabled>Зарегистрировать</button>
+                    <!-- Date of birth -->
+                    <div class="form-group">
+                        <label for="birth_day">Дата рождения:</label>
+                        <input type="text" class="form-control" name="birth_day" id="birth_day" placeholder="Введите дату рождения в формате ДД.ММ.ГГГГ" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
 
-                    <a href="login-form.php" class="header-text auth_txt">Уже есть аккаунт?</a>
-                    <a href="/index_new.php" class="header-text auth_txt">Отмена</a>
-                </div>
-            </form>
+                    <button class="btn btn-primary w-100 mt-4" type="submit" disabled>Зарегистрировать</button>
 
-        <?php else: ?>
-            <?php header('Location: /validation-form/profile.php') ?>
-        <?php endif;?>
+                    <div class="text-center mt-4">
+                        <p>Уже есть аккаунт? <a href="/login/" class="text-decoration-none">Войти</a></p>
+
+                        <p>Или войти при помощи:</p>
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="fab fa-vk"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="fab fa-telegram"></i>
+                        </button>
+
+                        <button type="button" class="btn btn-link btn-floating mx-1">
+                            <i class="fab fa-yandex"></i>
+                        </button>
+                    </div>
+
+                    <div class="mt-3 d-flex justify-content-center">
+                        <a href="/" class="btn btn-outline-danger">Отмена</a>
+                    </div>
+                </form>
+            <?php else: ?>
+                <?php header('Location: /profile/') ?>
+            <?php endif;?>
+        </div>
     </div>
-
-    <?php include '../footer.php'?>
-
 </div>
+
+<?php include '../inc/footer.php' ?>
 
 <script src="/libs/jquery-3.6.1.min.js"></script>
 <script src="/libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
@@ -120,32 +117,6 @@
         dateFormat: "d.m.Y",
         maxDate: "today",
         minDate: "01.01.1900",
-    });
-
-    $('form').on('submit', function(event) {
-        event.preventDefault(); // Отменяем отправку формы
-
-        const login = $('input[name="login"]').val();
-
-        $.ajax({
-            url: '/Validation-form/check.php',
-            type: 'POST',
-            data: { login: login },
-            success: function(response) {
-                const $submitButton = $('button[type="submit"]');
-
-                if (response === 'true') {
-                    $('#email-error').text('Такой e-mail уже существует');
-                    $submitButton.prop('disabled', true);
-                } else if (response === 'false') {
-                    $('#email-error').text('Введите корректный e-mail');
-                    $submitButton.prop('disabled', true);
-                } else {
-                    $('#email-error').text('');
-                    $submitButton.prop('disabled', false);
-                }
-            }
-        });
     });
 
     $('input[name="login"]').on('input', function() {
@@ -210,7 +181,7 @@
     $('input[name="name"], input[name="second_name"]').on('input', function() {
         const form = $(this).closest('form')[0];
         const name = $(this).val();
-        const nameRegex = /^[A-Я][а-я]*$/; // Изменяем регулярное выражение, чтобы разрешить только кириллицу
+        const nameRegex = /^[A-Я][а-яё]*$/; // Изменяем регулярное выражение, чтобы разрешить только кириллицу
         if (name.length !== 0 ) {
             if (!nameRegex.test(name)) {
                 $(this).addClass('is-invalid');

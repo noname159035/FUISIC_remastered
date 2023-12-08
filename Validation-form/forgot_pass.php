@@ -1,27 +1,22 @@
-<! DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
     <title>Восстановление пароля</title>
-    <link rel="stylesheet" href="/style/background_style.css">
 </head>
-<body>
+<body class="bg-light d-flex flex-column h-100">
 
-<div class="background">
+<?php include '../inc/header.php' ?>
 
-    <?php include '../header.php'?>
+<div class="container">
+    <h1>Данная страница еще не готова, наберитесь терпения!</h1>
 
-    <div class="container">
-        <h1>Данная страница еще не готова, наберитесь терпения!</h1>
-
-        <a href="login-form.php" class="header-text auth_txt">Вернуться</a>
-    </div>
-
-    <?php include '../footer.php'?>
-
+    <a href="/login/" class="header-text auth_txt">Вернуться</a>
 </div>
+
+<?php include '../inc/footer.php' ?>
 
 </body>
 </html>

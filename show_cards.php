@@ -1,214 +1,291 @@
+<?php
+// Подключение к базе данных
+$link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+
+if ($link->connect_error) {
+    die("Connection failed: " . $link->connect_error);
+}
+
+$query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
+$stmt = $link->prepare($query);
+$stmt->bind_param('s', $_GET['id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$idName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
+
+if (isset($_COOKIE['user'])) {
+    $userId = $_COOKIE['user'];
+}
+
+$Id = $_GET['id'];
+$time = date("Y-m-d H:i:s");
+
+if (isset($_POST['finish'])) {
+    if (isset($_COOKIE['user'])) {
+        // Код для записи данных в таблицу "История"
+        $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
+        $stmt = $link->prepare($query);
+        $stmt->bind_param('sss', $userId, $time, $Id);
+        $stmt->execute();
+    }
+    // Перенаправление на страницу example.php с передачей данных в POST-запросе
+    header("Location: /collections/");
+    exit();
+}
+
+// Подключение к базе данных
+$query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
+$stmt = $link->prepare($query);
+$stmt->bind_param('s', $Id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Код для вывода карточек
+if (isset($Id) && $Id != 0) {
+
+// Создание массива всех карточек
+    $cardsArr = [];
+    while ($row = $result->fetch_assoc()) {
+        $card = [
+            'formula' => $row['Формула'],
+            'description' => $row['Описание'],
+            'explanation'=> $row['Пояснение']
+        ];
+        $cardsArr[] = $card;
+    }
+
+// Проверка на наличие карточек
+    if (count($cardsArr) > 0) {
+
+// Определение текущей карточки
+        $currentCard = 0;
+        if (isset($_GET['card']) && $_GET['card'] >= 0 && $_GET['card'] < count($cardsArr)) {
+            $currentCard = $_GET['card'];
+        }
+
+// Вывод текущей карточки
+        $card = $cardsArr[$currentCard];
+    } else {
+        header('Location: /collections/');
+        exit();
+    }
+
+} else {
+    header('Location: /collections/');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-100">
 <head>
     <title>Карточки</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/cards_style.css">
-    <link rel="stylesheet" href="style/background_style.css">
 
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css" integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css"
+          integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA=="
+          crossorigin="anonymous"
+    />
+    <style>
+        #card_cont {
+            min-height: 300px;
+            transition: transform 0.5s;
+        }
 
+        .front {
+            transform: rotateY(0deg);
+        }
+
+        .back {
+            transform: rotateY(180deg);
+        }
+
+        .flipped {
+            transform: rotateY(180deg);
+        }
+
+    </style>
 </head>
 
+<body class="bg-light d-flex flex-column h-100">
 
-<body>
-<div class="background">
+<?php include("inc/header.php"); ?>
 
-    <?php include("header.php"); ?>
+<div class="container">
+    <h2 class="text-center mb-xl-5" id="cardsName"></h2>
 
-    <div id="container">
-
-
-        <?php
-        // Подключение к базе данных
-        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-        $query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
-        $stmt = $link->prepare($query);
-        $stmt->bind_param('s', $_GET['podbor']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
-        ?>
-        <h1 class="podbor_name">Подборка: <?php echo $podborName ?></h1>
-        <div class="container_1">
-            <?php
-
-            // Подключение к базе данных
-            $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-            $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
-            $stmt = $link->prepare($query);
-            $stmt->bind_param('s', $_GET['podbor']);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if (isset($_COOKIE['user'])) {
-                $userId = $_COOKIE['user'];
-            }
-
-            $podborId = $_GET['podbor'];
-            $time = date("Y-m-d H:i:s");
-
-            if (isset($_POST['finish'])) {
-                if (isset($_COOKIE['user'])) {
-                    // Код для записи данных в таблицу "История"
-                    $query = "INSERT INTO История (Пользователь, `Дата прохождения задания`, Подборка) VALUES (?, ?, ?)";
-                    $stmt = $link->prepare($query);
-                    $stmt->bind_param('sss', $userId, $time, $podborId);
-                    $stmt->execute();
-                    if (!$stmt) {
-                        echo "Error: " . mysqli_error($link);
-                    }
-                }
-                // Перенаправление на страницу example.php с передачей данных в POST-запросе
-                header("Location: collections_new.php");
-                exit();
-            } else {
-                // Код для вывода карточек
-                if (isset($_GET['podbor']) && $_GET['podbor'] != 0) {
-
-                    if ($link->connect_error) {
-                        die("Connection failed: " . $link->connect_error);
-                    }
-
-                    // Подготовка запроса
-
-
-                    // Создание массива всех карточек
-                    $cardsArr = [];
-                    while ($row = $result->fetch_assoc()) {
-                        $card = [
-                            'formula' => $row['Формула'],
-                            'description' => $row['Описание'],
-                            'explanation'=> $row['Пояснение']
-                        ];
-                        array_push($cardsArr, $card);
-                    }
-
-                    // Проверка на наличие карточек
-                    if (count($cardsArr) > 0) {
-                        // Определение текущей карточки
-                        $currentCard = 0;
-                        if (isset($_GET['card']) && $_GET['card'] >= 0 && $_GET['card'] < count($cardsArr)) {
-                            $currentCard = $_GET['card'];
-                        }
-
-                        // Вывод текущей карточки
-                        $card = $cardsArr[$currentCard];
-                        echo "<div class='card'>";
-                        echo "<div class='card-front'>";
-                        echo "<h3><div class='mathjax-latex'>" . $card['formula'] . "</div></h3>";
-                        echo "</div>";
-                        echo "<div class='card-back'>";
-                        echo "<p>" . $card['description'] . "</p>";
-                        echo "</div>";
-                        echo "</div>";
-
-                        // Кнопки переключения карточек
-                        echo "<div class='buttons'>";
-
-                        if ($currentCard > 0) {
-                            $prevCard = $currentCard - 1;
-                            echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-                        }
-                        if ($currentCard < count($cardsArr) - 1) {
-                            $nextCard = $currentCard + 1;
-                            echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
-
-                        }
-
-                        echo "</div>";
-
-                        // Скрипт для переворота карточки при клике на нее
-                        echo "<script>
-                    var card = document.querySelector('.card');
-                    card.addEventListener('click', function() {
-                        card.classList.toggle('is-flipped');
-                    });
-                    </script>";
-                    } else {
-                        header('Location: /collections_new.php');
-                        exit();
-                    }
-
-                } else {
-                    header('Location: /collections_new.php');
-                    exit();
-                }
-            }
-            ?>
-            <form method="POST" action="/show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>">
-
-                <!-- Счетчик карточек и кнопка "Finish" -->
-                <div class="buttons" id="counter">
-                    <div>
-                        <!-- <div class="counter"> -->
-                        <?php
-                        // Вывод счетчика всех карточек и текущей
-                        echo "<p>Карточка " . ($currentCard + 1) . " из " . count($cardsArr) . "</p>";
-                        ?>
-                        <!-- </div>     -->
-                    </div>
-                </div>
-                <button type="submit" name="finish" class="button buttons finish-button">Закончить</button>
-                <button id="button_tren" class="button buttons training-button" type="button">Тренажер</button>
-                <button id="button_exp" class="button buttons exp-button" type="button" onclick="showExplanation()"></button>
-            </form>
-        </div>
-    </div>
-
-    <div id="explanation" style="display:none;">
-        <?php echo "<h2>Пояснение</h2>" . $card['explanation']?>
-        <button onclick="hideExplanation()">Понятно</button>
-    </div>
-
-    <?php include("footer.php"); ?>
-
+    <div id="cards"></div>
 </div>
 
-<script>
-    function showExplanation() {
-        document.getElementById("explanation").style.display = "block";
-    }
+<!-- Подключение модального окна -->
+<div class="modal fade" id="explanationModal" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="explanationModalLabel">Пояснение</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Пояснение</h2>
+                <div id="explanationText"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    function hideExplanation() {
-        document.getElementById("explanation").style.display = "none";
-    }
-    function showExplanation() {
-        var explanation = document.getElementById('explanation');
-        if (explanation.style.display === 'none') {
-            explanation.style.display = 'block';
-            explanation.scrollIntoView();
-        } else {
-            explanation.style.display = 'none';
-        }
-    }
-</script>
-<!-- Подключаем скрипт библиотеки MathQuill -->
-<!-- Подключаем скрипт библиотеки MathJax -->
+<?php include("inc/footer.php"); ?>
+
+<!-- Подключение скриптов -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-<!-- Инициализируем MathJax -->
-<script type="text/javascript">
-    MathJax.Hub.Config({
-        showMathMenu: false,
-        tex2jax: {
-            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+<script>
+    let url = window.location.href;
+    let id = url.split('/').pop();
+
+    $.ajax({
+        url: '/collections/get_cards/' + id,
+        type: 'post',
+        dataType: 'json',
+        success: function(data) {
+            // Обработка полученных данных
+            let currentCardIndex = 0;
+            let cards = data;
+            let cardsName = cards[0].id;
+            let cardCount = cards.length;
+            let cardsNameContainer = $('#cardsName');
+            let cardContainer = $('#cards');
+            let explanationContainer = $('#explanationText');
+            let cardTemplate = '' +
+                '<div class="row mb-3">' +
+                    '<div class="btn-group">' +
+                        '<a  href="/collections/training/" class="btn btn-outline-primary">Тренажер</a>' +
+                        '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
+                        '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
+                        '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                    '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 prev-card"><h1>←</h1></a>' +
+                    '</div>' +
+                    '<div class="col">' +
+                        '<div class="card border-primary align-items-center justify-content-center" id="card_cont">' +
+                            '<div class="front">' +
+                                '<h2>{formula}</h2>' +
+                            '</div>' +
+                            '<div class="back visually-hidden">' +
+                                '<h3>{description}</h3>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 next-card" id="btn-card"><h1>→</h1></a>' +
+                    '</div>' +
+                '</div>'
+            ;
+
+            let explanationTemplate = '<p>{explanationText}</p>';
+
+            let cardsNameTemplate = '<p>'+cardsName+'</p>';
+
+            cardsNameContainer.html(cardsNameTemplate);
+
+            function showCard(index) {
+                let card = cards[index];
+                let formula = card.formula;
+                let description = card.description;
+
+                let nav = '<ul class="pagination justify-content-center mt-3">';
+                for (let i = 0; i < cardCount; i++) {
+                    nav += '<li class="page-item' + (i === currentCardIndex? ' active' : '') + '"><a class="page-link" href="#" data-index="' + i + '">' + (i+1) + '</a></li>';
+                }
+                nav += '</ul>';
+
+                let html = cardTemplate.replace('{formula}', formula).replace('{description}', description).replace('{CardIndex}', index+1).replace('{CardCount}', cards.length);
+                cardContainer.html(html);
+                cardContainer.append(nav);
+
+                let card_class = document.querySelector('#card_cont');
+                let front = document.querySelector('.front');
+                let back = document.querySelector('.back');
+
+                cardContainer.on('click', '.card', function() {
+                    card_class.classList.toggle('flipped');
+                    front.classList.toggle('visually-hidden');
+                    back.classList.toggle('visually-hidden');
+                });
+
+
+                // Отображение формулы в нужном виде
+                MathJax.Hub.Config({
+                    showMathMenu: false,
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
+            }
+
+            function showPrevCard() {
+                currentCardIndex--;
+                if (currentCardIndex < 0) {
+                    currentCardIndex = cardCount - 1;
+                }
+                showCard(currentCardIndex);
+            }
+
+            function showNextCard() {
+                currentCardIndex++;
+                if (currentCardIndex >= cardCount) {
+                    currentCardIndex = 0;
+                }
+                showCard(currentCardIndex);
+            }
+            function prepareExplanation(index){
+
+                let card = cards[index];
+                let explanation = card.explanation;
+
+                let html = explanationTemplate.replace('{explanationText}', explanation);
+                explanationContainer.html(html);
+
+            }
+            function showExplanation(){
+                prepareExplanation(currentCardIndex);
+            }
+
+            showCard(currentCardIndex);
+
+            cardContainer.on('click', '.page-link', function(event) {
+                event.preventDefault();
+                let index = $(this).data('index');
+                currentCardIndex = index;
+                showCard(index);
+            });
+
+            cardContainer.on('click', '.prev-card', showPrevCard);
+            cardContainer.on('click', '.next-card', showNextCard);
+            cardContainer.on('click', '.exp-btn', showExplanation)
+
+        },
+        error: function(xhr, status, error) {
+            // Вывод ошибки в консоль
+            console.log('Error:', error);
         }
     });
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
-<script>
-    document.getElementById("button_tren").addEventListener('click', function (event){
-        window.location.href = "traning.php<?php echo"?podbor=" . $_GET['podbor']?>";
-    });
-</script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="scrypts/cards_scrypt.js"></script>
 </body>
 <?php
 $link->close();

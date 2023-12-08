@@ -1,58 +1,112 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>База данных</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style/index_style.css" />
-        <link rel="stylesheet" href="style/collections_style.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <a href="index.php" class="header-text main_txt">Главная</a>
-                <a href="collections.php" class="header-text coll_txt">Подборки</a>
-                <a href="Tests.php" class="header-text test_txt">Тесты</a>
-                <a href="support.php" class="header-text help_txt">Помощь</a>
-                <?php
-                // Проверяем, авторизован ли пользователь
-                if (!isset($_COOKIE['user'])) {
-                    echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>войти</a>");
-                }
-                else echo ("<a href='validation-form/login-form.php' class='header-text auth_txt'>Профиль</a>");
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content=" ie=edge">
+    <title>Задания</title>
+</head>
+<body class="bg-light d-flex flex-column h-100">
+
+<?php include 'inc/header.php';?>
+
+<!--<div class="container">-->
+<!--    <div class="filter_container">-->
+<!--        <div style="display: flex; height: 100%; justify-content: space-evenly;">-->
+<!--            <div><p style="margin-top: 5%">Математика</p></div>-->
+<!--            <div><p style="margin-top: 5%">7Класс</p></div>-->
+<!--            <div><p style="margin-top: 5%">Давление</p></div>-->
+<!--            <div><p style="margin-top: 5%">Тип</p></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="album py-5">
+    <?php
+    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+    $query = "SELECT * FROM Разделы";
+    $result = mysqli_query($link, $query);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+
+    $query2 = "SELECT * FROM Подборки WHERE Раздел = '{$row['Код Раздела']}'";
+    $result2 = mysqli_query($link, $query2);
+    ?>
+    <div class="container">
+        <h2 class="mt-3"><?php echo $row['Название'];?></h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-1">
+            <?php
+            while ($row2 = mysqli_fetch_assoc($result2)) {
+                $query3 = "SELECT COUNT(*) FROM Карточка WHERE Подборка = '{$row2['Код подборки']}'";
+                $result3 = mysqli_query($link, $query3);
+                $row_count_cards = mysqli_fetch_assoc($result3)['COUNT(*)'];
+                $row_time_cards = round($row_count_cards*1.2);
                 ?>
-                <a href="index.php" id="logo"></a>
-
-            </div>
-            <form method="GET" action="show_cards.php">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" alt="" src="/style/img/F_2.svg">
+                        <div class="card-body">
+                            <h3><?php echo $row2['Название'];?></h3>
+                            <p class="card-text"><?php echo $row['Название'];?></p>
+                            <p class="card-text">Тип: Карточки</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-outline-primary" href="cards/<?php echo $row2['Код подборки'];?>">Начать</a>
+                                </div>
+                                <small class="text-muted"><?php echo $row_time_cards;?> минут(ы)</small>
+                                <small class="text-muted"><?php echo $row_count_cards;?> формул(ы)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <?php
-                $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-                $query = "SELECT * FROM Разделы";
-                $result = mysqli_query($link, $query);
+            }
+            mysqli_free_result($result2);
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<p class="name_of_collections">' . $row['Название'] . '</p>';
+            $query2 = "SELECT * FROM Тесты WHERE Раздел = '{$row['Код Раздела']}'";
+            $result2 = mysqli_query($link, $query2);
 
-                    $query2 = "SELECT * FROM Подборки WHERE Раздел = '{$row['Код Раздела']}'";
-                    $result2 = mysqli_query($link, $query2);
-
-                    // echo '<div class="btn-group-horizontal mt-2" role="group">';
-                    echo '<div class="btn-group-horizontal mt-2" id="conteiner_mt" role="group">';
-
-
-                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                        echo '<a class="coll_block ph start_ph p_ph" id="coll_block_text" href="show_cards.php?podbor=' . $row2['Код подборки'] . '">' . $row2['Название'] . '</a>';
-                    }
-
-                    echo '</div>';
-
-                    mysqli_free_result($result2);
-                }
-
-                mysqli_free_result($result);
-                mysqli_close($link);
+            while ($row2 = mysqli_fetch_assoc($result2)) {
+                $query3 = "SELECT COUNT(*) FROM Задачи WHERE Тест = '{$row2['Код_Теста']}'";
+                $result3 = mysqli_query($link, $query3);
+                $row_count_cards = mysqli_fetch_assoc($result3)['COUNT(*)'];
+                $row_time_cards = round($row_count_cards*1.2);
                 ?>
-            </form>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" alt="" src="/style/img/F_2.svg">
+                        <div class="card-body">
+                            <h3><?php echo $row2['Название'];?></h3>
+                            <p class="card-text"><?php echo $row['Название'];?></p>
+                            <p class="card-text">Тип: Тест</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a class="btn btn-outline-primary" href="test/<?php echo $row2['Код_Теста'];?>">Начать</a>
+                                </div>
+                                <small class="text-muted"><?php echo $row_time_cards;?> минут(ы)</small>
+                                <small class="text-muted"><?php echo $row_count_cards;?> задач(и)</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            echo '</div>';
+            mysqli_free_result($result2);
+            ?>
         </div>
-        <script src="jquery-3.6.1.min.js"></script>
-    </body>
+        <?php
+        }
+        mysqli_free_result($result);
+        mysqli_close($link);
+        ?>
+    </div>
+</div>
+
+<?php include 'inc/footer.php';?>
+
+<script src="libs/jquery-3.6.1.min.js"></script>
+<script src="libs/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
+
+</body>
 </html>

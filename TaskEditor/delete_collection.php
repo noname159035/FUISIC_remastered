@@ -20,7 +20,7 @@ if (!$link) {
 
 // Проверяем, авторизован ли пользователь
 if (!isset($_COOKIE['user'])) {
-    header("Location: /Validation-form/login-form.php");
+    header("Location: /login");
     exit;
 }
 
@@ -39,6 +39,6 @@ $query = "DELETE FROM Подборки WHERE `Код подборки`=$collecti
 mysqli_query($link, $query);
 
 // Возвращаемся на страницу со списком подборок
-header("Location: /TaskEditor/my_base.php");
+header("Location: /my_base/");
 exit;
 ?>

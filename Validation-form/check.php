@@ -12,7 +12,7 @@ $result = $mysql->query("SELECT * FROM `Пользователи` WHERE `e-mail`
 if ($result->num_rows > 0) {
   // E-mail уже существует
   $mysql->close();
-  header('Location: /Validation-form/register-form.php?error=email-exists');
+  header('Location: /register/email-exists/');
   exit();
 }
 
@@ -34,4 +34,4 @@ setcookie('user', $user['Код пользователя'], time() + 3600, "/");
 $mysql->close();
 
 // Перенаправляем пользователя на страницу профиля
-header('Location: /validation-form/profile.php');
+header('Location: /profile/');

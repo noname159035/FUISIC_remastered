@@ -1,6 +1,6 @@
 <?php
 if (!isset($_COOKIE['user'])) {
-    header('Location: /validation-form/login-form.php');
+    header('Location: /login/');
     exit();
 }
 
@@ -28,26 +28,25 @@ if (isset($_POST['submit'])) {
     $mysql->query("UPDATE `Пользователи` SET `e-mail` = '$email', `Тип пользователя` = '$userType', `Имя` = '$name', `Фамилия` = '$surname', `Password` = '$password', `Дата рождения` = '$birthdate' WHERE `Код пользователя` = '$user_id'");
 
 // Перенаправление на страницу профиля пользователя
-    header('Location: /Validation-form/Users.php');
+    header('Location: /users/');
     exit();
 }
 ?>
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Пользователи</title>
-    <link rel="stylesheet" href="/style/background_style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
-<body>
-<div class="background">
 
-    <?php include '../header.php' ?>
+<body class="bg-light d-flex flex-column h-100">
+
+    <?php include '../inc/header.php' ?>
 
     <div class="container">
         <h1>Редактирование профиля</h1>
@@ -91,8 +90,8 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
 
-    <?php include '../footer.php' ?>
-</div>
+    <?php include '../inc/footer.php' ?>
+
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     // свойства календаря
@@ -103,5 +102,6 @@ if (isset($_POST['submit'])) {
         minDate: "01.01.1900",
     });
 </script>
+
 </body>
 </html>

@@ -1,9 +1,9 @@
 document.getElementById("main").addEventListener('click',function() {
-    window.location.href = "index_new.php";
+    window.location.href = "index.php";
 });
 
 document.getElementById("collections").addEventListener('click',function() {
-    window.location.href = "collections_new.php";
+    window.location.href = "collections.php";
 });
 
 document.getElementById("help").addEventListener('click', function () {

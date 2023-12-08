@@ -1,22 +1,6 @@
 $(document).ready(function() {
-    var currentCardIndex = 0;
-    var cards = $('.card');
-
-    // При клике на кнопку "Next"
-    $('.btn-next').click(function() {
-        if (currentCardIndex < cards.length - 1) {
-            currentCardIndex++;
-            showCard(currentCardIndex);
-        }
-    });
-
-    // При клике на кнопку "Previous"
-    $('.btn-previous').click(function() {
-        if (currentCardIndex > 0) {
-            currentCardIndex--;
-            showCard(currentCardIndex);
-        }
-    });
+    let currentCardIndex = 0;
+    const cards = $('.card');
 
     // При клике на карточку
     cards.click(function() {

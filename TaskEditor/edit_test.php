@@ -1,44 +1,43 @@
+<?php
+
+if (!isset($_COOKIE['user'])) {
+    header("Location: /Validation-form/login-form.php");
+    exit;
+}
+if (!isset($_GET['test'])) {
+    echo "<h1>Тест не выбран!</h1>";
+    exit();
+}
+$link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+$query = "SELECT Название FROM Тесты WHERE `Код_Теста` = ?";
+$stmt = $link->prepare($query);
+$stmt->bind_param('s', $_GET['test']);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows == 0) {
+    echo "<h1>Тест не найден!</h1>";
+    exit();
+}
+$testName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
     <title>Редактор тестов</title>
-    <link rel="stylesheet" href="/style/background_style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 </head>
-<body>
+<body class="bg-light d-flex flex-column h-100">
 
-<div class="background">
-    <?php include '../header.php';?>
+    <?php include '../inc/header.php';?>
 
     <div class="container">
-        <?php
 
-        if (!isset($_COOKIE['user'])) {
-            header("Location: /Validation-form/login-form.php");
-            exit;
-        }
-        if (!isset($_GET['test'])) {
-            echo "<h1>Тест не выбран!</h1>";
-            exit();
-        }
-        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-        $query = "SELECT Название FROM Тесты WHERE `Код_Теста` = ?";
-        $stmt = $link->prepare($query);
-        $stmt->bind_param('s', $_GET['test']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        if ($result->num_rows == 0) {
-            echo "<h1>Тест не найден!</h1>";
-            exit();
-        }
-        $testName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
-        ?>
         <h1 class="test_name">Тест: <?php echo $testName ?></h1>
 
         <?php
-
         // Получение заданий из базы данных
         $query = "SELECT Код_задачи, Задача, Ответ, Решение FROM Задачи WHERE `Тест` = ? ORDER BY `Код_задачи` ASC";
         $stmt = $link->prepare($query);
@@ -131,8 +130,7 @@
             <a href='/TaskEditor/my_base.php' class='btn btn-secondary mt-3'>Закончить</a>
         </div>
     </div>
-    <?php include '../footer.php';?>
-</div>
+    <?php include '../inc/footer.php';?>
 
 </body>
 <script>

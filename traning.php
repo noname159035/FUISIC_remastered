@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title>Карточки</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/cards_style.css">
-    <link rel="stylesheet" href="style/background_style.css">
     <link rel="stylesheet" href="style/keyboardcommon2.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 
@@ -14,12 +11,9 @@
     <link rel="stylesheet" href="/libs/mathquill-0.10.1/mathquill.css" />
 
 </head>
+<body class="bg-light d-flex flex-column h-100">
 
-
-<body>
-<div class="background">
-
-    <?php include 'header.php'?>
+    <?php include 'inc/header.php' ?>
 
     <?php
     // Подключение к базе данных
@@ -57,7 +51,7 @@
                 echo "Error: " . mysqli_error($link);
             }
             // Перенаправление на страницу example.php с передачей данных в POST-запросе
-            header("Location: collections_new.php");
+            header("Location: collections.php");
             exit();
 
         } else {
@@ -128,7 +122,7 @@
                     });
                     </script>";
                 } else {
-                    header('Location: /collections_new.php');
+                    header('Location: /collections.php');
                     exit();
                 }
 
@@ -537,9 +531,7 @@
         </div>
     </div>
 
-    <?php include 'footer.php'?>
-
-</div>
+    <?php include 'inc/footer.php' ?>
 
 <!-- Подключаем скрипт библиотеки MathQuill -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
