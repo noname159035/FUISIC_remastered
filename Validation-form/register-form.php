@@ -50,15 +50,13 @@
                     <!-- Password -->
                     <div class="form-group">
                         <label for="pass">Пароль:</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Придумайте пароль" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()" style="border-top-left-radius: 0; border-bottom-left-radius: 0; padding-top: 10px !important; padding-bottom: 10px !important;">
+                            <div class="input-group has-validation">
+                                <input type="password" class="form-control " name="pass" id="pass" placeholder="Придумайте пароль" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePasswordVisibility()">
                                     <i class="bi bi-eye-slash" id="password-toggle-icon"></i>
                                 </button>
+                                <div class="invalid-feedback"></div>
                             </div>
-                            <div class="invalid-feedback"></div>
-                        </div>
                     </div>
 
                     <!-- Confirm Password -->
