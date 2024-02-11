@@ -9,17 +9,45 @@
 
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
     <link rel="stylesheet" href="/libs/mathquill-0.10.1/mathquill.css" />
-    <title>Клавиатура</title>
+    <title>Помощь</title>
 </head>
 <body class="bg-light d-flex flex-column h-100">
 <?php include 'inc/header.php' ?>
 
-<div class="container">
-    <div class="container row">
-        <span id="input_place" style="width: 500px; height: 300px; padding-top: 10%" class="col-md-8 mx-auto"></span>
+<div class="">
+    <div class="container pb-3" style="background-color: #F0F6FF; box-shadow: 0px 10px 16px 4px #0c507c80;">
+        <h1 class="text-center pt-3">Использование клавиатуры</h1>
+        <h5 class="text-center pt-1 text-primary">Данная страница является тестовой и лишь показывает функционал онлайн клавиатуры</h5>
+        <div class="row mt-3">
+            <div class="col">
+                <h5 class="text-center">Ручной ввод с клавиатуры</h5>
+                <p class="text-center">
+                    Формулу можно вводить с помощью клавиатуры пользователя. Для этого
+                    необходимо нажать по полю ввода и начать вводить символы с клавиатуры.
+                    Данный формат поддерживает математический ввод выражения, для того, чтобы
+                    ввести дробь достаточно нажать / на клавиатуре.
+                </p>
+            </div>
+            <div class="col">
+                <h5 class="text-center">Ввод с онлайн клавиатуры</h5>
+                <p class="text-center">
+                    Формулу можно вводить с помощью онлайн клавиатуры. Для этого нажмите
+                    левой кнопкой мыши на необходимую функцию или математический оператор
+                    на закрепленной клавиатуре ниже. Онлайн клавиатура имеет два режима - режим
+                    алфовита и режим математических операций.
+                </p>
+            </div>
+            <div class="col">
+                <h5 class="text-center">Ввод с помощью стинтаксиса Latex</h5>
+                <p class="text-center">
+                    Поле для ввода поддерживает ввод функции напрямую через синтексис
+                    библиотеки Latex. Для этого напишите заключите вашу формулу в знак "$"
+                </p>
+            </div>
+        </div>
     </div>
-
     <div id = "keyboard">
+            <span id="input_place" style="background-color: #F0F6FF;" class="w-100 p-3 mb-2"></span>
             <div id="keyboard_1">
                 <!--            <span id="input_place"></span>-->
                 <div id="conteiner_1">
@@ -56,7 +84,7 @@
                                 e
                             </button>
                         </div>
-                        <div class="line_2">
+                        <div class="line_1">
                             <button type="button" class="keyboard_button_2" id="color_xyzi" onClick='input("y")'>
                                 y
                             </button>
@@ -83,7 +111,7 @@
                             </button>
                             <button type="button" class="keyboard_button_2 novision" onClick='input("\\ln")'>ln</button>
                         </div>
-                        <div class="line_3">
+                        <div class="line_1">
                             <button type="button" class="keyboard_button_2" id="color_xyzi" onClick='input("z")'>
                                 z
                             </button>
@@ -118,7 +146,7 @@
                                 log
                             </button>
                         </div>
-                        <div class="line_4">
+                        <div class="line_1">
                             <button type="button" class="keyboard_button_2" id="color_xyzi" onClick='input("i")'>
                                 i
                             </button>
@@ -163,7 +191,7 @@
                                 <img src="/style/img/log.png" width="27" height="18">
                             </button>
                         </div>
-                        <div class="line_5">
+                        <div class="line_1">
                             <button type="button" id="btn2" class="keyboard_button_2">
                                 &#8635; abc
                             </button>
@@ -206,7 +234,7 @@
                 <!--                    <span id="input_place"></span>-->
                 <div id="conteiner_1">
                     <div class="lines_k1">
-                        <div class="line_1">
+                        <div class="line_2">
                             <button type="button" class="keyboard_button" onClick='input("\\alpha")'>
                                 &#945;
                             </button>
@@ -276,7 +304,7 @@
                                 &#921;
                             </button>
                         </div>
-                        <div class="line_3">
+                        <div class="line_2">
                             <button type="button" class="keyboard_button" onClick='input("\\Delta")'>
                                 &#916;
                             </button>
@@ -314,7 +342,7 @@
                                 h
                             </button>
                         </div>
-                        <div class="line_4">
+                        <div class="line_2">
                             <button type="button" class="keyboard_button" onClick='input("k")'>
                                 k
                             </button>
@@ -352,7 +380,7 @@
                                 x
                             </button>
                         </div>
-                        <div class="line_5">
+                        <div class="line_2">
                             <button type="button" id="btn" class="keyboard_button">
                                 &#8635; 123
                             </button>
@@ -392,46 +420,24 @@
             </div>
         </div>
 </div>
-
+<?php include 'inc/footer.php' ?>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
 <script>
 
-    function showExplanation() {
-        document.getElementById("explanation").style.display = "block";
-    }
-
-    function hideExplanation() {
-        document.getElementById("explanation").style.display = "none";
-    }
-    function showExplanation() {
-        var explanation = document.getElementById('explanation');
-        if (explanation.style.display === 'none') {
-            explanation.style.display = 'block';
-            explanation.scrollIntoView();
-        } else {
-            explanation.style.display = 'none';
-        }
-    }
-
     document.querySelector("#btn").addEventListener('click', function(){
         document.querySelector(".lines_k1").style.visibility = "hidden";
         document.querySelector(".lines_k2").style.visibility = "visible";
-
-
         // document.querySelector("#input_place").style.visibility = "visible";
-
-
     });
 
     document.querySelector("#btn2").addEventListener('click', function(){
         document.querySelector(".lines_k1").style.visibility = "visible";
         document.querySelector(".lines_k2").style.visibility = "hidden";
-
-
         // document.querySelector("#input_place").style.visibility = "visible";
 
     });
+
     var MQ = MathQuill.getInterface(2);
     var mathFieldSpan = document.getElementById('input_place');
     var mathField = MQ.MathField(mathFieldSpan, {
@@ -447,26 +453,11 @@
         }
     });
 
-
-
     function input(str) {
         mathField.write(str);
         mathField.focus();
     }
 
-    //var correctAnswer = <?php //echo json_encode($card['formula']); ?>//;
-    //
-    //function checkAnswer() {
-    //    var userAnswer = '`' + mathField.latex().replace(/\\(left|right)/g, '') + '`';
-    //    if (userAnswer == correctAnswer) {
-    //        swal('Ответ верный!');
-    //    } else {
-    //        swal(`Ответ неверный!\nВаш ответ: ${userAnswer}\nВерный ответ: ${correctAnswer}`);
-    //    }
-    //}
-    //document.getElementById("button_tren").addEventListener('click', function (event){
-    //    window.location.href = "show_cards.php<?php //echo"?podbor=" . $_GET['podbor']?>//";
-    //});
 
 
 
@@ -489,7 +480,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/scripts/cards_scrypt.js"></script>
-<?php include 'inc/footer.php' ?>
+<script src="cards_scrypt.js"></script>
+
 </body>
 </html>
