@@ -1,3 +1,14 @@
+<?php
+// Подключение к базе данных
+$link = new mysqli('localhost', 'p534029_admin', 'pI1aT7nO3h', 'p534029_Test_3');
+$query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
+$stmt = $link->prepare($query);
+$stmt->bind_param('s', $_GET['id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,39 +17,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style/keyboardcommon2.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
     <link rel="stylesheet" href="/libs/mathquill-0.10.1/mathquill.css" />
-
 </head>
 <body class="bg-light d-flex flex-column h-100">
 
     <?php include 'inc/header.php' ?>
 
-    <?php
-    // Подключение к базе данных
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
-    $query = "SELECT Название FROM Подборки WHERE `код подборки` = ?";
-    $stmt = $link->prepare($query);
-    $stmt->bind_param('s', $_GET['podbor']);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
-    ?>
     <h1 class="podbor_name">Подборка: <?php echo $podborName ?></h1>
 
     <!--         Карточка-->
     <div class="container_1">
         <?php
         // Подключение к базе данных
-        $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
         $query = "SELECT * FROM `Карточка` WHERE Подборка = ?";
         $stmt = $link->prepare($query);
-        $stmt->bind_param('s', $_GET['podbor']);
+        $stmt->bind_param('s', $_GET['id']);
         $stmt->execute();
         $result = $stmt->get_result();
         $userId = $_COOKIE['user'];
-        $podborId = $_GET['podbor'];
+        $podborId = $_GET['id'];
         $time = date("Y-m-d H:i:s");
 
         if (isset($_POST['finish'])) {
@@ -51,12 +49,12 @@
                 echo "Error: " . mysqli_error($link);
             }
             // Перенаправление на страницу example.php с передачей данных в POST-запросе
-            header("Location: collections.php");
+            header("Location: collections/");
             exit();
 
         } else {
             // Код для вывода карточек
-            if (isset($_GET['podbor']) && $_GET['podbor'] != 0) {
+            if (isset($_GET['id']) && $_GET['id'] != 0) {
 
                 if ($link->connect_error) {
                     die("Connection failed: " . $link->connect_error);
@@ -104,11 +102,11 @@
 
                     if ($currentCard > 0) {
                         $prevCard = $currentCard - 1;
-                        echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
+                        echo "<a href='?id=" . $_GET['id'] . "&card=" . $prevCard . "' class='button prev-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M51.25 16L30.75 32L51.25 48' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
                     }
                     if ($currentCard < count($cardsArr) - 1) {
                         $nextCard = $currentCard + 1;
-                        echo "<a href='?podbor=" . $_GET['podbor'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
+                        echo "<a href='?id=" . $_GET['id'] . "&card=" . $nextCard . "' class='button next-button'><svg width='82' height='64' viewBox='0 0 82 64' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M30.75 48L51.25 32L30.75 16' stroke='#0C507C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg></a>";
 
                     }
 
@@ -122,18 +120,18 @@
                     });
                     </script>";
                 } else {
-                    header('Location: /collections.php');
+                    header('Location: /collections/');
                     exit();
                 }
 
             } else {
-                header('Location: /collections_new');
+                header('Location: /collections/');
                 exit();
             }
             echo "<button id='button_check' class='button buttons check-button' type='button' onclick='checkAnswer()'>Проверить</button>";
         }
         ?>
-        <form method="POST" action="/traning.php<?php echo"?podbor=" . $_GET['podbor']?>">
+        <form method="POST" action="/traning.php<?php echo"?id=" . $_GET['id']?>">
 
             <!-- Счетчик карточек и кнопка "Finish" -->
             <div class="buttons" id="counter">
@@ -606,7 +604,7 @@
         }
     }
     document.getElementById("button_tren").addEventListener('click', function (event){
-        window.location.href = "show_cards.php<?php echo"?podbor=" . $_GET['podbor']?>";
+        window.location.href = "show_cards.php<?php echo"?id=" . $_GET['id']?>";
     });
 
 

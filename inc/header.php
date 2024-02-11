@@ -2,14 +2,14 @@
 <link href="/libs/bootstrap-5.3.1-dist/css/bootstrap.css" rel="stylesheet">
 <div class="container">
     <header class="d-flex pb-2 flex-wrap align-items-center justify-content-center justify-content-md-between mb-4 border-bottom">
-        <a href="/index.php" class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+        <a href="/" class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
             <img src="/style/img/Group_2.svg" alt="" class="bi me-2" role="img" aria-label="Bootstrap">
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/" class="nav-link px-2 link-dark fs-4">Главная</a></li>
             <li><a href="/collections/" class="nav-link px-2 link-dark fs-4">Задания</a></li>
-            <li><a href="/help" class="nav-link px-2 link-dark fs-4">Помощь</a></li>
+            <li><a href="/help/" class="nav-link px-2 link-dark fs-4">Помощь</a></li>
         </ul>
 
         <div class="col-md-2 text-end">

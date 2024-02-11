@@ -12,7 +12,8 @@
 
 <?php include '../inc/header.php' ?>
 
-<div class="container col-3 justify-content-center">
+<div class="container justify-content-center">
+    <section class="d-flex justify-content-center">
     <div class="card mt-5">
         <div class="m-3">
             <?php
@@ -101,6 +102,7 @@
             <?php endif;?>
         </div>
     </div>
+    </section>
 </div>
 
 <?php include '../inc/footer.php' ?>

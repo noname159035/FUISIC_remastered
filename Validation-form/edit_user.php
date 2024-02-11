@@ -5,11 +5,13 @@ if (!isset($_COOKIE['user'])) {
 }
 
 // Подключение к БД
-$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+require_once ('../db.php');
+
+global $link;
 
 // Получение ID пользователя и данных для редактирования
 $user_id = $_GET['id'];
-$result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя` = '$user_id'");
+$result = $link->query("SELECT * FROM `Пользователи` WHERE `Код пользователя` = '$user_id'");
 $row = mysqli_fetch_assoc($result);
 
 //Обработка отправки формы
@@ -25,7 +27,7 @@ if (isset($_POST['submit'])) {
 
 
 // Обновление данных пользователя в БД
-    $mysql->query("UPDATE `Пользователи` SET `e-mail` = '$email', `Тип пользователя` = '$userType', `Имя` = '$name', `Фамилия` = '$surname', `Password` = '$password', `Дата рождения` = '$birthdate' WHERE `Код пользователя` = '$user_id'");
+    $link->query("UPDATE `Пользователи` SET `e-mail` = '$email', `Тип пользователя` = '$userType', `Имя` = '$name', `Фамилия` = '$surname', `Password` = '$password', `Дата рождения` = '$birthdate' WHERE `Код пользователя` = '$user_id'");
 
 // Перенаправление на страницу профиля пользователя
     header('Location: /users/');
@@ -56,7 +58,7 @@ if (isset($_POST['submit'])) {
                 <select class="form-control" id="userType" name="userType" required>
                     <?php
                     $query_dif = "SELECT * FROM `Типы пользователей`";
-                    $result_dif = mysqli_query($mysql, $query_dif);
+                    $result_dif = mysqli_query($link, $query_dif);
 
                     while ($row_dif = mysqli_fetch_assoc($result_dif)) {
                         echo '<option value="' . $row_dif['Код типа пользователя'] . '">' . $row_dif['Тип'] . '</option>';

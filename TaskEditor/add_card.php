@@ -1,6 +1,10 @@
 <?php
 if (isset($_GET['id'])) {
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+    
+    require_once ('../db.php');
+
+    global $link;
+    
     $query = "INSERT INTO Карточка (`Подборка`, `Формула`, `Описание`, `Пояснение`) VALUES (?, '', '', '')";
     $stmt = $link->prepare($query);
     $stmt->bind_param('s', $_GET['id']);

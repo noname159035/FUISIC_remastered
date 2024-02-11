@@ -23,7 +23,10 @@
 
 <div class="album py-5">
     <?php
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+    require_once ('db.php');
+
+    global $link;
+
     $query = "SELECT * FROM Разделы";
     $result = mysqli_query($link, $query);
 

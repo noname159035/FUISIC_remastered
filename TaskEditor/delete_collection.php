@@ -9,7 +9,9 @@ if (isset($_GET['id'])) {
 }
 
 // Подключение к базе данных
-$link = mysqli_connect('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+require_once ('../db.php');
+
+global $link;
 
 if (!$link) {
     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;

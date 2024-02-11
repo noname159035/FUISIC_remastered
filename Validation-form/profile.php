@@ -5,15 +5,20 @@ if (!isset($_COOKIE['user'])) {
     exit();
 }
 
-// Получаем данные пользователя по коду из куки
 
-$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+
+require_once ('../db.php');
+
+global $link;
+
+// Получаем данные пользователя по коду из куки
 $user_id = $_COOKIE['user'];
-$result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
+
+$result = $link->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
 $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
         INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
         WHERE `Пользователи`.`Код пользователя`='$user_id'";
-$result = $mysql->query($sql);
+$result = $link->query($sql);
 $user = $result->fetch_assoc();
 
 if (isset($_POST['submit'])) {
@@ -61,7 +66,7 @@ if (isset($_POST['submit'])) {
 
         // Проверка наличия e-mail в базе данных
         $email_check_query = "SELECT * FROM Пользователи WHERE `e-mail`='$new_email' AND `Код пользователя` != '$user_id'";
-        $email_check_result = $mysql->query($email_check_query);
+        $email_check_result = $link->query($email_check_query);
 
         if ($email_check_result->num_rows > 0) {
             $error = "E-mail уже занят";
@@ -71,7 +76,7 @@ if (isset($_POST['submit'])) {
             // Обновляем данные пользователя в базе данных
             $new_date_of_birth = date('Y-m-d', strtotime($new_date_of_birth));
             $query = "UPDATE Пользователи SET `e-mail`='$new_email', Имя='$new_first_name', Фамилия='$new_last_name', `Дата рождения`='$new_date_of_birth', Password='$new_password' WHERE `Код пользователя`='$user_id'";
-            $mysql->query($query);
+            $link->query($query);
             header('Location: /profile/');
             exit();
         }
@@ -79,7 +84,7 @@ if (isset($_POST['submit'])) {
 }
 
 $query = "SELECT * FROM Уровни ORDER BY id";
-$result = mysqli_query($mysql, $query);
+$result = mysqli_query($link, $query);
 $levels = []; // массив с информацией о каждом уровне
 
 if ($result) {
@@ -87,11 +92,11 @@ if ($result) {
         $levels[] = $row;
     }
 } else {
-    die('Ошибка запроса: ' . mysqli_error($mysql));
+    die('Ошибка запроса: ' . mysqli_error($link));
 }
 
 $query = "SELECT IFNULL((SELECT COUNT(*) FROM История WHERE Пользователь = $user_id), 0) + IFNULL((SELECT COUNT(*) FROM История тестов WHERE Пользователь = $user_id), 0) AS Количество_заданий";
-$result = mysqli_query($mysql, $query);
+$result = mysqli_query($link, $query);
 $row = mysqli_fetch_assoc($result);
 $count = $row['Количество_заданий']/2;
 $currentLevel = 0; // текущий уровень пользователя
@@ -330,7 +335,7 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
                 <?php
             }
             // Закрытие соединения с БД
-            mysqli_close($mysql);
+            mysqli_close($link);
             ?>
         </div>
 

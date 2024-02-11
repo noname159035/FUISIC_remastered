@@ -1,6 +1,9 @@
 <?php
 if (isset($_GET['test']) && isset($_GET['task'])) {
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+    require_once ('../db.php');
+
+    global $link;
+
     $query = "DELETE FROM `Задачи` WHERE `Тест` = ? AND `Код_задачи` = ?";
     $stmt = $link->prepare($query);
     $stmt->bind_param('ss', $_GET['test'], $_GET['task']);
