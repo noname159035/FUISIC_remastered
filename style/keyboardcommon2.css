@@ -1,10 +1,12 @@
 @media screen and (min-width: 1000px) {
+
+
     #keyboard {
       box-sizing: border-box;
       width: 43vw;
       height: auto;
       position: fixed;
-      bottom: 3vh;
+      bottom: 20vh;
       left: 51.5%;
       margin-left: -23vw;
       background-color: white;
@@ -47,7 +49,7 @@
         box-shadow: 0px 3px 4px 0px hsl(204, 68%, 62%);
 
     }
-   
+
     #conteiner_1 {
       /* position: absolute;
       left: 50%;
@@ -95,10 +97,10 @@
       width: 43vw;
       height: auto;
       position: fixed;
-      bottom: 3vh;
+      bottom: 20vh;
       left: 51.5%;
       margin-left: -23vw;
-      background-color: FFFFFF;
+      background-color: #FFFFFF;
       /* border: solid #116ca9 1px; */
       border-radius: 10px;
       box-shadow: 0px 10px 16px 4px #0c507c80;
@@ -162,7 +164,7 @@
 
     body {
       font-style: normal;
-    }    
+    }
   }
 
 .MathQuill-TextArea {
@@ -171,20 +173,29 @@
 
 
   @media screen and (max-width: 999px) {
+    .line_1{
+      margin-left: 3%;
+    }
+
+    .line_2{
+      margin-left: 8%;
+    }
+
     #keyboard {
       box-sizing: border-box;
       width: 100%;
       height: auto;
       position: fixed;
-      bottom: 3vh;
-      background-color: FFFFFF;
-      margin-left: -1vw;
+      bottom: 20vh;
+      background-color: #FFFFFF;
+      /*margin-left: -1vw;*/
       /* border: solid #116ca9 1px; */
       border-radius: 10px;
       box-shadow: 0px 10px 16px 4px #0c507c80;
       font-family: sans-serif;
       font-weight: 600;
-
+      /*margin-left: -140px;*/
+      /*margin-right: 20%;*/
       visibility: visible;
     }
 
@@ -248,7 +259,7 @@
     }
 
     #btn {
-      width: 15.5vw;
+      width: 13.5vw;
     }
 
     #btn2 {
@@ -260,8 +271,8 @@
       width: 100%;
       height: auto;
       position: fixed;
-      bottom: 3vh;
-      background-color: FFFFFF;
+      bottom: 20vh;
+      background-color: #FFFFFF;
       margin-left: -1vw;
       /* border: solid #116ca9 1px; */
       border-radius: 10px;
@@ -321,8 +332,8 @@
       width: 610px;
       height: auto;
       position: fixed;
-      bottom: 3vh;
-      background-color: FFFFFF;
+      bottom: 20vh;
+      background-color: #FFFFFF;
       margin-left: -1vw;
       /* border: solid #116ca9 1px; */
       border-radius: 10px;
@@ -374,7 +385,7 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       color: #0c507c;
       font-weight: 600;
-      width: 45px;
+      width: 40px;
       height: 30px;
 
       border: none;
@@ -388,7 +399,7 @@
     }
 
     #btn {
-      width: 95px;
+      width: 85px;
     }
 
     #btn2 {
@@ -400,8 +411,8 @@
       width: 610px;
       height: auto;
       position: fixed;
-      bottom: 3vh;
-      background-color: FFFFFF;
+      bottom: 20vh;
+      background-color: #FFFFFF;
       margin-left: -1vw;
       /* border: solid #116ca9 1px; */
       border-radius: 10px;
