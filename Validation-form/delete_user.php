@@ -5,18 +5,21 @@ if (!isset($_COOKIE['user'])) {
 }
 
 // Подключение к БД
-$mysql = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+require_once ('../db.php');
+
+global $link;
+
 
 // Получение ID пользователя для удаления
 $user_id = $_GET['id'];
 
 // Получение данных пользователя для подтверждения удаления
-$result = $mysql->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
+$result = $link->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
 $user = mysqli_fetch_assoc($result);
 
 // Обработка удаления пользователя
 if (isset($_POST['confirm_delete'])) {
-    $mysql->query("DELETE FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
+    $link->query("DELETE FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
     header('Location: /users/');
     exit();
 }

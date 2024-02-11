@@ -8,7 +8,10 @@ if (!isset($_GET['test'])) {
     echo "<h1>Тест не выбран!</h1>";
     exit();
 }
-$link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+require_once ('../db.php');
+
+global $link;
+
 $query = "SELECT Название FROM Тесты WHERE `Код_Теста` = ?";
 $stmt = $link->prepare($query);
 $stmt->bind_param('s', $_GET['test']);

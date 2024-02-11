@@ -1,7 +1,11 @@
 <?php
 if (isset($_GET['id'])) {
     $cards_id =$_GET['cards_id'];
-    $link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+
+    require_once ('../db.php');
+
+    global $link;
+
     $query = "DELETE FROM `Карточка` WHERE `Код задания` = ?";
     $stmt = $link->prepare($query);
     $stmt->bind_param('s', $_GET['id']);

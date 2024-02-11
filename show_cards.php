@@ -1,6 +1,8 @@
 <?php
 // Подключение к базе данных
-$link = new mysqli('localhost', 'p523033_admin', 'eQ5kJ0dN5a', 'p523033_Test_3');
+require_once ('db.php');
+
+global $link;
 
 if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
@@ -169,7 +171,7 @@ if (isset($Id) && $Id != 0) {
             let cardTemplate = '' +
                 '<div class="row mb-3">' +
                     '<div class="btn-group">' +
-                        '<a  href="/collections/training/" class="btn btn-outline-primary">Тренажер</a>' +
+                        '<a  href="/collections/traning/" class="btn btn-outline-primary traning">Тренажер</a>' +
                         '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
                         '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
                         '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
@@ -226,6 +228,15 @@ if (isset($Id) && $Id != 0) {
                     back.classList.toggle('visually-hidden');
                 });
 
+                // Найти элемент ссылки по классу (если таких элементов несколько, будет выбран первый)
+                const link = document.querySelector('.traning');
+
+                // Проверить, существует ли элемент
+                if (link) {
+                    // Добавить id к атрибуту href
+                    link.href += id;
+                }
+
 
                 // Отображение формулы в нужном виде
                 MathJax.Hub.Config({
@@ -264,6 +275,15 @@ if (isset($Id) && $Id != 0) {
             }
             function showExplanation(){
                 prepareExplanation(currentCardIndex);
+
+                // Отображение формулы в нужном виде
+                MathJax.Hub.Config({
+                    showMathMenu: false,
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+                    }
+                });
+                MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
             }
 
             showCard(currentCardIndex);
