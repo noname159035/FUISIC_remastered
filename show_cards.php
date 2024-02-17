@@ -20,6 +20,7 @@ if (isset($_COOKIE['user'])) {
 }
 
 $Id = $_GET['id'];
+
 $time = date("Y-m-d H:i:s");
 
 if (isset($_POST['finish'])) {
@@ -117,9 +118,32 @@ if (isset($Id) && $Id != 0) {
 
 <div class="container">
     <h2 class="text-center mb-xl-5" id="cardsName"></h2>
-
     <div id="cards"></div>
 </div>
+
+<form action="#" method="post">
+    <input type="hidden" name="finish" value="1">
+    <!-- Модальное окно для кнопки "Закончить" -->
+    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="finishModalLabel">Подтверждение завершения подборки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите завершить прохождение карточек?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">закончить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <!-- Подключение модального окна -->
 <div class="modal fade" id="explanationModal" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel" aria-hidden="true">
@@ -150,7 +174,6 @@ if (isset($Id) && $Id != 0) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 <script>
     let url = window.location.href;
     let id = url.split('/').pop();
@@ -169,12 +192,15 @@ if (isset($Id) && $Id != 0) {
             let cardContainer = $('#cards');
             let explanationContainer = $('#explanationText');
             let cardTemplate = '' +
+
                 '<div class="row mb-3">' +
                     '<div class="btn-group">' +
                         '<a  href="/collections/keyboard/" class="btn btn-outline-primary">Тренажер</a>' +
                         '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
                         '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
-                        '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
+                        '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#finishModal">' +
+                        'Закончить'+
+                        '</button>' +
                     '</div>' +
                 '</div>' +
                 '<div class="row">' +

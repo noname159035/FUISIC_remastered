@@ -1,4 +1,11 @@
 <?php
+
+// Проверяем, авторизован ли пользователь
+if (!isset($_COOKIE['user'])) {
+    header("Location: /login");
+    exit;
+}
+
 // Получаем ID подборки из параметра GET запроса
 if (isset($_GET['id'])) {
     $collection_id = $_GET['id'];
@@ -19,13 +26,6 @@ if (!$link) {
     echo "Текст ошибки error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
-
-// Проверяем, авторизован ли пользователь
-if (!isset($_COOKIE['user'])) {
-    header("Location: /login");
-    exit;
-}
-
 // Выбираем подборку из базы данных
 $query = "SELECT * FROM Подборки WHERE `Код подборки`=$collection_id";
 $result = mysqli_query($link, $query);
@@ -43,4 +43,3 @@ mysqli_query($link, $query);
 // Возвращаемся на страницу со списком подборок
 header("Location: /my_base/");
 exit;
-?>

@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
     <h1>Редактирование карточки</h1>
     <form method="post">
         <div class="form-group">
-            <label for="formula">Пояснение</label>
+            <label for="formula">Формула</label>
             <input type="hidden" id="hidden_formula" name="formula">
             <span class="form-control" id="formula"></span>
         </div>

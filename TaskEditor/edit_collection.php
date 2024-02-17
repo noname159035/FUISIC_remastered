@@ -1,5 +1,9 @@
 <?php
 
+require_once ('../db.php');
+
+global $link;
+
 if (!isset($_COOKIE['user'])) {
     header("Location: /login/");
     exit;
@@ -12,15 +16,12 @@ if (!isset($_GET['id'])) {
 
 $cards_id = $_GET['id'];
 
-require_once ('../db.php');
-
-global $link;
-
 // Получение заданий из базы данных
 $query = "SELECT `Код задания`, Формула, Описание, Пояснение FROM Карточка WHERE `Подборка` =?";
 $stmt = $link->prepare($query);
 $stmt->bind_param('s', $cards_id);
 $stmt->execute();
+
 $result = $stmt->get_result();
 
 ?>

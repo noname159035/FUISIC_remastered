@@ -33,14 +33,16 @@ php_value session.cookie_lifetime 86400
 
   ## Редактор заданий
   RewriteRule ^my_base/$ /TaskEditor/my_base.php
-  RewriteRule ^my_base/edit/test/([0-9]+)$ /TaskEditor/edit_test.php?id=$1
-  RewriteRule ^my_base/edit/cards/([0-9]+)$ /TaskEditor/edit_collection.php?id=$1
+
   RewriteRule ^my_base/delete_card/([0-9]+)/([0-9]+)$ /TaskEditor/delete_card.php?cards_id=$1&id=$2
   RewriteRule ^my_base/add_card/([0-9]+)$ /TaskEditor/add_card.php?id=$1
   RewriteRule ^my_base/edit_card/([0-9]+)/([0-9]+)$ /TaskEditor/edit_card.php?cards_id=$1&id=$2
-  RewriteRule ^my_base/delete_task/([0-9]+)/([0-9]+)$ /TaskEditor/delete_card.php?cards_id=$1&id=$2
-  RewriteRule ^my_base/add_task/([0-9]+)$ /TaskEditor/add_card.php?id=$1
-  RewriteRule ^my_base/edit_task/([0-9]+)/([0-9]+)$ /TaskEditor/edit_card.php?cards_id=$1&id=$2
+  RewriteRule ^my_base/edit/cards/([0-9]+)$ /TaskEditor/edit_collection.php?id=$1
+
+  RewriteRule ^my_base/delete_task/([0-9]+)/([0-9]+)$ /TaskEditor/delete_task.php?task_id=$1&id=$2
+  RewriteRule ^my_base/add_task/([0-9]+)$ /TaskEditor/add_task.php?id=$1
+  RewriteRule ^my_base/edit_task/([0-9]+)/([0-9]+)$ /TaskEditor/edit_task.php?task_id=$1&id=$2
+  RewriteRule ^my_base/edit/test/([0-9]+)$ /TaskEditor/edit_test.php?id=$1
 
   ## Редактор пользователей
   RewriteRule ^users/$ /Validation-form/Users.php
@@ -51,9 +53,12 @@ php_value session.cookie_lifetime 86400
   ##Тесты и карточки
   RewriteRule ^collections/cards/([0-9]+)$ /show_cards.php?id=$1
   RewriteRule ^collections/get_cards/([0-9]+)$ /get_cards.php?id=$1
+
   RewriteRule ^collections/keyboard/$ /keyboard.php
+
   RewriteRule ^collections/cards/([0-9]+)/([0-9]+)$ /show_cards.php?id=$1&card=$2
   RewriteRule ^collections/test/([0-9]+)$ /show_tasks.php?id=$1
+  RewriteRule ^collections/test/check_answers/$ /check_answers.php
 
 
   ##Тесты и карточки

@@ -105,8 +105,8 @@ if (!$result2) {
             <tr>
                 <td><?php echo $i ?></td>
                 <td><?php echo $row['Название'] ?></td>
-                <td><?php  echo $row['Дата прохождения задания'] ?></td>
-                <td><?php  echo $row['Результат'] ?></td>
+                <td><?php  echo $row['Дата_прохождения_задания'] ?></td>
+                <td><?php  echo $row['Результат'] ?>%</td>
             </tr>
 
         <?php
