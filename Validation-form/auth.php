@@ -21,11 +21,11 @@ if (!$result) {
 $user = $result->fetch_assoc();
 
 if ($user) {
-  setcookie('user', $user['Код пользователя'], time() + 3600, "/");
-  header('location: /');
+    setcookie('user', $user['Код пользователя'], time() + 3600, "/");
+    header('location: /');
 } else {
-  header('Location: /Validation-form/login-form.php?error=account-doesnt_exists');
-  exit();
+    header('Location: /Validation-form/login-form.php?error=account-doesnt_exists');
+    exit();
 }
 
 $link->close();
