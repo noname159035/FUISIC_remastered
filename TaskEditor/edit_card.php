@@ -451,6 +451,8 @@ if (isset($_POST['submit'])) {
 </div>
 
 <?php include '../inc/footer.php' ?>
+</body>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
@@ -504,5 +506,4 @@ if (isset($_POST['submit'])) {
 
 
 </script>
-</body>
 </html>

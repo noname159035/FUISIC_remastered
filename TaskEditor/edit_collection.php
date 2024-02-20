@@ -41,40 +41,43 @@ $result = $stmt->get_result();
 <?php include '../inc/header.php';?>
 
 <div class="container">
-
-    <a href="/my_base/add_card/<?php echo $cards_id; ?>" class="btn btn-primary">Создать карточку</a>
+    <div class="btn-group">
+        <a href="/my_base/add_card/<?php echo $cards_id; ?>" class="btn btn-outline-primary">Создать карточку</a>
+        <a href="/my_base/" class="btn btn-outline-danger">Закончить</a>
+    </div>
     <?php
     if(mysqli_num_rows($result) == 0){
         ?>
-        <p>В данной подборке пока нет карточек, нажмите на кнопку создать, чтобы добавить новую карточку</p>
+        <div class="alert alert-primary mt-3">
+            <p>В данной подборке пока нет карточек, нажмите на кнопку создать, чтобы добавить новую карточку</p>
+        </div>
         <?php
     }
     else{
-    ?>
-    <a href="/my_base/" class="btn btn-outline-danger">Закончить</a>
-
-    <h3>Список карточек</h3>
-    <table class="table">
-        <tr>
-            <th>Формула</th>
-            <th>Описание</th>
-            <th>Редактировать</th>
-        </tr>
-        <?php while($row = $result->fetch_assoc()): ?>
+        ?>
+        <h3>Список карточек</h3>
+        <table class="table">
             <tr>
-                <td><?php echo $row['Формула']; ?></td>
-                <td><?php echo $row['Описание']; ?></td>
-                <td>
-                    <div class="btn-group">
-                    <a href="/my_base/edit_card/<?php echo ($cards_id.'/'.$row['Код задания']); ?>" class="btn btn-primary">Редактировать</a>
-                    <a href="/my_base/delete_card/<?php echo ($cards_id.'/'.$row['Код задания']); ?>" class="btn btn-danger">Удалить</a>
-                    </div>
-                </td>
+                <th>Формула</th>
+                <th>Описание</th>
+                <th>Редактировать</th>
             </tr>
-        <?php endwhile; ?>
-    </table>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['Формула']; ?></td>
+                    <td><?php echo $row['Описание']; ?></td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="/my_base/edit_card/<?php echo ($cards_id.'/'.$row['Код задания']); ?>" class="btn btn-primary">Редактировать</a>
+                            <a href="/my_base/delete_card/<?php echo ($cards_id.'/'.$row['Код задания']); ?>" class="btn btn-danger">Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    <?php } ?>
 </div>
-<?php } ?>
+
 <?php include '../inc/footer.php';?>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -92,5 +95,6 @@ $result = $stmt->get_result();
     });
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
+
 
 </html>

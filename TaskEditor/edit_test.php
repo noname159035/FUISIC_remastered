@@ -41,30 +41,32 @@ $result = $stmt->get_result();
 <?php include '../inc/header.php';?>
 
 <div class="container">
-
-    <a href="/my_base/add_task/<?php echo $test_id; ?>" class="btn btn-primary">Создать задачу</a>
+    <div class="btn-group">
+        <a href="/my_base/add_task/<?php echo $test_id; ?>" class="btn btn-outline-primary">Создать задачу</a>
+        <a href="/my_base/" class="btn btn-outline-danger">Закончить</a>
+    </div>
     <?php
     if(mysqli_num_rows($result) == 0){
         ?>
-        <p>В данном тесте пока нет задач, нажмите на кнопку создать, чтобы добавить новую задачу</p>
+            <div class="alert alert-primary mt-3">
+                <p>В данном тесте пока нет задач, нажмите на кнопку создать, чтобы добавить новую задачу</p>
+            </div>
         <?php
     }
     else{
     ?>
-    <a href="/my_base/" class="btn btn-outline-danger">Закончить</a>
-
     <h3>Список задач</h3>
     <table class="table">
         <tr>
-            <th>Задача</th>
+            <th class="w-50">Задача</th>
             <th>Ответ</th>
-            <th>Редактировать</th>
+            <th class="text-end">Редактировать</th>
         </tr>
         <?php while($row = $result->fetch_assoc()): ?>
             <tr>
-                <td><?php echo $row['Задача']; ?></td>
+                <td class="w-50"><?php echo $row['Задача']; ?></td>
                 <td><?php echo $row['Ответ']; ?></td>
-                <td>
+                <td class="text-end">
                     <div class="btn-group">
                         <a href="/my_base/edit_task/<?php echo ($test_id.'/'.$row['Код_задачи']); ?>" class="btn btn-primary">Редактировать</a>
                         <a href="/my_base/delete_task/<?php echo ($test_id.'/'.$row['Код_задачи']); ?>" class="btn btn-danger">Удалить</a>
@@ -73,8 +75,9 @@ $result = $stmt->get_result();
             </tr>
         <?php endwhile; ?>
     </table>
-</div>
 <?php } ?>
+</div>
+
 <?php include '../inc/footer.php';?>
 </body>
 

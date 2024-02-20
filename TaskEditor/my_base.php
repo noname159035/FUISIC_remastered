@@ -110,7 +110,7 @@ $result_sections = mysqli_query($link, $query_sections);
                 echo '</div>';
                 echo '</li>';
             }
-
+            echo '</ul>';
         } else {
             //Выводим сообщение, если у пользователя не найдено подборок в данном разделе
             echo '<div class="alert alert-primary" role="alert">У вас пока нет тестов в данном разделе.</div>';
