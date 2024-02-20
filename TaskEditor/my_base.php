@@ -119,6 +119,7 @@ $result_sections = mysqli_query($link, $query_sections);
 
     }
     ?>
+    <a href="/profile/" class="btn btn-primary mt-3"> Вернуться</a>
 
     <div class="modal fade" id="editCollectionModal" tabindex="-1" role="dialog" aria-labelledby="editCollectionModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

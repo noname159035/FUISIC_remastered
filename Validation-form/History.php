@@ -121,9 +121,8 @@ if (!$result2) {
     mysqli_close($link);
     ?>
 
-    <div class="button">
-        <a href="/profile/" class="btn btn-secondary float-end">Отменить</a>
-    </div>
+    <a href="/profile/" class="btn btn-primary">Вернуться</a>
+
 
 </div>
 

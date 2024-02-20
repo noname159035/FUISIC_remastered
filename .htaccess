@@ -8,13 +8,13 @@ php_value session.cookie_lifetime 86400
 
   ErrorDocument 404 /404/
   ## Футер
-  RewriteRule ^terms/$ /help/Terms&Conditions.php
-  RewriteRule ^services/$ /help/Privacy_Policy.php
-  RewriteRule ^support/$ /help/support.php
+  RewriteRule ^terms/$ /footer_pages/Terms&Conditions.php
+  RewriteRule ^services/$ /footer_pages/Privacy_Policy.php
+  RewriteRule ^support/$ /footer_pages/support.php
 
   ## Хедер
   RewriteRule ^collections/$ /collections.php
-  RewriteRule ^help/$ /help.php
+#  RewriteRule ^help/$ /help.php
 
   ## Авторизация
   RewriteRule ^login/$ /Validation-form/login-form.php

@@ -153,19 +153,19 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
             <!-- Здесь будут наши кнопки -->
             <ul class="list-group">
                 <!--<li class="list-group-item"><a href="/"><i class="fa-solid fa-house"></i> Главная страница</a></li>-->
-                <li class="list-group-item"><a href="/history/" class="text-decoration-none"><i class="fas fa-user"></i> История</a></li>
-                <li class="list-group-item"><a href="/favorites/" class="text-decoration-none"><i class="fas fa-heart"></i> Избранное</a></li>
-                <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="fas fa-trophy"></i> Достижения</a></li>
-                <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="fas fa-star"></i> Рейтинг</a></li>
+                <li class="list-group-item"><a href="/history/" class="text-decoration-none"><i class="bi bi-clock-history"></i> История</a></li>
+                <li class="list-group-item"><a href="/favorites/" class="text-decoration-none"><i class="bi bi-star"></i> Избранное</a></li>
+                <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="bi bi-trophy"></i> Достижения</a></li>
+                <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="bi bi-bar-chart"></i> Рейтинг</a></li>
                 <?php
                 if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
-                    echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='fas fa-user'></i> Мои задания</a></li>";
+                    echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='bi bi-list-task'></i> Мои задания</a></li>";
                 }
                 if ($user['Тип'] == 'Администратор') {
-                    echo "<li class='list-group-item'><a href='/users/' class='text-decoration-none'><i class='fas fa-user'></i> Пользователи</a></li>";
+                    echo "<li class='list-group-item'><a href='/users/' class='text-decoration-none'><i class='bi bi-people'></i> Пользователи</a></li>";
                 }
                 ?>
-                <li class="list-group-item"><a href="/logout/" class="text-decoration-none"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+                <li class="list-group-item"><a href="/logout/" class="text-decoration-none"><i class="bi bi-box-arrow-right"></i> Выход</a></li>
             </ul>
         </div>
         <!-- Блок профиля -->
@@ -360,6 +360,27 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
         maxDate: "today",
         minDate: "01.01.1900",
     });
+    <!-- Валидация e-mail -->
+    $('input[name="new_email"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const login = $(this).val();
+        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (login.length !== 0 ) {
+            if (!loginRegex.test(login)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
     <!-- Валидация имени и фамилии -->
     $('input[name="new_first_name"], input[name="new_last_name"]').on('input', function() {
         const form = $(this).closest('form')[0];
