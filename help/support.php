@@ -27,11 +27,50 @@
             <label for="main_textarea">Опишите вашу проблему:</label>
             <textarea class="form-control" id="main_textarea" name="user_question" rows="10" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" class="btn btn-primary mt-3 btn_send">Отправить</button>
     </form>
 </div>
 
 <?php include '../inc/footer.php' ?>
+<script>
+    function SendMail(){
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\SMTP;
+        use PHPMailer\PHPMailer\Exception;
 
+        require 'vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.sendgrid.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'fuisic@mail.ru';                     //SMTP username
+            $mail->Password   = '&trOurFdEO32';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('fuisic@mail.ru', 'User_Name');
+            $mail->addAddress('fuisic@mail.ru', 'Техподдержка');     //Add a recipient
+
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Тестовое сообщение';
+            $mail->Body    = 'Тестовое сообщение body';
+            $mail->AltBody = 'Альтернативное сообщение';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    }
+
+    cardContainer.on('click', '.btn_send', SendMail);
+</script>
 </body>
 </html>
