@@ -176,30 +176,30 @@ if (isset($Id) && $Id != 0) {
             let explanationContainer = $('#explanationText');
             let cardTemplate = '' +
                 '<div class="row mb-3">' +
-                '<div class="btn-group">' +
-                '<a  href="/collections/traning/" class="btn btn-outline-primary traning">Тренажер</a>' +
-                '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
-                '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
-                '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
-                '</div>' +
+                    '<div class="btn-group">' +
+                        '<a  href="/collections/traning/" class="btn btn-outline-primary traning">Тренажер</a>' +
+                        '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
+                        '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
+                        '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
+                    '</div>' +
                 '</div>' +
                 '<div class="row card_block">' +
-                '<div class="col-2">' +
-                '<a class="btn btn-outline-light text-dark w-100 h-100 prev-card"><h1 style="margin-top: 50%; font-size: 500%">←</h1></a>' +
-                '</div>' +
-                '<div class="col main_card_block">' +
-                '<div class="card border-primary align-items-center justify-content-center" id="card_cont">' +
-                '<div class="front">' +
-                '<h2>{formula}</h2>' +
-                '</div>' +
-                '<div class="back visually-hidden">' +
-                '<h3>{description}</h3>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-2">' +
-                '<a class="btn btn-outline-light text-dark w-100 h-100 next-card" id="btn-card"><h1 style="margin-top: 45%; font-size: 500%">→</h1></a>' +
-                '</div>' +
+                    '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 prev-card"><h1 style="margin-top: 50%; font-size: 500%">←</h1></a>' +
+                    '</div>' +
+                    '<div class="col main_card_block">' +
+                        '<div class="card border-primary align-items-center justify-content-center" id="card_cont">' +
+                            '<div class="front">' +
+                                '<h2>{formula}</h2>' +
+                            '</div>' +
+                            '<div class="back visually-hidden">' +
+                                '<h3>{description}</h3>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 next-card" id="btn-card"><h1 style="margin-top: 45%; font-size: 500%">→</h1></a>' +
+                    '</div>' +
                 '</div>'
             ;
 
