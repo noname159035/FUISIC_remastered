@@ -51,70 +51,71 @@ if (!$result2) {
 
 <div class="container">
     <h2>История прохождения заданий</h2>
-    <div class="row">
-        <div class="col-md-4 text-center">
-            <h4>Сортировать по:</h4>
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h4 class="mb-0">Сортировать по:</h4>
         </div>
-        <div class="col-md-4 text-right">
-            <button class="btn btn-default" id="sort-date-asc">По возрастанию</button>
-            <button class="btn btn-default" id="sort-date-desc">По убыванию</button>
+        <div class="col-md-6 text-right">
+            <div class="btn-group">
+                <button class="btn btn-outline-primary" id="sort-date-asc">По возрастанию</button>
+                <button class="btn btn-outline-primary" id="sort-date-desc">По убыванию</button>
+            </div>
         </div>
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Подборка</th>
-            <th>Дата прохождения задания</th>
-        </tr>
-        </thead>
-        <tbody>
+    <h3>Подборки</h3>
+
+    <ul class="list-unstyled">
         <?php
         $i = 1;
         while ($row = mysqli_fetch_assoc($result)) { ?>
-
-            <tr>
-                <td><?php echo $i ?></td>
-                <td><?php echo $row['Название'] ?></td>
-                <td><?php  echo $row['Дата прохождения задания'] ?></td>
-            </tr>
-
+            <li class="media mb-3 p-3" style="border-bottom: 1px solid #ddd;">
+                <!-- Если у вас есть изображения, раскомментируйте этот блок
+                <img src="path_to_image" class="mr-3" alt="...">
+                -->
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1" style="color: #0056b3;"><?php echo $i . '. ' . $row['Название']; ?></h5>
+                    <p style="font-size: 0.9em; color: #555;">Дата прохождения задания: <?php echo $row['Дата прохождения задания']; ?></p>
+                </div>
+            </li>
             <?php
             $i++;
         }
         ?>
-        </tbody>
-    </table>
+    </ul>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Тест</th>
-            <th>Дата прохождения задания</th>
-            <th>Результат</th>
-        </tr>
-        </thead>
-        <tbody>
+    <h3>Тесты</h3>
+
+    <ul class="list-unstyled">
         <?php
         $i = 1;
-        while ($row = mysqli_fetch_assoc($result2)) {
-            ?>
-
-            <tr>
-                <td><?php echo $i ?></td>
-                <td><?php echo $row['Название'] ?></td>
-                <td><?php  echo $row['Дата_прохождения_задания'] ?></td>
-                <td><?php  echo $row['Результат'] ?>%</td>
-            </tr>
-
-        <?php
+        while ($row = mysqli_fetch_assoc($result2)) { ?>
+            <li class="media mb-3 p-3" style="border-bottom: 1px solid #ddd; ">
+                <!-- Если у вас есть изображения, раскомментируйте этот блок
+                <img src="path_to_image" class="mr-3" alt="...">
+                -->
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1" style="color: #0056b3;"><?php echo $i . '. ' . $row['Название']; ?></h5>
+                    <?php
+                    $result = $row['Результат'];
+                    $color = '';
+                    if ($result <= 30) {
+                        $color = 'red';
+                    } else if ($result <= 60) {
+                        $color = 'orange';
+                    } else {
+                        $color = 'green';
+                    }
+                    ?>
+                    <b class="mt-0 mb-1">Результат: <span style="color: <?php echo $color; ?>"><?php echo $result; ?>%</span></b>
+                    <p style="font-size: 0.9em; color: #555;">Дата прохождения задания: <?php echo $row['Дата_прохождения_задания']; ?></p>
+                </div>
+            </li>
+            <?php
             $i++;
         }
         ?>
-        </tbody>
-    </table>
+    </ul>
 
     <?php
     // Закрытие соединения с БД

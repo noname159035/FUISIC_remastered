@@ -5,8 +5,6 @@ if (!isset($_COOKIE['user'])) {
     exit();
 }
 
-
-
 require_once ('../db.php');
 
 global $link;
@@ -14,7 +12,6 @@ global $link;
 // Получаем данные пользователя по коду из куки
 $user_id = $_COOKIE['user'];
 
-$result = $link->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
 $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
         INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
         WHERE `Пользователи`.`Код пользователя`='$user_id'";
@@ -131,7 +128,6 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
-
     <meta charset="UTF-8">
     <title>Данные пользователя</title>
     <link rel="stylesheet" href="/style/level.css">
@@ -158,7 +154,10 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
                 <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="bi bi-trophy"></i> Достижения</a></li>
                 <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="bi bi-bar-chart"></i> Рейтинг</a></li>
                 <?php
-                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
+                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
+                    echo "<li class='list-group-item'><a href='/profile/courses/' class='text-decoration-none'><i class='bi bi-journal-check'></i> Мои классы</a></li>";
+                }
+                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
                     echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='bi bi-list-task'></i> Мои задания</a></li>";
                 }
                 if ($user['Тип'] == 'Администратор') {
@@ -171,7 +170,6 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
         <!-- Блок профиля -->
         <div class="col-md-6">
             <h1>Личный кабинет</h1>
-
             <!--Редактирование пользователей-->
             <?php if(isset($_GET['edit'])):
                 if (isset($error)) {
@@ -317,7 +315,6 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
                         </div>
                         <span><b><?php echo $next_max_value;?></b></span>
                     </div>
-
                     <p>(осталось решить <?php echo $remaining;?> заданий)</p>
                 </div>
                 <?php

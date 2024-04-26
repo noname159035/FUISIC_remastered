@@ -1,7 +1,30 @@
 <?php
 if (!isset($_COOKIE['user'])) {
-    header('Location: /validation-form/login-form.php');
+    header('Location: /login/');
     exit();
+}
+
+// Подключение к БД
+require_once ('../db.php');
+
+global $link;
+
+$user_id = $_COOKIE['user'];
+if (isset($_POST['search_query'])) {
+    $search_query = $_POST['search_query'];
+    $result = $link->query("SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
+        INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя` 
+        WHERE `Пользователи`.`Код пользователя` != '$user_id' 
+        AND (`Пользователи`.`Имя` LIKE '%$search_query%' 
+        OR `Пользователи`.`Фамилия` LIKE '%$search_query%' 
+        OR `Пользователи`.`e-mail` LIKE '%$search_query%'  
+        OR `Пользователи`.`Код пользователя` LIKE '%$search_query%' 
+        OR `Типы пользователей`.`Тип` LIKE '%$search_query%' ) ");
+} else {
+    $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
+        INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
+        WHERE `Пользователи`.`Код пользователя`!='$user_id'";
+    $result = $link->query($sql);
 }
 ?>
 <!DOCTYPE html>
@@ -17,24 +40,6 @@ if (!isset($_COOKIE['user'])) {
 <?php include '../inc/header.php' ?>
 
 <div class="container">
-    <?php
-    // Подключение к БД
-    require_once ('../db.php');
-
-    global $link;
-
-    $user_id = $_COOKIE['user'];
-    if (isset($_POST['search_query'])) {
-        $search_query = $_POST['search_query'];
-        $result = $link->query("SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
-        INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя` WHERE `Пользователи`.`Код пользователя` != '$user_id' AND (`Пользователи`.`Имя` LIKE '%$search_query%' OR `Пользователи`.`Фамилия` LIKE '%$search_query%' OR `Пользователи`.`e-mail` LIKE '%$search_query%'  OR `Пользователи`.`Код пользователя` LIKE '%$search_query%' OR `Типы пользователей`.`Тип` LIKE '%$search_query%' ) ");
-    } else {
-        $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
-        INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
-        WHERE `Пользователи`.`Код пользователя`!='$user_id'";
-        $result = $link->query($sql);
-    }
-    ?>
     <form class="form-inline my-2 my-lg-0" method="post">
         <label>
             <input class="form-control mr-sm-2" type="text" name="search_query"
