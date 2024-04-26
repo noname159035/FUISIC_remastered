@@ -20,8 +20,10 @@ if (isset($_POST['submit'])) {
     $userType = $_POST['userType'];
     $name = $_POST['name'];
     $surname = $_POST['surname'];
-    $password = $_POST['password'];
-    $password = md5($password. "sadfasd123");
+    $password = $row['Password'];
+    if($row['Password'] != $_POST['password']){
+        $password = md5($password. "sadfasd123");
+    }
     $birthdate = $_POST['birthdate'];
     $birthdate = date('Y-m-d', strtotime($birthdate));
 
@@ -61,7 +63,12 @@ if (isset($_POST['submit'])) {
                     $result_dif = mysqli_query($link, $query_dif);
 
                     while ($row_dif = mysqli_fetch_assoc($result_dif)) {
-                        echo '<option value="' . $row_dif['Код типа пользователя'] . '">' . $row_dif['Тип'] . '</option>';
+                        if($row_dif['Тип'] == 'Базовый'){
+                            echo '<option selected value="' . $row_dif['Код типа пользователя'] . '">' . $row_dif['Тип'] . '</option>';
+                        }
+                        else{
+                            echo '<option value="' . $row_dif['Код типа пользователя'] . '">' . $row_dif['Тип'] . '</option>';
+                        }
                     }
                     mysqli_free_result($result_dif);
                     ?>

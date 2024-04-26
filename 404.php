@@ -13,7 +13,7 @@
 <div class="container">
     <h1>Данная страница еще не готова, наберитесь терпения!</h1>
 
-    <a href="/" class="header-text auth_txt">На главную</a>
+    <a href="#" onclick="window.history.back(); return false;" class="btn btn-primary">Вернуться</a>
 </div>
 
 <?php include 'inc/footer.php' ?>

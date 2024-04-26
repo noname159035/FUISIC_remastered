@@ -1,4 +1,11 @@
 <?php
+
+// Проверяем, авторизован ли пользователь
+if (!isset($_COOKIE['user'])) {
+    header("Location: /login");
+    exit;
+}
+
 // Получаем ID теста из параметра GET запроса
 if (isset($_GET['id'])) {
     $test_id = $_GET['id'];
@@ -19,11 +26,7 @@ if (!$link) {
     exit;
 }
 
-// Проверяем, авторизован ли пользователь
-if (!isset($_COOKIE['user'])) {
-    header("Location: /Validation-form/login-form.php");
-    exit;
-}
+
 // Выбираем тест из базы данных
 $query = "SELECT * FROM Тесты WHERE `Код_Теста`=$test_id";
 $result = mysqli_query($link, $query);
@@ -39,6 +42,5 @@ $query = "DELETE FROM Тесты WHERE `Код_Теста`=$test_id";
 mysqli_query($link, $query);
 
 // Возвращаемся на страницу со списком тестов
-header("Location: /TaskEditor/my_base.php");
+header("Location: /my_base/");
 exit;
-?>

@@ -5,8 +5,6 @@ if (!isset($_COOKIE['user'])) {
     exit();
 }
 
-
-
 require_once ('../db.php');
 
 global $link;
@@ -14,7 +12,6 @@ global $link;
 // Получаем данные пользователя по коду из куки
 $user_id = $_COOKIE['user'];
 
-$result = $link->query("SELECT * FROM `Пользователи` WHERE `Код пользователя`='$user_id'");
 $sql = "SELECT `Пользователи`.*, `Типы пользователей`.`Тип` FROM `Пользователи`
         INNER JOIN `Типы пользователей` ON `Пользователи`.`Тип пользователя`=`Типы пользователей`.`Код типа пользователя`
         WHERE `Пользователи`.`Код пользователя`='$user_id'";
@@ -131,7 +128,6 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
 <!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
-
     <meta charset="UTF-8">
     <title>Данные пользователя</title>
     <link rel="stylesheet" href="/style/level.css">
@@ -153,25 +149,27 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
             <!-- Здесь будут наши кнопки -->
             <ul class="list-group">
                 <!--<li class="list-group-item"><a href="/"><i class="fa-solid fa-house"></i> Главная страница</a></li>-->
-                <li class="list-group-item"><a href="/history/" class="text-decoration-none"><i class="fas fa-user"></i> История</a></li>
-                <li class="list-group-item"><a href="/favorites/" class="text-decoration-none"><i class="fas fa-heart"></i> Избранное</a></li>
-                <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="fas fa-trophy"></i> Достижения</a></li>
-                <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="fas fa-star"></i> Рейтинг</a></li>
+                <li class="list-group-item"><a href="/history/" class="text-decoration-none"><i class="bi bi-clock-history"></i> История</a></li>
+                <li class="list-group-item"><a href="/favorites/" class="text-decoration-none"><i class="bi bi-star"></i> Избранное</a></li>
+                <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="bi bi-trophy"></i> Достижения</a></li>
+                <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="bi bi-bar-chart"></i> Рейтинг</a></li>
                 <?php
-                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум пользователь' || $user['Тип'] == 'Преподаватель') {
-                    echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='fas fa-user'></i> Мои задания</a></li>";
+                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
+                    echo "<li class='list-group-item'><a href='/profile/courses/' class='text-decoration-none'><i class='bi bi-journal-check'></i> Мои классы</a></li>";
+                }
+                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
+                    echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='bi bi-list-task'></i> Мои задания</a></li>";
                 }
                 if ($user['Тип'] == 'Администратор') {
-                    echo "<li class='list-group-item'><a href='/users/' class='text-decoration-none'><i class='fas fa-user'></i> Пользователи</a></li>";
+                    echo "<li class='list-group-item'><a href='/users/' class='text-decoration-none'><i class='bi bi-people'></i> Пользователи</a></li>";
                 }
                 ?>
-                <li class="list-group-item"><a href="/logout/" class="text-decoration-none"><i class="fas fa-sign-out-alt"></i> Выход</a></li>
+                <li class="list-group-item"><a href="/logout/" class="text-decoration-none"><i class="bi bi-box-arrow-right"></i> Выход</a></li>
             </ul>
         </div>
         <!-- Блок профиля -->
         <div class="col-md-6">
             <h1>Личный кабинет</h1>
-
             <!--Редактирование пользователей-->
             <?php if(isset($_GET['edit'])):
                 if (isset($error)) {
@@ -317,7 +315,6 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
                         </div>
                         <span><b><?php echo $next_max_value;?></b></span>
                     </div>
-
                     <p>(осталось решить <?php echo $remaining;?> заданий)</p>
                 </div>
                 <?php
@@ -360,6 +357,27 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
         maxDate: "today",
         minDate: "01.01.1900",
     });
+    <!-- Валидация e-mail -->
+    $('input[name="new_email"]').on('input', function() {
+        const form = $(this).closest('form')[0];
+        const login = $(this).val();
+        const loginRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (login.length !== 0 ) {
+            if (!loginRegex.test(login)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('Введите корректный e-mail');
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').text('');
+            }
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).siblings('.invalid-feedback').text('');
+        }
+        const invalidCount = form.querySelectorAll('.is-invalid').length;
+        form.querySelector('button[type="submit"]').disabled = invalidCount > 0;
+    });
+
     <!-- Валидация имени и фамилии -->
     $('input[name="new_first_name"], input[name="new_last_name"]').on('input', function() {
         const form = $(this).closest('form')[0];

@@ -5,8 +5,6 @@ if (isset($_COOKIE['user'])) {
 
 $testId = $_GET['id'];
 
-$time = date("Y-m-d H:i:s");
-
 require_once ('db.php');
 
 global $link;
@@ -39,39 +37,92 @@ $result = $stmt->get_result();
 
     <h2>Тест: <?php echo $row['Название']?></h2>
 
-
-
-    <?php while ($row = $result->fetch_assoc()) { ?>
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $row['Задача']?></h5>
-                <label>
-                    <input type="text" class="form-control" placeholder="Введите ответ">
-                </label>
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#explanationModal<?php echo $row['Код_задачи'] ?>">Решение</button>
+    <form action="/collections/test/check_answers/" method="post">
+        <?php while ($row = $result->fetch_assoc()) { ?>
+            <input type="hidden" name="id" class="form-control" value="<?php echo $testId ?>">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo htmlspecialchars($row['Задача']); ?></h5>
+                    <label>
+                        <input type="text" name="answers[<?php echo $row['Код_задачи']; ?>]" class="form-control" placeholder="Введите ответ">
+                    </label>
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#explanationModal<?php echo $row['Код_задачи'] ?>">Решение</button>
+                </div>
             </div>
-        </div>
+            <!-- Модальные окна и другой код -->
+            <div class="modal fade" id="explanationModal<?php echo $row['Код_задачи']?>" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel<?php echo $row['Код_задачи']?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="explanationModalLabel<?php echo $row['Код_задачи']?>">Решение</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="explanationText<?php echo $row['Код_задачи']?>"><?php echo $row['Решение']?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
 
-        <div class="modal fade" id="explanationModal<?php echo $row['Код_задачи']?>" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel<?php echo $row['Код_задачи']?>" aria-hidden="true">
+        <!-- Кнопка "Выйти", которая теперь открывает модальное окно -->
+        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exitModal">
+            Выйти
+        </button>
+
+        <!-- Кнопка "Закончить тест", которая теперь открывает модальное окно -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#finishTestModal">
+            Закончить тест
+        </button>
+
+        <!-- Модальное окно для кнопки "Выйти" -->
+        <div class="modal fade" id="exitModal" tabindex="-1" role="dialog" aria-labelledby="exitModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="explanationModalLabel<?php echo $row['Код_задачи']?>">Решение</h5>
+                        <h5 class="modal-title" id="exitModalLabel">Подтверждение выхода</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p id="explanationText<?php echo $row['Код_задачи']?>"><?php echo $row['Решение']?></p>
+                        Вы уверены, что хотите выйти?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <a href="/collections/" class="btn btn-danger">Выйти</a>
                     </div>
                 </div>
             </div>
         </div>
-    <?php } ?>
 
-    <a href="/check_answers/" class="btn btn-outline-primary">Закончить</a>
+        <!-- Модальное окно для кнопки "Закончить тест" -->
+        <div class="modal fade" id="finishTestModal" tabindex="-1" role="dialog" aria-labelledby="finishTestModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="finishTestModalLabel">Подтверждение завершения теста</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Вы уверены, что хотите завершить тест?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Проверить ответы</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
-    <?php include("inc/footer.php");?>
+</div>
+
+<?php include("inc/footer.php");?>
 
 </body>
 
