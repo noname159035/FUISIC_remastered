@@ -27,11 +27,10 @@
             <label for="main_textarea">Опишите вашу проблему:</label>
             <textarea class="form-control" id="main_textarea" name="user_question" rows="10" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Отправить</button>
+        <button type="submit" class="btn btn-primary mt-3 btn_send">Отправить</button>
     </form>
 </div>
 
 <?php include '../inc/footer.php' ?>
-
 </body>
 </html>

@@ -120,36 +120,12 @@ if (isset($Id) && $Id != 0) {
 
 <?php include("inc/header.php"); ?>
 
-<!--<div class="test_div">ТЕСТОВАЯ СТРОКА</div>-->
+<div class="test_div">ТЕСТОВАЯ СТРОКА</div>
 <div class="container">
     <h2 class="text-center mb-xl-5" id="cardsName"></h2>
 
     <div id="cards"></div>
 </div>
-
-<form action="#" method="post">
-    <input type="hidden" name="finish" value="1">
-    <!-- Модальное окно для кнопки "Закончить" -->
-    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="finishModalLabel">Подтверждение завершения подборки</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Вы уверены, что хотите завершить прохождение карточек?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary">закончить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 
 <!-- Подключение модального окна -->
 <div class="modal fade" id="explanationModal" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel" aria-hidden="true">
@@ -201,10 +177,10 @@ if (isset($Id) && $Id != 0) {
             let cardTemplate = '' +
                 '<div class="row mb-3">' +
                 '<div class="btn-group">' +
-                '<a  href="/collections/keyboard/" class="btn btn-outline-primary">Тренажер</a>' +
+                '<a  href="/collections/traning/" class="btn btn-outline-primary traning">Тренажер</a>' +
                 '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
                 '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
-                '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#finishModal">Закончить</button>' +
+                '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
                 '</div>' +
                 '</div>' +
                 '<div class="row card_block">' +
@@ -258,14 +234,14 @@ if (isset($Id) && $Id != 0) {
                     back.classList.toggle('visually-hidden');
                 });
 
-                // // Найти элемент ссылки по классу (если таких элементов несколько, будет выбран первый)
-                // const link = document.querySelector('.traning');
+                // Найти элемент ссылки по классу (если таких элементов несколько, будет выбран первый)
+                const link = document.querySelector('.traning');
 
-                // // Проверить, существует ли элемент
-                // if (link) {
-                //     // Добавить id к атрибуту href
-                //     link.href += id;
-                // }
+                // Проверить, существует ли элемент
+                if (link) {
+                    // Добавить id к атрибуту href
+                    link.href += id;
+                }
 
 
                 // Отображение формулы в нужном виде
