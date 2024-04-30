@@ -120,7 +120,6 @@ if (isset($Id) && $Id != 0) {
 
 <?php include("inc/header.php"); ?>
 
-<div class="test_div">ТЕСТОВАЯ СТРОКА</div>
 <div class="container">
     <h2 class="text-center mb-xl-5" id="cardsName"></h2>
 
