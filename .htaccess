@@ -54,6 +54,7 @@ php_value session.cookie_lifetime 86400
   RewriteRule ^collections/cards/([0-9]+)$ /show_cards.php?id=$1
   RewriteRule ^collections/get_cards/([0-9]+)$ /get_cards.php?id=$1
 
+  RewriteRule ^collections/traning/([0-9]+)$ /keyboard.php
   RewriteRule ^collections/keyboard/$ /keyboard.php
 
   RewriteRule ^collections/test/([0-9]+)$ /show_tasks.php?id=$1
