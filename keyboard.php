@@ -25,7 +25,7 @@
                     Формулу можно вводить с помощью клавиатуры пользователя. Для этого
                     необходимо нажать по полю ввода и начать вводить символы с клавиатуры.
                     Данный формат поддерживает математический ввод выражения, для того, чтобы
-                    ввести дробь достаточно нажать / на клавиатуре.
+                    ввести дробь, достаточно нажать / на клавиатуре.
                 </p>
             </div>
             <div class="col">
@@ -38,10 +38,10 @@
                 </p>
             </div>
             <div class="col">
-                <h5 class="text-center">Ввод с помощью стинтаксиса Latex</h5>
+                <h5 class="text-center">Ввод с помощью синтаксиса Latex</h5>
                 <p class="text-center">
-                    Поле для ввода поддерживает ввод функции напрямую через синтексис
-                    библиотеки Latex. Для этого напишите заключите вашу формулу в знак "$"
+                    Поле для ввода поддерживает ввод функции напрямую через синтаксис
+                    библиотеки Latex. Для начала ввода команды нажмите \ на клавиатуре.
                 </p>
             </div>
         </div>
@@ -285,19 +285,19 @@
                             <button type="button" class="keyboard_button" onClick='input("\\omega")'>
                                 &#969;
                             </button>
-                            <button type="button" class="keyboard_button" onClick='input("\\Alpha")'>
+                            <button type="button" class="keyboard_button" onClick='input("A")'>
                                 &#913;
                             </button>
                             <button type="button" class="keyboard_button" onClick='input("\\Delta")'>
                                 &#916;
                             </button>
-                            <button type="button" class="keyboard_button" onClick='input("\\Epsilon")'>
+                            <button type="button" class="keyboard_button" onClick='input("E")'>
                                 &#917;
                             </button>
-                            <button type="button" class="keyboard_button" onClick='input("\\Zeta")'>
+                            <button type="button" class="keyboard_button" onClick='input("Z")'>
                                 &#918;
                             </button>
-                            <button type="button" class="keyboard_button" onClick='input("\\Eta")'>
+                            <button type="button" class="keyboard_button" onClick='input("H")'>
                                 &#919;
                             </button>
                             <button type="button" class="keyboard_button" onClick='input("\\Theta")'>
@@ -312,7 +312,7 @@
                                 &#920;
                             </button>
                             <button type="button" class="keyboard_button" onClick='input("\\Xi")'>
-                                &#924;
+                                &#926;
                             </button>
                             <button type="button" class="keyboard_button" onClick='input("\\Pi")'>
                                 &#928;
@@ -480,7 +480,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/scripts/cards_scrypt.js"></script>
+<script src="cards_scrypt.js"></script>
 
 </body>
 </html>
