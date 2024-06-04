@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
+    <link rel="stylesheet" href="collections_new_style.css">
     <title>Задания</title>
 </head>
 <body class="bg-light d-flex flex-column h-100">
@@ -20,6 +21,7 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
+
 
 <div class="album py-5">
     <?php
@@ -46,10 +48,10 @@
                 $row_time_cards = round($row_count_cards*1.2);
                 ?>
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm card_block">
                         <img class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" alt="" src="/style/img/F_2.svg">
                         <div class="card-body">
-                            <h3><?php echo $row2['Название'];?></h3>
+                            <div style='height: 42px; '><h3 style="font-size: 150%; line-height: 20px"><?php echo $row2['Название'];?></h3></div>
                             <p class="card-text"><?php echo $row['Название'];?></p>
                             <p class="card-text">Тип: Карточки</p>
                             <div class="d-flex justify-content-between align-items-center">
@@ -79,7 +81,8 @@
                     <div class="card shadow-sm">
                         <img class="bd-placeholder-img card-img-top" width="100%" height="225"  role="img" alt="" src="/style/img/F_2.svg">
                         <div class="card-body">
-                            <h3><?php echo $row2['Название'];?></h3>
+                            <div style='height: 42px; '><h3 style="font-size: 150%; line-height: 20px"><?php echo $row2['Название'];?></h3></div>
+
                             <p class="card-text"><?php echo $row['Название'];?></p>
                             <p class="card-text">Тип: Тест</p>
                             <div class="d-flex justify-content-between align-items-center">

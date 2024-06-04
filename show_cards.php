@@ -90,7 +90,12 @@ if (isset($Id) && $Id != 0) {
           integrity="sha512-1i2kdU6oq3PAzrP6r/QkjDiuclLRhjFeT7L+d1X8C43ndhAR51ZgA+PSVwvH8Wmc7VhjzMG/n1Q5j5Fx9Pa5GA=="
           crossorigin="anonymous"
     />
+
     <style>
+        body{
+            overflow: hidden;
+        }
+
         #card_cont {
             min-height: 300px;
             transition: transform 0.5s;
@@ -115,11 +120,36 @@ if (isset($Id) && $Id != 0) {
 
 <?php include("inc/header.php"); ?>
 
+<!--<div class="test_div">ТЕСТОВАЯ СТРОКА</div>-->
 <div class="container">
     <h2 class="text-center mb-xl-5" id="cardsName"></h2>
 
     <div id="cards"></div>
 </div>
+
+<form action="#" method="post">
+    <input type="hidden" name="finish" value="1">
+    <!-- Модальное окно для кнопки "Закончить" -->
+    <div class="modal fade" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="finishModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="finishModalLabel">Подтверждение завершения подборки</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Вы уверены, что хотите завершить прохождение карточек?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">закончить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <!-- Подключение модального окна -->
 <div class="modal fade" id="explanationModal" tabindex="-1" role="dialog" aria-labelledby="explanationModalLabel" aria-hidden="true">
@@ -150,7 +180,7 @@ if (isset($Id) && $Id != 0) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.js"></script>
 <script>
     let url = window.location.href;
     let id = url.split('/').pop();
@@ -169,33 +199,33 @@ if (isset($Id) && $Id != 0) {
             let cardContainer = $('#cards');
             let explanationContainer = $('#explanationText');
             let cardTemplate = '' +
-                '<div class="row mb-3">' +
-                    '<div class="btn-group">' +
-                        '<a  href="/collections/traning/" class="btn btn-outline-primary traning">Тренажер</a>' +
+                            '<div class="row mb-3">' +
+                            '<div class="btn-group">' +
+                            '<a  href="/collections/keyboard/" class="btn btn-outline-primary">Тренажер</a>' +
                         '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
                         '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
-                        '<a href="/collections/" class="btn btn-outline-primary">Закончить</a>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="row">' +
-                    '<div class="col-2">' +
-                        '<a class="btn btn-outline-light text-dark w-100 h-100 prev-card"><h1>←</h1></a>' +
-                    '</div>' +
-                    '<div class="col">' +
-                        '<div class="card border-primary align-items-center justify-content-center" id="card_cont">' +
-                            '<div class="front">' +
-                                '<h2>{formula}</h2>' +
-                            '</div>' +
-                            '<div class="back visually-hidden">' +
-                                '<h3>{description}</h3>' +
-                            '</div>' +
+                        '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#finishModal">Закончить</button>' +
                         '</div>' +
-                    '</div>' +
-                    '<div class="col-2">' +
-                        '<a class="btn btn-outline-light text-dark w-100 h-100 next-card" id="btn-card"><h1>→</h1></a>' +
-                    '</div>' +
-                '</div>'
-            ;
+                        '</div>' +
+                        '<div class="row card_block">' +
+                        '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 prev-card"><h1 style="margin-top: 50%; font-size: 500%">←</h1></a>' +
+                        '</div>' +
+                        '<div class="col main_card_block">' +
+                        '<div class="card border-primary align-items-center justify-content-center" id="card_cont">' +
+                        '<div class="front">' +
+                        '<h2>{formula}</h2>' +
+                        '</div>' +
+                        '<div class="back visually-hidden">' +
+                        '<h3>{description}</h3>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-2">' +
+                        '<a class="btn btn-outline-light text-dark w-100 h-100 next-card" id="btn-card"><h1 style="margin-top: 45%; font-size: 500%">→</h1></a>' +
+                        '</div>' +
+                        '</div>'
+                        ;
 
             let explanationTemplate = '<p>{explanationText}</p>';
 
@@ -228,14 +258,7 @@ if (isset($Id) && $Id != 0) {
                     back.classList.toggle('visually-hidden');
                 });
 
-                // Найти элемент ссылки по классу (если таких элементов несколько, будет выбран первый)
-                const link = document.querySelector('.traning');
 
-                // Проверить, существует ли элемент
-                if (link) {
-                    // Добавить id к атрибуту href
-                    link.href += id;
-                }
 
 
                 // Отображение формулы в нужном виде
@@ -249,21 +272,37 @@ if (isset($Id) && $Id != 0) {
 
             }
 
-            function showPrevCard() {
-                currentCardIndex--;
-                if (currentCardIndex < 0) {
-                    currentCardIndex = cardCount - 1;
-                }
-                showCard(currentCardIndex);
-            }
-
-            function showNextCard() {
+            function showNextCard(){
                 currentCardIndex++;
                 if (currentCardIndex >= cardCount) {
                     currentCardIndex = 0;
                 }
                 showCard(currentCardIndex);
+                anime({
+                    targets: ".main_card_block",
+                    translateX: [
+                        { value: -1700, duration: 400, delay: 0 },
+                        { value: +1700, duration: 0, delay: 0 },
+                        { value: 0, duration: 400, delay: 0 },
+                    ],
+                });
             }
+            function showPrevCard(){
+                currentCardIndex--;
+                if (currentCardIndex < 0) {
+                    currentCardIndex = cardCount - 1;
+                }
+                showCard(currentCardIndex);
+                anime({
+                    targets: ".main_card_block",
+                    translateX: [
+                        { value: 1700, duration: 400, delay: 0 },
+                        { value: -1700, duration: 0, delay: 0 },
+                        { value: 0, duration: 400, delay: 0 },
+                    ],
+                });
+            }
+
             function prepareExplanation(index){
 
                 let card = cards[index];
@@ -297,7 +336,8 @@ if (isset($Id) && $Id != 0) {
 
             cardContainer.on('click', '.prev-card', showPrevCard);
             cardContainer.on('click', '.next-card', showNextCard);
-            cardContainer.on('click', '.exp-btn', showExplanation)
+            cardContainer.on('click', '.exp-btn', showExplanation);
+
 
         },
         error: function(xhr, status, error) {
@@ -305,6 +345,9 @@ if (isset($Id) && $Id != 0) {
             console.log('Error:', error);
         }
     });
+</script>
+<script>
+
 </script>
 </body>
 <?php

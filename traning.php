@@ -15,7 +15,7 @@ $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
     <title>Карточки</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/keyboardcommon2.css" />
+    <link rel="stylesheet" href="/style/keyboardcommon2.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <!-- Подключаем стили и скрипты библиотеки MathQuill -->
     <link rel="stylesheet" href="/libs/mathquill-0.10.1/mathquill.css" />
@@ -628,7 +628,7 @@ $podborName = $result->fetch_array(MYSQLI_ASSOC)['Название'];
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="cards_scrypt.js"></script>
+<script src="/scripts/cards_scrypt.js"></script>
 
 
 
