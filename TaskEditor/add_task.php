@@ -1,26 +1,24 @@
 <?php
-if (!isset($_GET['test'])) {
+if (isset($_GET['id'])) {
+
+    require_once ('../db.php');
+
+    global $link;
+
+    $query = "INSERT INTO Задачи (`Тест`, `Задача`, `Ответ`, `Решение`) VALUES (?, '', '', '')";
+    $stmt = $link->prepare($query);
+
+    $stmt->bind_param('s', $_GET['id']);
+    if ($stmt->execute()) {
+        $taskId = $stmt->insert_id;
+        echo "<div class='alert alert-success' role='alert'>Задание успешно удалено!</div>";
+        // Перенаправляем пользователя на предыдущую страницу
+        header("Location: /my_base/edit_task/".$_GET['id'].'/'.$taskId);
+    }
+    else {
+        echo "<div class='alert alert-danger' role='alert'>Не удалось удалить задание!</div>";
+    }
+}
+else{
     echo "<h1>Тест не выбран!</h1>";
-    exit();
 }
-
-require_once ('../db.php');
-
-global $link;
-
-if ($link->connect_error) {
-    die("Ошибка подключения: " . $link->connect_error);
-}
-
-// Добавление новой задачи в базу
-$query = "INSERT INTO Задачи (`Тест`, `Задача`, `Ответ`, `Решение`) VALUES (?, '', '', '')";
-$stmt = $link->prepare($query);
-
-$stmt->bind_param('s', $_GET['test']);
-if ($stmt->execute()) {
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
-    exit();
-} else {
-    echo "<h1>Не удалось добавить задание!</h1>";
-}
-?>

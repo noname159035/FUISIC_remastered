@@ -7,7 +7,7 @@
 </head>
 <body class="bg-light d-flex flex-column h-100">
 
-<?php include '../inc/header.php' ?>
+<?php include '../header.php' ?>
 
 <div class="container">
     <h1>Условия использования</h1>
@@ -19,7 +19,7 @@
     </ul>
 </div>
 
-<?php include '../inc/footer.php' ?>
+<?php include '../footer.php' ?>
 
 </body>
 </html>

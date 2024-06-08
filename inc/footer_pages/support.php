@@ -7,10 +7,10 @@
 </head>
 <body class="bg-light d-flex flex-column h-100">
 
-<?php include '../inc/header.php' ?>
+<?php include '../header.php' ?>
 
 <div class="container">
-    <form action="../mail.php" method="post">
+    <form action="../../mail.php" method="post">
         <div class="form-group">
             <label for="name">Ф.И.О:</label>
             <input type="text" class="form-control" id="name" name="user_name" required>
@@ -31,7 +31,7 @@
     </form>
 </div>
 
-<?php include '../inc/footer.php' ?>
+<?php include '../footer.php' ?>
 
 </body>
 </html>

@@ -85,7 +85,7 @@
                 <?php
             } else {
                 // Перенаправление на страницу профиля
-                header('Location: /profile');
+                header('Location: /profile/');
                 exit();
             }
             ?>
