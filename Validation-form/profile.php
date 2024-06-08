@@ -154,8 +154,10 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
                 <li class="list-group-item"><a href="/archives/" class="text-decoration-none"><i class="bi bi-trophy"></i> Достижения</a></li>
                 <li class="list-group-item"><a href="/rating/" class="text-decoration-none"><i class="bi bi-bar-chart"></i> Рейтинг</a></li>
                 <?php
-                if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
+                if ($user['Тип'] == 'Администратор' ) {
                     echo "<li class='list-group-item'><a href='/profile/courses/' class='text-decoration-none'><i class='bi bi-journal-check'></i> Мои классы</a></li>";
+                } else if($user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
+                    echo "<li class='list-group-item' title='Будет доступно позже'><a href='/404' class='text-decoration-none'><i class='bi bi-journal-check'></i> Мои классы</a></li>";
                 }
                 if ($user['Тип'] == 'Администратор' || $user['Тип'] == 'Премиум' || $user['Тип'] == 'Преподаватель') {
                     echo "<li class='list-group-item'><a href='/my_base/' class='text-decoration-none'><i class='bi bi-list-task'></i> Мои задания</a></li>";

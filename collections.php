@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content=" ie=edge">
-    <link rel="stylesheet" href="collections_new_style.css">
+    <link rel="stylesheet" href="style/collections_new_style.css">
     <title>Задания</title>
 </head>
 <body class="bg-light d-flex flex-column h-100">
@@ -21,8 +21,6 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-
-
 <div class="album py-5">
     <?php
     require_once ('db.php');

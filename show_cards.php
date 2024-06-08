@@ -203,7 +203,7 @@ if (isset($Id) && $Id != 0) {
                             '<div class="btn-group">' +
                             '<a  href="/collections/keyboard/" class="btn btn-outline-primary">Тренажер</a>' +
                         '<button type="button" class="btn btn-outline-primary exp-btn" data-toggle="modal" data-target="#explanationModal">Пояснение</button>' +
-                        '<a href="/add_to_favorites/" class="btn btn-outline-primary">Добавить в избранное</a>' +
+                        '<a href="/add_to_favorites/" class="btn btn-outline-primary disabled">Добавить в избранное</a>' +
                         '<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#finishModal">Закончить</button>' +
                         '</div>' +
                         '</div>' +
