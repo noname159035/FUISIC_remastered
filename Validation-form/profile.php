@@ -133,6 +133,7 @@ $next_percent = (($count - $current_min_value) / ($next_max_value - $current_min
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Данные пользователя</title>
     <link rel="stylesheet" href="/style/level.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css" crossorigin="anonymous">

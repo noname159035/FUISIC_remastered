@@ -1,8 +1,8 @@
-
+<link rel="stylesheet" href="/style/header_style.css">
 <link href="/libs/bootstrap-5.3.1-dist/css/bootstrap.css" rel="stylesheet">
 <div class="container">
-    <header class="d-flex pb-2 flex-wrap align-items-center justify-content-center justify-content-md-between mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none">
+    <header class="d-flex pb-2 flex-wrap align-items-center justify-content-center justify-content-md-between mb-4 border-bottom test">
+        <a href="/" class="align-items-center col-md-2 mb-2 mb-md-0 text-dark text-decoration-none header_img">
             <img src="/style/img/Group_2.svg" alt="" class="bi me-2" role="img" aria-label="Bootstrap">
         </a>
 
